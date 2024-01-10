@@ -27,7 +27,7 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Hi, Vladislav",
+          title: Text("Hi",
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w400,

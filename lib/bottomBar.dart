@@ -39,31 +39,3 @@ class _BottonBarState extends State<BottonBar> {
     );
   }
 }
-
-
-NavigationBarTheme(
-data: NavigationBarThemeData(
-indicatorColor: Color.fromRGBO(254, 217, 183, 100),
-),
-child: NavigationBar(
-height: 75,
-backgroundColor: Color.fromRGBO(0, 129, 167, 100),
-selectedIndex: index,
-onDestinationSelected: (index) =>
-setState(() => this.index = index ),
-destinations: [
-NavigationDestination(
-icon: Icon(Icons.book),
-label: "Study"),
-NavigationDestination(
-icon: Icon(Icons.repeat),
-label: "Repeat"),
-NavigationDestination(
-icon: Icon(Icons.chrome_reader_mode),
-label: "Dictionary"),
-NavigationDestination(
-icon: Icon(Icons.settings),
-label: "Settings"),
-],
-),
-),
