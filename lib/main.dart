@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:studrow/presentation/pages/dictionary.dart';
+import 'package:studrow/presentation/pages/study.dart';
+import 'package:studrow/presentation/pages/study.dart';
+import 'package:studrow/standart_setting.dart';
 
 void main() {
   runApp(const MainApp());
@@ -7,46 +10,53 @@ void main() {
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
-
   @override
   State<MainApp> createState() => _MainAppState();
 }
 
 class _MainAppState extends State<MainApp> {
+  final _standartSetting = StSetting("Vladislav", 5);
   int index = 0;
   final screens = [
-    Center(child: Text("Study", style: TextStyle(fontSize: 72))),
-    Center(child: Text("Repeat", style: TextStyle(fontSize: 72))),
-    Center(child: Text("Dictionary", style: TextStyle(fontSize: 72))),
-    Center(child: Text("Settings", style: TextStyle(fontSize: 72))),
+    // const Center(child: Text("Study", style: TextStyle(fontSize: 72))),
+    StudyPage(),
+    const Center(child: Text("Repeat", style: TextStyle(fontSize: 72))),
+    const Center(child: Text("Dictionary", style: TextStyle(fontSize: 72))),
+    const Center(child: Text("Settings", style: TextStyle(fontSize: 72))),
   ];
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.grey[500],
         appBar: AppBar(
-          title: Text("Hi",
-            style: TextStyle(
+          title: Text("Hi, ${_standartSetting.nameUser}",
+            style: const TextStyle(
+              color: Colors.white,
               fontSize: 32,
               fontWeight: FontWeight.w400,
             ),),
           toolbarHeight: 75,
-          backgroundColor: Color.fromRGBO(0, 129, 167, 100),
+          backgroundColor:Colors.black,
         ),
         body: screens[index],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
-            indicatorColor: Color.fromRGBO(254, 217, 183, 100),
+            indicatorColor: Colors.white,
+            labelTextStyle: MaterialStateProperty.all(
+              TextStyle(color: Colors.white),
+            ),
           ),
           child: NavigationBar(
             height: 75,
-            backgroundColor: Color.fromRGBO(0, 129, 167, 100),
+            backgroundColor: Colors.black,
             selectedIndex: index,
             onDestinationSelected: (index) =>
                 setState(() => this.index = index ),
-            destinations: [
+            destinations: const [
               NavigationDestination(
                   icon: Icon(Icons.book),
                   label: "Study"),
@@ -67,6 +77,3 @@ class _MainAppState extends State<MainApp> {
   }
 }
 
-pressSetting() {
-  print("Button Setting");
-}
