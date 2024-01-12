@@ -15,7 +15,7 @@ class StudyBackCard extends StatelessWidget {
           color: Colors.white,
           child: SizedBox(
             width: 320,
-            height: 450,
+            height: 400,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(

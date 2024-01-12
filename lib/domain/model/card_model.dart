@@ -10,5 +10,4 @@ class CardModel{
 
   CardModel(this.number, this.topicEN, this.topicUA, this.image, this.wordEN,
       this.wordUA, this.sentenceEN, this.sentenceUA);
-
 }

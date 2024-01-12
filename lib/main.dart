@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/pages/dictionary.dart';
-import 'package:studrow/presentation/pages/study.dart';
-import 'package:studrow/presentation/pages/study.dart';
+import 'package:studrow/presentation/pages/study_page.dart';
 import 'package:studrow/standart_setting.dart';
 
 void main() {
@@ -15,28 +13,30 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final _standartSetting = StSetting("Vladislav", 5);
   int index = 0;
   final screens = [
-    // const Center(child: Text("Study", style: TextStyle(fontSize: 72))),
-    StudyPage(),
+    const StudyPage(),
     const Center(child: Text("Repeat", style: TextStyle(fontSize: 72))),
     const Center(child: Text("Dictionary", style: TextStyle(fontSize: 72))),
-    const Center(child: Text("Settings", style: TextStyle(fontSize: 72))),
+    const Center(child: Text("Setting", style: TextStyle(fontSize: 72))),
   ];
+
 
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // routes: {
+      //   '/finish': (context) => const FinishLearnPage(),
+      // },
       home: Scaffold(
         backgroundColor: Colors.grey[500],
         appBar: AppBar(
-          title: Text("Hi, ${_standartSetting.nameUser}",
+          title: Text("Hi, ${StSetting.nameUser}",
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 32,
+              fontSize: 30,
               fontWeight: FontWeight.w400,
             ),),
           toolbarHeight: 75,

@@ -4,8 +4,7 @@
 В подальшому виконаємо рефакторинг та замінемо цей метод
  */
 class StSetting{
-  String nameUser;
-  int numberLearningCardDay;
-  StSetting(this.nameUser, this.numberLearningCardDay);
-
+  static String nameUser = "Vladislav";
+  static int numberLearningCardDay = 5;
+  static bool isFinishedLearn = false;
 }
