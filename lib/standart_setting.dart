@@ -4,7 +4,10 @@
 В подальшому виконаємо рефакторинг та замінемо цей метод
  */
 class StSetting{
-  static String nameUser = "Vladislav";
+  static String nameUser = "";
   static int numberLearningCardDay = 5;
   static bool isFinishedLearn = false;
 }
+
+
+
