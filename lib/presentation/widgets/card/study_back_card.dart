@@ -11,8 +11,7 @@ class StudyBackCard extends StatelessWidget {
     return Container(
       child: Center(
         child: Card(
-          shadowColor: Colors.black,
-          color: Colors.white,
+          elevation: 20,
           child: SizedBox(
             width: 320,
             height: 400,

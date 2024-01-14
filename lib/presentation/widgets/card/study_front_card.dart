@@ -12,8 +12,9 @@ class StudyFrontCard extends StatelessWidget {
     return Container(
         child: Center(
           child: Card(
-            shadowColor: Colors.black,
-            color: Colors.black,
+            elevation: 20,
+            // shadowColor: Colors.black,
+            // color: Colors.black,
             child: SizedBox(
               width: 320,
               height: 400,
@@ -29,14 +30,14 @@ class StudyFrontCard extends StatelessWidget {
                           cardData.number,
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         Text(
                           cardData.topicEN,
                           style: TextStyle(
                             fontSize: 22,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -48,7 +49,7 @@ class StudyFrontCard extends StatelessWidget {
                             cardData.image,
                             style: TextStyle(
                               fontSize: 38,
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -60,7 +61,7 @@ class StudyFrontCard extends StatelessWidget {
                           cardData.wordEN,
                            style: TextStyle(
                              fontSize: 30,
-                             color: Colors.white,
+                             color: Colors.black,
                              fontWeight: FontWeight.w500,
                            ),
                         ),
@@ -69,7 +70,7 @@ class StudyFrontCard extends StatelessWidget {
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

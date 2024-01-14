@@ -20,16 +20,14 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[500],
       appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text("Hi, ${StSetting.nameUser}",
             style: const TextStyle(
-              color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.w400,
             ),),
-          backgroundColor:Colors.black,
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           toolbarHeight: 75,
           actions: [
             IconButton(
@@ -43,14 +41,9 @@ class _MainPageState extends State<MainPage> {
       body: screens[index],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          indicatorColor: Colors.white,
-          labelTextStyle: MaterialStateProperty.all(
-            TextStyle(color: Colors.white),
-          ),
         ),
         child: NavigationBar(
           height: 75,
-          backgroundColor: Colors.black,
           selectedIndex: index,
           onDestinationSelected: (index) =>
               setState(() => this.index = index ),

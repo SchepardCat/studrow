@@ -65,7 +65,6 @@ class _StudyPageState extends State<StudyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[500],
         key: _scaffoldKey,
         body: !StSetting.isFinishedLearn? Center(
           child: Padding(

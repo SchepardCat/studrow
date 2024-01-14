@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studrow/presentation/pages/main_page.dart';
 import 'package:studrow/presentation/pages/settings_page.dart';
-import 'package:studrow/presentation/pages/study_page.dart';
-import 'package:studrow/standart_setting.dart';
+import 'package:studrow/presentation/theme/theme.dart';
+import 'presentation/theme/typography.dart';
 
 void main() {
   runApp(const MainApp());
@@ -20,6 +20,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: MaterialTheme(textTheme).light(),
       routes: {
         '/setting': (context) => const SettingsPage(),
         '/main': (contex) => const MainPage()

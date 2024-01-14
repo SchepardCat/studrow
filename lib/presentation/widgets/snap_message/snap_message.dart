@@ -14,7 +14,7 @@ class FlashMessage{
             padding: EdgeInsets.all(14),
             height: 90,
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Theme.of(context).colorScheme.onTertiary,
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
             child: Column(
