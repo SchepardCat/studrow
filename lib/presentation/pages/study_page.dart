@@ -84,8 +84,6 @@ class _StudyPageState extends State<StudyPage> {
                           setState(() {
                             numberCurrentCard ++;
                             if(numberCurrentCard < StSetting.numberLearningCardDay){
-                              //FlashMessage("Nice!!!", "If you want a translation, click on the card.\nIf you remember the word - swipe to the left").getScaffoldMessage(context);
-                              FlashMessage("Nice!!!", "You learned a new word").getScaffoldMessage(context);
                               addListItem(numberCurrentCard);
                             }else{
                               StSetting.isFinishedLearn = true;
