@@ -20,7 +20,6 @@ class _StudyPageState extends State<StudyPage> {
   late MatchEngine _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   int numberCurrentCard = 0;
-  int totalResult = 100;
   bool isFinished = false;
 
   //test data
@@ -99,7 +98,7 @@ class _StudyPageState extends State<StudyPage> {
                     //line progress learning
                     //1- percent indicator package
                     //2 - step progress indicator package
-                    StudyProgressBar(numberOfCards: StSetting.numberLearningCardDay, numberCurrentCard: numberCurrentCard),
+                    ProgressBar(totalCards: StSetting.numberLearningCardDay, currentNumber: numberCurrentCard, widthBar: 320),
                   ]
                 )
             ),

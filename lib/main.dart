@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studrow/presentation/pages/main_page.dart';
 import 'package:studrow/presentation/pages/settings_page.dart';
+import 'package:studrow/presentation/pages/logo_page.dart';
+import 'package:studrow/presentation/pages/start_page.dart';
 import 'package:studrow/presentation/theme/theme.dart';
 import 'presentation/theme/typography.dart';
 
@@ -23,9 +25,10 @@ class _MainAppState extends State<MainApp> {
       theme: MaterialTheme(textTheme).light(),
       routes: {
         '/setting': (context) => const SettingsPage(),
-        '/main': (contex) => const MainPage()
+        '/main': (contex) => const MainPage(),
+        '/start': (contex) => const StartPage()
       },
-      home: MainPage()
+      home: LogoPage()
     );
   }
 }

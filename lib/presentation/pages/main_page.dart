@@ -13,7 +13,7 @@ class _MainPageState extends State<MainPage> {
   int index = 0;
   final screens = [
     const StudyPage(),
-    const Center(child: Text("Repeat", style: TextStyle(fontSize: 72))),
+    const Center(child: Text("Exam", style: TextStyle(fontSize: 72))),
     const Center(child: Text("Dictionary", style: TextStyle(fontSize: 72))),
   ];
 
@@ -21,12 +21,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Hi, ${StSetting.nameUser}",
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w400,
-            ),),
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           toolbarHeight: 75,
           actions: [

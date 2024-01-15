@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" modified="2024-01-15T13:02:14.454Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="948sX-67y_IsboM43u2C" version="22.1.18" type="device">
+  <diagram name="Страница — 1" id="RGU6fT7gIkPIzqMIowFn">
+    <mxGraphModel dx="1050" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-2" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-3" value="LOGO" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="60" y="100" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-4" value="Загру&lt;br&gt;зка" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="80" y="170" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-5" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="280" y="40" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-6" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="80" y="280" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-7" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="280" y="280" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-8" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="480" y="280" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-9" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="520" y="40" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-10" value="Start page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="310" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-11" value="Logo page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="70" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-12" value="Setting page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="550" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-13" value="Study page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="110" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-14" value="Exam page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="310" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-15" value="Dictionari page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="510" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-17" value="Кожного дня буде проходити екзамен за вивченими раніше словами" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="310" y="520" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-19" value="Загальний словник пройдених слів" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="510" y="520" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-20" value="Статистика&lt;br&gt;вивчення слів" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="40" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TmlWOfnDZo3jvkJbb3dy-21" value="Налаштування додатку" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="640" y="40" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1OTaHzqRbfWPAobn1kER-1" value="appbar2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="40" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1OTaHzqRbfWPAobn1kER-2" value="appbar3" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="40" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1OTaHzqRbfWPAobn1kER-3" value="appbar1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="280" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1OTaHzqRbfWPAobn1kER-4" value="appbar1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="280" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1OTaHzqRbfWPAobn1kER-5" value="appbar1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

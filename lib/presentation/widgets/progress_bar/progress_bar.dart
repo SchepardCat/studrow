@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
-class StudyProgressBar extends StatefulWidget {
-  static const int totalSteps = 100;
-  final int numberCurrentCard;
-  final int numberOfCards;
-  const StudyProgressBar({ required this.numberOfCards, required this.numberCurrentCard});
+class ProgressBar extends StatefulWidget {
+  final int currentNumber;
+  final int totalCards;
+  final double widthBar;
+  const ProgressBar({ required this.totalCards, required this.currentNumber, required this.widthBar});
 
   @override
-  State<StudyProgressBar> createState() => _StudyProgressBarState();
+  State<ProgressBar> createState() => _ProgressBarState();
 }
 
-class _StudyProgressBarState extends State<StudyProgressBar> {
+class _ProgressBarState extends State<ProgressBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,14 +21,16 @@ class _StudyProgressBarState extends State<StudyProgressBar> {
           child: Column(
             children: [
               Container(
-                child: StepProgressIndicator(
-                  totalSteps: StudyProgressBar.totalSteps,
-                  currentStep: widget.numberCurrentCard * (StudyProgressBar.totalSteps/widget.numberOfCards).toInt(),
-                  size: 18,
-                  padding: 0,
-                  selectedColor: Theme.of(context).colorScheme.primaryContainer,
-                  unselectedColor: Theme.of(context).colorScheme.onTertiary,
-                  roundedEdges: Radius.circular(8),
+                child: LinearPercentIndicator(
+                  width: widget.widthBar,
+                  animation: true,
+                  lineHeight: 20.0,
+                  animationDuration: 1200,
+                  percent: widget.currentNumber/widget.totalCards,
+                  center: Text("" + widget.currentNumber.toString() + "/" + widget.totalCards.toString()),
+                  barRadius: Radius.circular(8),
+                  progressColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.onTertiary,
                 ),
               ),
             ],

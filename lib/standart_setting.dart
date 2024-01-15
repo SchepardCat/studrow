@@ -7,6 +7,7 @@ class StSetting{
   static String nameUser = "";
   static int numberLearningCardDay = 5;
   static bool isFinishedLearn = false;
+  static String companyName = "Studrow";
 }
 
 
