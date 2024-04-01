@@ -28,14 +28,14 @@ class StudyFrontCard extends StatelessWidget {
                       children: [
                         Text(
                           cardData.number,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                           ),
                         ),
                         Text(
                           cardData.topicEN,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 22,
                             color: Colors.black,
                           ),
@@ -47,7 +47,7 @@ class StudyFrontCard extends StatelessWidget {
                       children: [
                         Text(
                             cardData.image,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 38,
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
@@ -59,7 +59,7 @@ class StudyFrontCard extends StatelessWidget {
                       children: [
                         Text(
                           cardData.wordEN,
-                           style: TextStyle(
+                           style: const TextStyle(
                              fontSize: 30,
                              color: Colors.black,
                              fontWeight: FontWeight.w500,
@@ -68,7 +68,7 @@ class StudyFrontCard extends StatelessWidget {
                         Text(
                           cardData.sentenceEN,
                           textDirection: TextDirection.ltr,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                             fontWeight: FontWeight.w500,

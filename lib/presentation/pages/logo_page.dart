@@ -13,7 +13,7 @@ class _LogoPageState extends State<LogoPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5)).then((value){
+    Future.delayed(const Duration(seconds: 5)).then((value){
       Navigator.pushNamed(context, '/start');
     });
   }
@@ -33,7 +33,7 @@ class _LogoPageState extends State<LogoPage> {
                   color: Theme.of(context).colorScheme.primaryContainer
                 ),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               SpinKitFoldingCube(
                 color: Theme.of(context).colorScheme.primaryContainer,
                 size: 50,

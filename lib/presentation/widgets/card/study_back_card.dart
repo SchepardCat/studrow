@@ -25,14 +25,14 @@ class StudyBackCard extends StatelessWidget {
                     children: [
                       Text(
                         cardData.number,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black,
                         ),
                       ),
                       Text(
                         cardData.topicUA,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 22,
                           color: Colors.black,
                         ),
@@ -44,7 +44,7 @@ class StudyBackCard extends StatelessWidget {
                     children: [
                       Text(
                         cardData.image,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 38,
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
@@ -56,7 +56,7 @@ class StudyBackCard extends StatelessWidget {
                     children: [
                       Text(
                         cardData.wordUA,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
@@ -65,7 +65,7 @@ class StudyBackCard extends StatelessWidget {
                       Text(
                         cardData.sentenceUA,
                         textDirection: TextDirection.ltr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.w500,

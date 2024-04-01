@@ -9,27 +9,27 @@ class FlashMessage{
   getScaffoldMessage(BuildContext context){
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(milliseconds: 900),
+          duration: const Duration(milliseconds: 900),
           content: Container(
-            padding: EdgeInsets.all(14),
+            padding: const EdgeInsets.all(14),
             height: 90,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onTertiary,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   messageShort,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20
                   ),
                 ),
                 Text(
                   messageLong,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 15,
                   ),

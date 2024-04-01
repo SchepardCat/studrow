@@ -23,14 +23,14 @@ class _StartPageState extends State<StartPage> {
             ),),
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           toolbarHeight: 75,
-          actions: [
-            IconButton(
-              onPressed: (){
-                Navigator.pushNamed(context, '/setting');
-              },
-              icon: Icon(Icons.settings),
-            )
-          ]
+          // actions: [
+          //   IconButton(
+          //     onPressed: (){
+          //       Navigator.pushNamed(context, '/setting');
+          //     },
+          //     icon: const Icon(Icons.settings),
+          //   )
+          // ]
       ),
       body: Container(
         child: Padding(
@@ -41,32 +41,21 @@ class _StartPageState extends State<StartPage> {
               children: [
                 Column(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                            "Привіт, " + StSetting.nameUser,
-                          style: TextStyle(
-                            fontSize: 26
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 25),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Вивчено слів сьогодні"),
                         ProgressBar(totalCards: 5, currentNumber: 1, widthBar: 120)
                       ],),
-                    SizedBox(height: 10),
-                    Row(
+                    const SizedBox(height: 10),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Загальна кількість слів"),
                         ProgressBar(totalCards: 1500, currentNumber: 543, widthBar: 120),
                       ],),
-                    SizedBox(height: 10),
-                    Row(
+                    const SizedBox(height: 10),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                       Text("Потрібно повторити слів"),
@@ -79,7 +68,7 @@ class _StartPageState extends State<StartPage> {
                       Navigator.pushNamed(context, '/main');
                     },
                     child: Text(
-                      "Почати",
+                      "Вивчати",
                       style: TextStyle(
                         fontSize: 30,
                         color: Theme.of(context).colorScheme.primary

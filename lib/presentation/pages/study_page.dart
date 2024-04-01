@@ -16,9 +16,9 @@ class StudyPage extends StatefulWidget {
 
 class _StudyPageState extends State<StudyPage> {
   //налаштування для свайпу карток
-  List<SwipeItem> _swipeItems = <SwipeItem>[];
+  final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   int numberCurrentCard = 0;
   bool isFinished = false;
 
@@ -103,7 +103,7 @@ class _StudyPageState extends State<StudyPage> {
                 )
             ),
           ),
-        ) : Center(
+        ) : const Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

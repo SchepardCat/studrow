@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studrow/presentation/pages/form_add.dart';
 import 'package:studrow/presentation/pages/main_page.dart';
 import 'package:studrow/presentation/pages/settings_page.dart';
 import 'package:studrow/presentation/pages/logo_page.dart';
@@ -26,9 +27,10 @@ class _MainAppState extends State<MainApp> {
       routes: {
         '/setting': (context) => const SettingsPage(),
         '/main': (contex) => const MainPage(),
-        '/start': (contex) => const StartPage()
+        '/start': (contex) => const StartPage(),
+        '/formAdd': (contex) => const FormAdd(),
       },
-      home: LogoPage()
+      home: const LogoPage()
     );
   }
 }

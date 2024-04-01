@@ -11,10 +11,10 @@ class SettingsPage extends StatefulWidget {
 
 
 class _SettingsPageState extends State<SettingsPage> {
-  TextEditingController _numberCardField = TextEditingController();
-  TextEditingController _textNameField = TextEditingController();
+  final TextEditingController _numberCardField = TextEditingController();
+  final TextEditingController _textNameField = TextEditingController();
   int _selectedNumber = 5;
-  List<int> _numbCard = [5, 10, 20];
+  final List<int> _numbCard = [5, 10, 20];
 
 
   getData(){
@@ -28,7 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         toolbarHeight: 75,
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Setting",
           style: TextStyle(
             fontSize: 30
@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   "Setting",
                   style: TextStyle(
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Name",
                       style: TextStyle(
                           color: Colors.black,
@@ -66,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       child: TextField(
                         controller: _textNameField,
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             prefixText: StSetting.nameUser,
                             labelText: StSetting.nameUser,
                         ),
@@ -79,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       "Number card learn days",
                       style: TextStyle(
                           color: Colors.black,
@@ -119,7 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Navigator.pushNamed(context, '/main');
                       });
                     },
-                    child: Text(
+                    child: const Text(
                       "Save settings",
                       style: TextStyle(
                         color: Colors.black,
