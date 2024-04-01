@@ -19,7 +19,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
         onPressed: (){
           Navigator.pushNamed(context, '/formAdd');
         },
-        tooltip: 'Add new word',
+        tooltip: 'Form add new word',
         child: const Icon(Icons.add),
       ),
     );
