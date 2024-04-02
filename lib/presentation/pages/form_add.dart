@@ -19,7 +19,7 @@ class _FormAddState extends State<FormAdd> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Add new WORD!!!!!!!!",
+            Text("Form add new WORD!!!!!!!!",
               style: TextStyle(
                   fontSize: 32,
                   color: Colors.black
