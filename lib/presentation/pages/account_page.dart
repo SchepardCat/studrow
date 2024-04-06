@@ -13,25 +13,6 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            StSetting.companyName,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w400,
-            ),),
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          toolbarHeight: 75,
-          // actions: [
-          //   IconButton(
-          //     onPressed: (){
-          //       Navigator.pushNamed(context, '/setting');
-          //     },
-          //     icon: const Icon(Icons.settings),
-          //   )
-          // ]
-      ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -45,35 +26,31 @@ class _StartPageState extends State<StartPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Вивчено слів сьогодні"),
-                        ProgressBar(totalCards: 5, currentNumber: 1, widthBar: 120)
-                      ],),
+                        ProgressBar(
+                            totalCards: 5, currentNumber: 1, widthBar: 120)
+                      ],
+                    ),
                     const SizedBox(height: 10),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Загальна кількість слів"),
-                        ProgressBar(totalCards: 1500, currentNumber: 543, widthBar: 120),
-                      ],),
+                        ProgressBar(
+                            totalCards: 1500,
+                            currentNumber: 543,
+                            widthBar: 120),
+                      ],
+                    ),
                     const SizedBox(height: 10),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      Text("Потрібно повторити слів"),
-                        ProgressBar(totalCards: 543, currentNumber: 403, widthBar: 120),
-                    ],),
+                        Text("Потрібно повторити слів"),
+                        ProgressBar(
+                            totalCards: 543, currentNumber: 403, widthBar: 120),
+                      ],
+                    ),
                   ],
-                ),
-                FilledButton.tonal(
-                    onPressed: (){
-                      Navigator.pushNamed(context, '/main');
-                    },
-                    child: Text(
-                      "Вивчати",
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Theme.of(context).colorScheme.primary
-                      ),
-                    )
                 ),
               ],
             ),

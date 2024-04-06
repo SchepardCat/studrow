@@ -8,15 +8,15 @@ class LogoPage extends StatefulWidget {
   State<LogoPage> createState() => _LogoPageState();
 }
 
-
 class _LogoPageState extends State<LogoPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5)).then((value){
-      Navigator.pushNamed(context, '/start');
+    Future.delayed(const Duration(seconds: 5)).then((value) {
+      Navigator.popAndPushNamed(context, '/main');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +24,14 @@ class _LogoPageState extends State<LogoPage> {
         color: Theme.of(context).colorScheme.primary,
         width: double.infinity,
         child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                  "LOGO",
+                "LOGO",
                 style: TextStyle(
-                  fontSize: 72,
-                  color: Theme.of(context).colorScheme.primaryContainer
-                ),
+                    fontSize: 72,
+                    color: Theme.of(context).colorScheme.primaryContainer),
               ),
               const SizedBox(height: 50),
               SpinKitFoldingCube(
@@ -45,4 +45,3 @@ class _LogoPageState extends State<LogoPage> {
     );
   }
 }
-
