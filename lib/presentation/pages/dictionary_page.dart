@@ -10,6 +10,7 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
+  bool chosenWord = false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -26,8 +27,10 @@ class _DictionaryPageState extends State<DictionaryPage> {
 
         body: const TabBarView(
           children: [
+            //всі слова відсортовані за алфавітом
             DictionaryList(),
-            Icon(Icons.directions_transit),
+            //теки та слова відсортовані в іерархії по текам
+            DictionaryList(),
           ],
         ),
 

@@ -4,6 +4,8 @@ import 'package:studrow/presentation/pages/main_page.dart';
 import 'package:studrow/presentation/pages/settings_page.dart';
 import 'package:studrow/presentation/pages/logo_page.dart';
 import 'package:studrow/presentation/pages/account_page.dart';
+import 'package:studrow/presentation/pages/study_page.dart';
+import 'package:studrow/presentation/pages/word_details_page.dart';
 import 'package:studrow/presentation/theme/theme.dart';
 import 'presentation/theme/typography.dart';
 
@@ -29,7 +31,9 @@ class _MainAppState extends State<MainApp> {
           '/main': (contex) => const MainPage(),
           '/start': (contex) => const StartPage(),
           '/formAdd': (contex) => const FormAdd(),
+          '/word' : (context) => const WordDetails(),
         },
         home: const LogoPage());
   }
 }
+

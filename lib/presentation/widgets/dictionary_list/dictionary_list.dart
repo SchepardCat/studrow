@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studrow/presentation/pages/study_page.dart';
+import 'package:studrow/presentation/pages/word_details_page.dart';
 
 class DictionaryList extends StatefulWidget {
   const DictionaryList({super.key});
@@ -17,10 +19,17 @@ class _DictionaryListState extends State<DictionaryList> {
         padding: const EdgeInsets.all(8),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 50,
-            color: Colors.amber[colorCodes[index]],
-            child: Center(child: Text('Entry ${entries[index]}')),
+          return ListTile(
+              leading: Text('Entry ${entries[index]}'),
+              onTap: (){
+                Navigator.pushNamed(context, '/word');
+              }
+
+              // color: Theme.of(context).colorScheme.secondary,
+              // child: Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: Text('Entry ${entries[index]}', style: TextStyle(fontSize: 22.0),),
+              // ),
           );
         }
     );
