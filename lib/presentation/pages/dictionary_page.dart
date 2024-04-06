@@ -8,15 +8,12 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-      ),
+      body: Center(),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.pushNamed(context, '/formAdd');
         },
         tooltip: 'Form add new word',
