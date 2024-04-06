@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          StSetting.companyName,
+          "Search widget",
           style: const TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w400,
@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: NavigationBarTheme(
         data: const NavigationBarThemeData(),
         child: NavigationBar(
-          height: 75,
+          height: 90,
           selectedIndex: index,
           onDestinationSelected: (index) => setState(() => this.index = index),
           destinations: const [
