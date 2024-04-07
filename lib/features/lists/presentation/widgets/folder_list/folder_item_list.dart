@@ -1,5 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/widgets/word_list/word_item_list.dart';
+import 'package:studrow/features/dictionary/presentation/pages/dictionary_page.dart';
+import 'package:studrow/features/dictionary/router/dictionary_routes.dart';
+import 'package:studrow/router/router.dart';
+
 
 class FolderItemList extends StatefulWidget {
   final List<String> listData;
@@ -28,7 +32,7 @@ class _FolderItemListState extends State<FolderItemList> {
             leading: Icon(Icons.folder),
             title: Text('Entry ${listData[index]}'),
             onTap: () {
-              Navigator.pushNamed(context, '/listWord');
+              AutoRouter.of(context).push(WordsListRoute());
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),

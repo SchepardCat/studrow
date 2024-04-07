@@ -1,8 +1,10 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/domain/model/card_model.dart';
-import 'package:studrow/presentation/widgets/card/study_back_card.dart';
-import 'package:studrow/presentation/widgets/card/study_front_card.dart';
+
+
+import '../../../domain/model/card_model.dart';
+import 'study_back_card.dart';
+import 'study_front_card.dart';
 
 
 class CardFlip extends StatelessWidget {

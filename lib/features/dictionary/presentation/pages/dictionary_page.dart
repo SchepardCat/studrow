@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/widgets/folder_list/folders_list.dart';
-import 'package:studrow/presentation/widgets/word_list/word_list.dart';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:studrow/features/dictionary/presentation/pages/dictionary_word_list.dart';
+
 
 @RoutePage()
 class DictionaryPage extends StatefulWidget {
@@ -15,26 +16,11 @@ class _DictionaryPageState extends State<DictionaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const TabBar(
-            tabs: [
-              Tab(text: "Lists"),
-              Tab(text: "Words"),
-            ],
-            dividerHeight: 2,
-          ),
+          title: Text("Dictionary"),
         ),
-
-        body: const TabBarView(
-          children: [
-            ListFolders(),
-            ListWords(),
-          ],
-        ),
-
+        body: WordsListPage(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, '/formAdd');
@@ -42,7 +28,6 @@ class _DictionaryPageState extends State<DictionaryPage> {
           tooltip: 'Form add new word',
           child: const Icon(Icons.add),
         ),
-      ),
-    );
+      );
   }
 }

@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:studrow/router/router.dart';
 
 class WordItemList extends StatefulWidget {
   final List<String> listData;
@@ -26,7 +28,7 @@ class _WordItemListState extends State<WordItemList> {
           ListTile(
             title: Text('Entry ${listData[index]}'),
             onTap: () {
-              Navigator.pushNamed(context, '/word');
+              AutoRouter.of(context).push(WordDetailsRoute());
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),

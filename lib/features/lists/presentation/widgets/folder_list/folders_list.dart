@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/widgets/folder_list/folder_item_list.dart';
+
+
+import 'folder_item_list.dart';
 
 
 class ListFolders extends StatefulWidget {

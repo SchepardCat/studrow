@@ -21,6 +21,7 @@ class _MainPageState extends State<MainPage> {
         AccountRoute(),
         StudyRoute(),
         RepeatRoute(),
+        FoldersRoute(),
         DictionaryRoute(),
       ],
       builder: (context, child) {
@@ -37,6 +38,7 @@ class _MainPageState extends State<MainPage> {
                 NavigationDestination(icon: Icon(Icons.account_circle), label: "Account"),
                 NavigationDestination(icon: Icon(Icons.book), label: "Study"),
                 NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
+                NavigationDestination(icon: Icon(Icons.folder), label: "Folders"),
                 NavigationDestination(icon: Icon(Icons.chrome_reader_mode), label: "Dictionary"),
               ],
             ),

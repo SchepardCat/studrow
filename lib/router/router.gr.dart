@@ -27,6 +27,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DictionaryPage(),
       );
     },
+    DictionaryWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const DictionaryWrapperScreen()),
+      );
+    },
+    FoldersListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FoldersListPage(),
+      );
+    },
+    FoldersRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FoldersPage(),
+      );
+    },
+    ListWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const ListWrapperScreen()),
+      );
+    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -49,6 +73,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const StudyPage(),
+      );
+    },
+    WordDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WordDetailsPage(),
+      );
+    },
+    WordsListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WordsListPage(),
       );
     },
   };
@@ -78,6 +114,62 @@ class DictionaryRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'DictionaryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DictionaryWrapperScreen]
+class DictionaryWrapperRoute extends PageRouteInfo<void> {
+  const DictionaryWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          DictionaryWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DictionaryWrapperRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FoldersListPage]
+class FoldersListRoute extends PageRouteInfo<void> {
+  const FoldersListRoute({List<PageRouteInfo>? children})
+      : super(
+          FoldersListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FoldersListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FoldersPage]
+class FoldersRoute extends PageRouteInfo<void> {
+  const FoldersRoute({List<PageRouteInfo>? children})
+      : super(
+          FoldersRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FoldersRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ListWrapperScreen]
+class ListWrapperRoute extends PageRouteInfo<void> {
+  const ListWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          ListWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ListWrapperRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -134,6 +226,34 @@ class StudyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StudyRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WordDetailsPage]
+class WordDetailsRoute extends PageRouteInfo<void> {
+  const WordDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          WordDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WordDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WordsListPage]
+class WordsListRoute extends PageRouteInfo<void> {
+  const WordsListRoute({List<PageRouteInfo>? children})
+      : super(
+          WordsListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WordsListRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

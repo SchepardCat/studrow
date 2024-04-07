@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/widgets/word_list/word_item_list.dart';
+import 'package:studrow/features/dictionary/presentation/widgets/word_list/word_item_list.dart';
+
+
 
 class ListWords extends StatefulWidget {
   const ListWords({super.key});

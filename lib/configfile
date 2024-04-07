@@ -17,3 +17,15 @@ DATA -
 
 Мова
 Тема
+
+
+
+AutoRoute(page: MainRoute.page, path: "/",
+        children: [
+          AutoRoute(page: AccountRoute.page, path: 'account'),
+          AutoRoute(page: StudyRoute.page, path: 'study'),
+          AutoRoute(page: RepeatRoute.page, path: 'repeat'),
+          AutoRoute(page: DictionaryRoute.page, path: 'dictionary'),
+          AutoRoute(page: SettingsRoute.page, path: 'settings'),
+    ]),
+    AutoRoute(page: WordDetails.page, path: '/details'),

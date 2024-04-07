@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/data/dto/data.dart';
-import 'package:studrow/domain/model/card_model.dart';
-import 'package:studrow/presentation/widgets/card/card_flip.dart';
-import 'package:studrow/presentation/widgets/progress_bar/progress_bar.dart';
-import 'package:studrow/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/standart_setting.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:auto_route/auto_route.dart';
+
+import '../../data/dto/data.dart';
+import '../../domain/model/card_model.dart';
+import '../widgets/card/card_flip.dart';
+import '../widgets/progress_bar/progress_bar.dart';
+import '../widgets/snap_message/snap_message.dart';
 
 @RoutePage()
 class StudyPage extends StatefulWidget {
@@ -67,6 +68,8 @@ class _StudyPageState extends State<StudyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
+        appBar: AppBar(
+          title: Text("Learny dictionary"),),
         body: !StSetting.isFinishedLearn? Center(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
