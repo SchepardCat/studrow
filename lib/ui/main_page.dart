@@ -15,6 +15,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   @override
+  void initState() {
+
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
@@ -31,11 +36,12 @@ class _MainPageState extends State<MainPage> {
           bottomNavigationBar: NavigationBarTheme(
             data: const NavigationBarThemeData(),
             child: NavigationBar(
-              height: 75,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              height: 90,
               selectedIndex: tabsRouter.activeIndex,
               onDestinationSelected: (index) => _openPage(index, tabsRouter),
               destinations: const [
-                NavigationDestination(icon: Icon(Icons.account_circle), label: "Account"),
+                NavigationDestination(icon: Icon(Icons.home), label: "Home"),
                 NavigationDestination(icon: Icon(Icons.book), label: "Study"),
                 NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
                 NavigationDestination(icon: Icon(Icons.folder), label: "Folders"),
