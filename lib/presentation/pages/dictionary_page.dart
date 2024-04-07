@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/widgets/dictionary_list/dictionary_list.dart';
+import 'package:studrow/presentation/widgets/folder_list/folders_list.dart';
+import 'package:studrow/presentation/widgets/word_list/word_list.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class DictionaryPage extends StatefulWidget {
   const DictionaryPage({super.key});
 
@@ -10,7 +12,7 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
-  bool chosenWord = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -19,22 +21,20 @@ class _DictionaryPageState extends State<DictionaryPage> {
         appBar: AppBar(
           title: const TabBar(
             tabs: [
-              Tab(text: "word"),
-              Tab(text: "folder"),
+              Tab(text: "Lists"),
+              Tab(text: "Words"),
             ],
+            dividerHeight: 2,
           ),
         ),
 
         body: const TabBarView(
           children: [
-            //всі слова відсортовані за алфавітом
-            DictionaryList(),
-            //теки та слова відсортовані в іерархії по текам
-            DictionaryList(),
+            ListFolders(),
+            ListWords(),
           ],
         ),
 
-        //Buttom add new word or folder
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, '/formAdd');

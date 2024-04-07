@@ -6,7 +6,9 @@ import 'package:studrow/presentation/widgets/progress_bar/progress_bar.dart';
 import 'package:studrow/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/standart_setting.dart';
 import 'package:swipe_cards/swipe_cards.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class StudyPage extends StatefulWidget {
   const StudyPage({super.key});
 

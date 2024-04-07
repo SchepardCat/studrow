@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studrow/presentation/widgets/progress_bar/progress_bar.dart';
-import 'package:studrow/standart_setting.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
@@ -12,8 +13,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Center(
@@ -36,9 +36,7 @@ class _AccountPageState extends State<AccountPage> {
                       children: [
                         Text("Загальна кількість слів"),
                         ProgressBar(
-                            totalCards: 1500,
-                            currentNumber: 543,
-                            widthBar: 120),
+                            totalCards: 1500, currentNumber: 543, widthBar: 120),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -56,7 +54,6 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

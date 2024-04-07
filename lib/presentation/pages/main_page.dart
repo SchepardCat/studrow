@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/presentation/pages/dictionary_page.dart';
-import 'package:studrow/presentation/pages/account_page.dart';
-import 'package:studrow/presentation/pages/study_page.dart';
-import 'package:studrow/presentation/widgets/search/search.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
+import 'package:studrow/router/router.dart';
 
-import '../../standart_setting.dart';
-
+@RoutePage()
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -15,45 +13,40 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int index = 0;
-  final screens = [
-    const AccountPage(),
-    const DictionaryPage(),
-    const StudyPage(),
-    const Center(child: Text("Exam", style: TextStyle(fontSize: 72))),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: SearchWidget(),
-        // title: Text(
-        //   "Search widget",
-        //   style: const TextStyle(
-        //     fontSize: 30,
-        //     fontWeight: FontWeight.w400,
-        //   ),
-        // ),
-        // backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        // toolbarHeight: 75,
-      ),
-      body: screens[index],
-      bottomNavigationBar: NavigationBar(
-          height: 75,
-          selectedIndex: index,
-          onDestinationSelected: (index) => setState(() => this.index = index),
-          destinations: const [
-            NavigationDestination(
-                icon: Icon(Icons.account_circle),
-                label: "Account"
+    return AutoTabsRouter(
+      routes: const [
+        AccountRoute(),
+        StudyRoute(),
+        RepeatRoute(),
+        DictionaryRoute(),
+      ],
+      builder: (context, child) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        return Scaffold(
+          body: child,
+          bottomNavigationBar: NavigationBarTheme(
+            data: const NavigationBarThemeData(),
+            child: NavigationBar(
+              height: 75,
+              selectedIndex: tabsRouter.activeIndex,
+              onDestinationSelected: (index) => _openPage(index, tabsRouter),
+              destinations: const [
+                NavigationDestination(icon: Icon(Icons.account_circle), label: "Account"),
+                NavigationDestination(icon: Icon(Icons.book), label: "Study"),
+                NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
+                NavigationDestination(icon: Icon(Icons.chrome_reader_mode), label: "Dictionary"),
+              ],
             ),
-            NavigationDestination(
-                icon: Icon(Icons.chrome_reader_mode), label: "Dictionary"),
-            NavigationDestination(icon: Icon(Icons.book), label: "Study"),
-            NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
-          ],
-        ),
+          ),
+        );
+      },
     );
+  }
+
+  void _openPage(int index, TabsRouter tabsRouter) {
+    tabsRouter.setActiveIndex(index);
   }
 }
