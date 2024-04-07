@@ -14,7 +14,7 @@ class _RepeatPageState extends State<RepeatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Learny dictionary"),),
+          title: Text("Learny words"),),
         body: Container()
     );
   }

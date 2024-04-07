@@ -33,12 +33,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DictionaryWrapperScreen()),
       );
     },
-    FoldersListRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FoldersListPage(),
-      );
-    },
     FoldersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -133,20 +127,6 @@ class DictionaryWrapperRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FoldersListPage]
-class FoldersListRoute extends PageRouteInfo<void> {
-  const FoldersListRoute({List<PageRouteInfo>? children})
-      : super(
-          FoldersListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FoldersListRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [FoldersPage]
 class FoldersRoute extends PageRouteInfo<void> {
   const FoldersRoute({List<PageRouteInfo>? children})
@@ -156,6 +136,20 @@ class FoldersRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FoldersRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FoldersWordsPage]
+class FoldersWordsRoute extends PageRouteInfo<void> {
+  const FoldersWordsRoute({List<PageRouteInfo>? children})
+      : super(
+          FoldersWordsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FoldersWordsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

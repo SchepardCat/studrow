@@ -32,7 +32,7 @@ class _FolderItemListState extends State<FolderItemList> {
             leading: Icon(Icons.folder),
             title: Text('Entry ${listData[index]}'),
             onTap: () {
-              AutoRouter.of(context).push(WordsListRoute());
+              AutoRouter.of(context).push(DictionaryRoute());
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),

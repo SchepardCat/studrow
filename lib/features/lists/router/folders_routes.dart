@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:studrow/features/lists/router/folder_route_wrapper_screen.dart';
 import 'package:studrow/router/router.dart';
 
 abstract class ListRoutes {
@@ -7,7 +6,8 @@ abstract class ListRoutes {
     page: ListWrapperRoute.page,
     children: [
       AutoRoute(page: FoldersRoute.page, initial: true),
-      AutoRoute(page: WordsListRoute.page),
+      AutoRoute(page: WordDetailsRoute.page),
+      AutoRoute(page: DictionaryRoute.page),
     ],
   );
 }

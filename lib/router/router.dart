@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:studrow/features/lists/router/folders_routes.dart';
 
 import '../features/account/account_page.dart';
-import '../features/lists/presentation/pages/dictionary_folder_list.dart';
 import '../features/dictionary/presentation/pages/dictionary_page.dart';
 import '../features/dictionary/presentation/pages/dictionary_word_list.dart';
-import '../features/dictionary/presentation/pages/word_details_page.dart';
+import '../features/word/presentation/pages/word_details_page.dart';
 import '../features/dictionary/router/dictionary_route_wrapper_screen.dart';
 import '../features/dictionary/router/dictionary_routes.dart';
 import '../features/lists/presentation/pages/folders_page.dart';
@@ -40,10 +40,7 @@ class AppRouter extends _$AppRouter {
               page: RepeatRoute.page,
               path: 'repeat'
           ),
-          AutoRoute(
-              page: FoldersRoute.page,
-              path: 'folders'
-          ),
+          ListRoutes.routes,
           DictionaryRoutes.routes,
           AutoRoute(
               page: SettingsRoute.page,

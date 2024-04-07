@@ -69,7 +69,7 @@ class _StudyPageState extends State<StudyPage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("Learny dictionary"),),
+          title: Text("Learny words"),),
         body: !StSetting.isFinishedLearn? Center(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
