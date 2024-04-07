@@ -39,22 +39,21 @@ class _MainPageState extends State<MainPage> {
         // toolbarHeight: 75,
       ),
       body: screens[index],
-      bottomNavigationBar: NavigationBarTheme(
-        data: const NavigationBarThemeData(),
-        child: NavigationBar(
+      bottomNavigationBar: NavigationBar(
           height: 75,
           selectedIndex: index,
           onDestinationSelected: (index) => setState(() => this.index = index),
           destinations: const [
             NavigationDestination(
-                icon: Icon(Icons.account_circle), label: "Account"),
+                icon: Icon(Icons.account_circle),
+                label: "Account"
+            ),
             NavigationDestination(
                 icon: Icon(Icons.chrome_reader_mode), label: "Dictionary"),
             NavigationDestination(icon: Icon(Icons.book), label: "Study"),
             NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
           ],
         ),
-      ),
     );
   }
 }
