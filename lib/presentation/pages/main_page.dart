@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:studrow/presentation/pages/dictionary_page.dart';
 import 'package:studrow/presentation/pages/account_page.dart';
 import 'package:studrow/presentation/pages/study_page.dart';
+import 'package:studrow/presentation/widgets/search/search.dart';
 
 import '../../standart_setting.dart';
 
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int index = 0;
   final screens = [
-    const StartPage(),
+    const AccountPage(),
     const DictionaryPage(),
     const StudyPage(),
     const Center(child: Text("Exam", style: TextStyle(fontSize: 72))),
@@ -26,21 +27,22 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Search widget",
-          style: const TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        toolbarHeight: 75,
+        title: SearchWidget(),
+        // title: Text(
+        //   "Search widget",
+        //   style: const TextStyle(
+        //     fontSize: 30,
+        //     fontWeight: FontWeight.w400,
+        //   ),
+        // ),
+        // backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        // toolbarHeight: 75,
       ),
       body: screens[index],
       bottomNavigationBar: NavigationBarTheme(
         data: const NavigationBarThemeData(),
         child: NavigationBar(
-          height: 90,
+          height: 75,
           selectedIndex: index,
           onDestinationSelected: (index) => setState(() => this.index = index),
           destinations: const [

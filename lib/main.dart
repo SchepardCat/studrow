@@ -29,7 +29,7 @@ class _MainAppState extends State<MainApp> {
           '/logo': (context) => const LogoPage(),
           '/setting': (context) => const SettingsPage(),
           '/main': (contex) => const MainPage(),
-          '/start': (contex) => const StartPage(),
+          '/start': (contex) => const AccountPage(),
           '/formAdd': (contex) => const FormAdd(),
           '/word' : (context) => const WordDetails(),
         },

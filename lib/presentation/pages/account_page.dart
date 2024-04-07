@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:studrow/presentation/widgets/progress_bar/progress_bar.dart';
 import 'package:studrow/standart_setting.dart';
 
-class StartPage extends StatefulWidget {
-  const StartPage({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({super.key});
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
