@@ -3,10 +3,10 @@ import 'package:studrow/standart_setting.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:auto_route/auto_route.dart';
 
+import '../../../../presentation/widgets/progress_bar/progress_bar.dart';
 import '../../data/dto/data.dart';
 import '../../domain/model/card_model.dart';
 import '../widgets/card/card_flip.dart';
-import '../widgets/progress_bar/progress_bar.dart';
 import '../widgets/snap_message/snap_message.dart';
 
 @RoutePage()

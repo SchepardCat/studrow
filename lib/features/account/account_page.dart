@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-import '../study/presentation/widgets/progress_bar/progress_bar.dart';
+import '../../presentation/widgets/progress_bar/progress_bar.dart';
+
 
 @RoutePage()
 class AccountPage extends StatefulWidget {
