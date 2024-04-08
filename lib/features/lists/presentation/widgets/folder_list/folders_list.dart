@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studrow/domain/model/Folder.dart';
 
 
 import 'folder_item_list.dart';
@@ -12,8 +13,7 @@ class ListFolders extends StatefulWidget {
 }
 
 class _ListFoldersState extends State<ListFolders> {
-  List<String> entries = <String>['D', 'F', 'G'];
-
+  final List<String> entries = Folder().listFolders;
 
   @override
   void initState() {

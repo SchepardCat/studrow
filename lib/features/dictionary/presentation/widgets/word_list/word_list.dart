@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studrow/features/dictionary/presentation/widgets/word_list/word_item_list.dart';
 
+import '../../../../../domain/model/Word.dart';
+
 
 
 class ListWords extends StatefulWidget {
@@ -11,7 +13,7 @@ class ListWords extends StatefulWidget {
 }
 
 class _ListWordsState extends State<ListWords> {
-  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<String> entries = Word().listWord;
 
   @override
   Widget build(BuildContext context) {

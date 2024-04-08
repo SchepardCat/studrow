@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
+
 @RoutePage()
 class RepeatPage extends StatefulWidget {
   const RepeatPage({super.key});
@@ -14,9 +15,9 @@ class _RepeatPageState extends State<RepeatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Learny words"),),
+          title: Text("Learny words"),
+        ),
         body: Container()
     );
   }
 }
-
