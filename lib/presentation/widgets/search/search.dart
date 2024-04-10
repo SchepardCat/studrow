@@ -15,6 +15,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   /*
   Загальний список всіх обєктів
 
+
   List<Bird> allBirds = [
     Bird(name: "Chestnut-headed Bee-eater", image: "assets/birds/bird-1.jpg"),
     Bird(name: "Eurasian Hoopoe", image: "assets/birds/bird-2.jpg"),
