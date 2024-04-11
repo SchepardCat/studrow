@@ -8,6 +8,7 @@ abstract class ListRoutes {
       AutoRoute(page: FoldersRoute.page, initial: true),
       AutoRoute(page: WordDetailsRoute.page),
       AutoRoute(page: DictionaryRoute.page),
+      AutoRoute(page: WordFormAddRoute.page),
     ],
   );
 }

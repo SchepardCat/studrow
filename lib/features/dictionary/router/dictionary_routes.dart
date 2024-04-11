@@ -7,6 +7,7 @@ abstract class DictionaryRoutes {
     page: DictionaryWrapperRoute.page,
     children: [
       AutoRoute(page: DictionaryRoute.page, initial: true),
+      AutoRoute(page: WordFormAddRoute.page),
       AutoRoute(page: WordDetailsRoute.page),
     ],
   );

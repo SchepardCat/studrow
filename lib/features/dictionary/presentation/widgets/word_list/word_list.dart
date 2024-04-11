@@ -3,8 +3,6 @@ import 'package:studrow/features/dictionary/presentation/widgets/word_list/word_
 
 import '../../../../../domain/model/Word.dart';
 
-
-
 class ListWords extends StatefulWidget {
   const ListWords({super.key});
 

@@ -31,7 +31,7 @@ class _FoldersPageState extends State<FoldersPage> {
             context: context,
             builder: (context) {
               return Dialog(
-                child: FormAdd(),
+                child: listFormAdd(),
               );
             },
           );

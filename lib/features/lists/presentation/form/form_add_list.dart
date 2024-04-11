@@ -2,23 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class FormAdd extends StatefulWidget {
-  const FormAdd({super.key});
+class listFormAdd extends StatefulWidget {
+  const listFormAdd({super.key});
 
   @override
-  State<FormAdd> createState() => _FormAddState();
+  State<listFormAdd> createState() => _listFormAddState();
 }
 
-class _FormAddState extends State<FormAdd> {
-  bool enabled  = false;
-
-
+class _listFormAddState extends State<listFormAdd> {
 
   @override
   Widget build(BuildContext context) {
-    final VoidCallback? onPressed = enabled ? () {} : null;
     return Container(
-      height:240,
+      height: 240,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
@@ -26,9 +22,12 @@ class _FormAddState extends State<FormAdd> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
-                child: Text("Add new list", style: TextStyle(
-                  fontSize: 20,
-                ),),
+                child: Text(
+                  "Add new list",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
               ),
               Expanded(
                 child: SizedBox(
@@ -38,10 +37,9 @@ class _FormAddState extends State<FormAdd> {
                       border: OutlineInputBorder(),
                       hintText: "Name of new list",
                       hintStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.grey[500]
-                      ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.grey[500]),
                     ),
                   ),
                 ),
@@ -51,13 +49,36 @@ class _FormAddState extends State<FormAdd> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FilledButton.tonal(
-                      onPressed: onPressed, child: const Text('Cancel'), style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.primaryContainer),
-                    ),),
+                      onPressed: (){
+                        print("Cancel button form add");
+                        Navigator.pop(context, true);
+                      },
+                      child: const Text('Cancel'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).colorScheme.primaryContainer),
+                      ),
+                    ),
                     FilledButton.tonal(
-                      onPressed: onPressed, child: const Text('Add'), style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.primaryContainer),
-                    ),),
+                      onPressed: (){
+                        print("Add button form add");
+                        Navigator.pop(context, true);
+
+                        /*
+
+
+
+
+
+                        Сюди додати метод додавання в базу данних теку
+                         */
+                      },
+                      child: const Text('Add'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).colorScheme.primaryContainer),
+                      ),
+                    ),
                   ],
                 ),
               )
