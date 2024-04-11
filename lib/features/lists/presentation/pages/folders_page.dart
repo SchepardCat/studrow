@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:studrow/features/lists/presentation/pages/dictionary_folder_list.dart';
 
+import '../form/form_add_list.dart';
+
 
 
 
@@ -25,7 +27,14 @@ class _FoldersPageState extends State<FoldersPage> {
       body: FoldersListPage(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/formAdd');
+          showDialog(
+            context: context,
+            builder: (context) {
+              return Dialog(
+                child: FormAdd(),
+              );
+            },
+          );
         },
         tooltip: 'Form add new folder',
         child: const Icon(Icons.add),
