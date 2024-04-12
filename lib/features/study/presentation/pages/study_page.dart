@@ -25,6 +25,7 @@ class _StudyPageState extends State<StudyPage> {
           child: Container(
             child: Column(
               children: [
+                Text("Список вибору папки з якої слова будеш вивчати"),
                 ElevatedButton(
                     onPressed: () {
                       AutoRouter.of(context).push(StudyCardRoute());

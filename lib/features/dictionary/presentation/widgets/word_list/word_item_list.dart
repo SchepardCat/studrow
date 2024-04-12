@@ -16,8 +16,16 @@ class WordItemList extends StatefulWidget {
 class _WordItemListState extends State<WordItemList> {
   final List<String> listData;
   final int index;
+  Color tileCol = Colors.white;
+
 
   _WordItemListState({required this.listData, required this.index});
+
+
+  @override
+  void initState() {
+    getStud();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +34,7 @@ class _WordItemListState extends State<WordItemList> {
       child: Column(
         children: [
           ListTile(
+            tileColor: tileCol,
             title: Text('Entry ${listData[index]}'),
             onTap: () {
               AutoRouter.of(context).push(WordDetailsRoute());
@@ -38,5 +47,12 @@ class _WordItemListState extends State<WordItemList> {
         ],
       ),
     );
+  }
+
+  void getStud(){
+
+    if(listData[index] == "A" || listData[index] == "B") {
+      this.tileCol = Colors.amber[200]!;
+    }
   }
 }
