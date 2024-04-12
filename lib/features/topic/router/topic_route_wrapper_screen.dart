@@ -5,8 +5,8 @@ import '../../../router/router.dart';
 
 
 @RoutePage()
-class ListWrapperScreen extends StatelessWidget implements AutoRouteWrapper {
-  const ListWrapperScreen({super.key});
+class TopicWrapperScreen extends StatelessWidget implements AutoRouteWrapper {
+  const TopicWrapperScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

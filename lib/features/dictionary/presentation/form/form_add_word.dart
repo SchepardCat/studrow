@@ -25,7 +25,17 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
             child: IconButton(
               iconSize: 32,
               icon: const Icon(Icons.done),
-              onPressed: () {},
+              onPressed: () {
+                /*
+                    Написати метод долавання в БД
+
+
+
+
+
+                     */
+                Navigator.pop(context, true);
+              },
             ),
           ),
         ],
@@ -80,7 +90,8 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                  onPressed: () {}, child: const Text('Choose a topic')),
+                  onPressed: () {
+                  }, child: const Text('Choose a topic')),
             ),
           ],
         ),

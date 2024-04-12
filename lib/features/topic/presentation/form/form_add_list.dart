@@ -65,11 +65,6 @@ class _listFormAddState extends State<listFormAdd> {
                         Navigator.pop(context, true);
 
                         /*
-
-
-
-
-
                         Сюди додати метод додавання в базу данних теку
                          */
                       },

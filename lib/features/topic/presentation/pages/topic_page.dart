@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:studrow/features/lists/presentation/pages/dictionary_folder_list.dart';
-
+import 'package:studrow/features/topic/presentation/pages/dictionary_topic_list.dart';
 import '../form/form_add_list.dart';
 
 
 
 
 @RoutePage()
-class FoldersPage extends StatefulWidget {
-  const FoldersPage({super.key});
+class TopicsPage extends StatefulWidget {
+  const TopicsPage({super.key});
 
   @override
-  State<FoldersPage> createState() => _FoldersPageState();
+  State<TopicsPage> createState() => _TopicsPageState();
 }
 
-class _FoldersPageState extends State<FoldersPage> {
+class _TopicsPageState extends State<TopicsPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Folders"),
+        title: Text("Topics"),
       ),
-      body: FoldersListPage(),
+      body: TopicsPageBody(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showDialog(
@@ -36,9 +34,9 @@ class _FoldersPageState extends State<FoldersPage> {
             },
           );
         },
-        tooltip: 'Form add new folder',
+        tooltip: 'Form add new topic',
         icon: const Icon(Icons.add),
-        label: Text("New list"),
+        label: Text("New topic"),
       ),
     );
   }

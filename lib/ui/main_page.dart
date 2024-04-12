@@ -25,8 +25,7 @@ class _MainPageState extends State<MainPage> {
       routes: const [
         AccountRoute(),
         StudyRoute(),
-        RepeatRoute(),
-        FoldersRoute(),
+        TopicsRoute(),
         DictionaryRoute(),
       ],
       builder: (context, child) {
@@ -43,8 +42,7 @@ class _MainPageState extends State<MainPage> {
               destinations: const [
                 NavigationDestination(icon: Icon(Icons.home), label: "Home"),
                 NavigationDestination(icon: Icon(Icons.book), label: "Study"),
-                NavigationDestination(icon: Icon(Icons.repeat), label: "Repeat"),
-                NavigationDestination(icon: Icon(Icons.folder), label: "Folders"),
+                NavigationDestination(icon: Icon(Icons.folder), label: "Topics"),
                 NavigationDestination(icon: Icon(Icons.chrome_reader_mode), label: "Dictionary"),
               ],
             ),

@@ -1,26 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/features/dictionary/presentation/pages/dictionary_page.dart';
-import 'package:studrow/features/dictionary/router/dictionary_routes.dart';
 import 'package:studrow/router/router.dart';
 
 
-class FolderItemList extends StatefulWidget {
+class TopicItemList extends StatefulWidget {
   final List<String> listData;
   final int index;
 
-  const FolderItemList({required this.listData, required this.index});
+  const TopicItemList({required this.listData, required this.index});
 
   @override
-  State<FolderItemList> createState() =>
-      new _FolderItemListState(listData: listData, index: index);
+  State<TopicItemList> createState() =>
+      new _TopicItemListState(listData: listData, index: index);
 }
 
-class _FolderItemListState extends State<FolderItemList> {
+class _TopicItemListState extends State<TopicItemList> {
   final List<String> listData;
   final int index;
 
-  _FolderItemListState({required this.listData, required this.index});
+  _TopicItemListState({required this.listData, required this.index});
 
   @override
   Widget build(BuildContext context) {

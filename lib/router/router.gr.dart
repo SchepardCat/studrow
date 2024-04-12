@@ -33,18 +33,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DictionaryWrapperScreen()),
       );
     },
-    FoldersRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FoldersPage(),
-      );
-    },
-    ListWrapperRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const ListWrapperScreen()),
-      );
-    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -63,10 +51,34 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SettingsPage(),
       );
     },
+    StudyCardRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StudyCardPage(),
+      );
+    },
     StudyRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const StudyPage(),
+      );
+    },
+    StudyWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const StudyWrapperScreen()),
+      );
+    },
+    TopicWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const TopicWrapperScreen()),
+      );
+    },
+    TopicsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TopicsPage(),
       );
     },
     WordDetailsRoute.name: (routeData) {
@@ -133,34 +145,6 @@ class DictionaryWrapperRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FoldersPage]
-class FoldersRoute extends PageRouteInfo<void> {
-  const FoldersRoute({List<PageRouteInfo>? children})
-      : super(
-          FoldersRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FoldersRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ListWrapperScreen]
-class ListWrapperRoute extends PageRouteInfo<void> {
-  const ListWrapperRoute({List<PageRouteInfo>? children})
-      : super(
-          ListWrapperRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ListWrapperRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [MainPage]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
@@ -203,6 +187,20 @@ class SettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [StudyCardPage]
+class StudyCardRoute extends PageRouteInfo<void> {
+  const StudyCardRoute({List<PageRouteInfo>? children})
+      : super(
+          StudyCardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StudyCardRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [StudyPage]
 class StudyRoute extends PageRouteInfo<void> {
   const StudyRoute({List<PageRouteInfo>? children})
@@ -212,6 +210,48 @@ class StudyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StudyRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [StudyWrapperScreen]
+class StudyWrapperRoute extends PageRouteInfo<void> {
+  const StudyWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          StudyWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StudyWrapperRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TopicWrapperScreen]
+class TopicWrapperRoute extends PageRouteInfo<void> {
+  const TopicWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          TopicWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TopicWrapperRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TopicsPage]
+class TopicsRoute extends PageRouteInfo<void> {
+  const TopicsRoute({List<PageRouteInfo>? children})
+      : super(
+          TopicsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TopicsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
