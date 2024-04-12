@@ -33,8 +33,8 @@ class _TopicsPageState extends State<TopicsPage> with RouteAware{
       ),
       body: TopicsPageBody(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          refr = await showDialog(
+        onPressed: ()  {
+          showDialog(
             context: context,
             builder: (context) {
               return Dialog(
@@ -42,9 +42,6 @@ class _TopicsPageState extends State<TopicsPage> with RouteAware{
               );
             },
           );
-          if(refr){
-            initState();
-          }
         },
         tooltip: 'Form add new topic',
         icon: const Icon(Icons.add),

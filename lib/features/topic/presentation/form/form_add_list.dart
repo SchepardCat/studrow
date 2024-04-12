@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/domain/repository/topic_repository.dart';
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 
 class listFormAdd extends StatefulWidget {
   const listFormAdd({super.key});
@@ -87,7 +89,7 @@ class _listFormAddState extends State<listFormAdd> {
 
   _insertTopic() async {
     final Topic topic = Topic(name: _nameTopic.text);
-    await TopicRepository.insert(topic);
+    Provider.of<TopicProvider>(context, listen: false).insertTopic(topic: topic);
     print("Insert complete");
   }
 }

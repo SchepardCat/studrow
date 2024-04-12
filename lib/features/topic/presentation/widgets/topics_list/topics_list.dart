@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/domain/repository/topic_repository.dart';
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 
 
 import 'topic_item_list.dart';
@@ -23,22 +25,11 @@ class _TopicsListState extends State<TopicsList> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: TopicRepository.getTopic(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done){
-            if(snapshot.data == null || snapshot.data!.isEmpty){
-              return const Center(child: Text("Empty!"));
-            }
-            return ListView(
-              padding: const EdgeInsets.all(10),
-              children: [
-                for(var topic in snapshot.data!)
-                  TopicItemList(topic: topic)
-              ],
-            );
-          }
-          return SizedBox();
+    return Consumer<TopicProvider>(
+        builder: (context, provider, child) {
+          return provider.topics.isEmpty? const Center(child: Text("Empty")):
+              ListView(
+                children: provider.topics.map((e) => TopicItemList(topic: e)).toList());
         },
     );
     // return ListView.builder(

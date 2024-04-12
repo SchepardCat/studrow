@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
 import 'ui/theme/theme.dart';
 import 'ui/theme/typography.dart';
@@ -20,10 +22,15 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: MaterialTheme(textTheme).light(),
-        routerConfig: _router.config(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TopicProvider()),
+      ],
+      child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: MaterialTheme(textTheme).light(),
+          routerConfig: _router.config(),
+      ),
     );
   }
 }

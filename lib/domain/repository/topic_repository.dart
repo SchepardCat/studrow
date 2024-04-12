@@ -32,7 +32,7 @@ class TopicRepository{
 
   static Future<List<Topic>> getTopic() async {
     final db = await _database();
-    final List<Map<String, Object?>> topicMaps = await db.query(_tableName);
+    final List<Map<String, Object?>> topicMaps = await db.query(_tableName, orderBy: "name ASC");
     return [
       for (final {
       'id': id as int,
