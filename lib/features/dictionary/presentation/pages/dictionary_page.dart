@@ -23,12 +23,13 @@ class _DictionaryPageState extends State<DictionaryPage> {
           title: Text("Dictionary"),
         ),
         body: WordsListPage(),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             AutoRouter.of(context).push(WordFormAddRoute());
           },
           tooltip: 'Form add new word',
-          child: const Icon(Icons.add),
+          icon: const Icon(Icons.add),
+          label: Text("New word"),
         ),
       );
   }

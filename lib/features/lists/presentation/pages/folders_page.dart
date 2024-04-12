@@ -25,7 +25,7 @@ class _FoldersPageState extends State<FoldersPage> {
         title: Text("Folders"),
       ),
       body: FoldersListPage(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showDialog(
             context: context,
@@ -37,7 +37,8 @@ class _FoldersPageState extends State<FoldersPage> {
           );
         },
         tooltip: 'Form add new folder',
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: Text("New list"),
       ),
     );
   }

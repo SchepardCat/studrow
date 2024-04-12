@@ -65,15 +65,32 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SearchBar(
-        hintText: "Search",
-        controller: controller,
-        padding: MaterialStateProperty.all<EdgeInsets>(
-            const EdgeInsets.symmetric(horizontal: 15)),
-        leading: const Icon(Icons.search),
-        trailing: const [Icon(Icons.mic)],
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+      child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: _ClearButton(controller: controller),
+            hintText: 'Search',
+            hintStyle: TextStyle(
+              color: Colors.grey[500],
+              fontSize: 18
+            ),
+            border: InputBorder.none
+          ),
+        ),
     );
   }
+}
+
+class _ClearButton extends StatelessWidget {
+  const _ClearButton({required this.controller});
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+    icon: const Icon(Icons.clear),
+    onPressed: () => controller.clear(),
+  );
 }
