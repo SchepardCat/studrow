@@ -2,23 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:studrow/router/router.dart';
 
+import '../../../../../domain/model/topic.dart';
 
-class TopicItemList extends StatefulWidget {
-  final List<String> listData;
-  final int index;
 
-  const TopicItemList({required this.listData, required this.index});
+class TopicItemList extends StatelessWidget {
+  final Topic topic;
 
-  @override
-  State<TopicItemList> createState() =>
-      new _TopicItemListState(listData: listData, index: index);
-}
-
-class _TopicItemListState extends State<TopicItemList> {
-  final List<String> listData;
-  final int index;
-
-  _TopicItemListState({required this.listData, required this.index});
+  const TopicItemList({required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +18,7 @@ class _TopicItemListState extends State<TopicItemList> {
         children: [
           ListTile(
             leading: Icon(Icons.folder),
-            title: Text('Entry ${listData[index]}'),
+            title: Text(topic.name),
             onTap: () {
               AutoRouter.of(context).push(DictionaryRoute());
             },

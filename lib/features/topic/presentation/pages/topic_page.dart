@@ -14,8 +14,17 @@ class TopicsPage extends StatefulWidget {
   State<TopicsPage> createState() => _TopicsPageState();
 }
 
-class _TopicsPageState extends State<TopicsPage> {
+class _TopicsPageState extends State<TopicsPage> with RouteAware{
+  bool refr = false;
 
+  @override
+  void didPopNext() {
+    initState();
+  }
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +33,8 @@ class _TopicsPageState extends State<TopicsPage> {
       ),
       body: TopicsPageBody(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          showDialog(
+        onPressed: () async {
+          refr = await showDialog(
             context: context,
             builder: (context) {
               return Dialog(
@@ -33,6 +42,9 @@ class _TopicsPageState extends State<TopicsPage> {
               );
             },
           );
+          if(refr){
+            initState();
+          }
         },
         tooltip: 'Form add new topic',
         icon: const Icon(Icons.add),

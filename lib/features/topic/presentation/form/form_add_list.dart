@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:studrow/domain/model/topic.dart';
+import 'package:studrow/domain/repository/topic_repository.dart';
 
 class listFormAdd extends StatefulWidget {
   const listFormAdd({super.key});
@@ -10,6 +12,8 @@ class listFormAdd extends StatefulWidget {
 }
 
 class _listFormAddState extends State<listFormAdd> {
+  final _nameTopic = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,7 @@ class _listFormAddState extends State<listFormAdd> {
               Expanded(
                 child: SizedBox(
                   child: TextField(
+                    controller: _nameTopic,
                     autofocus: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -61,12 +66,8 @@ class _listFormAddState extends State<listFormAdd> {
                     ),
                     FilledButton.tonal(
                       onPressed: (){
-                        print("Add button form add");
                         Navigator.pop(context, true);
-
-                        /*
-                        Сюди додати метод додавання в базу данних теку
-                         */
+                        _insertTopic();
                       },
                       child: const Text('Add'),
                       style: ButtonStyle(
@@ -82,5 +83,11 @@ class _listFormAddState extends State<listFormAdd> {
         ),
       ),
     );
+  }
+
+  _insertTopic() async {
+    final Topic topic = Topic(name: _nameTopic.text);
+    await TopicRepository.insert(topic);
+    print("Insert complete");
   }
 }

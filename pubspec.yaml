@@ -17,6 +17,8 @@ dependencies:
   auto_route: ^8.0.3
   build_runner: ^2.4.9
   auto_route_generator: ^8.0.0
+  sqflite: ^2.2.8
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,18 @@
 class Topic{
-  final List<String> _listTopics = ['D', 'F', 'G','D', 'F', 'G','D', 'F', 'G','D', 'F', 'G','D', 'F', 'G','D', 'F', 'G','D', 'F', 'G'];
-  Topic();
+  int? id;
+  String name;
 
-  List<String> get listTopics => _listTopics;
+  Topic({this.id, required this.name});
+
+  Map<String,Object?> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Topic{id: $id, name: $name}';
+  }
 }

@@ -4,6 +4,7 @@ import 'ui/theme/theme.dart';
 import 'ui/theme/typography.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

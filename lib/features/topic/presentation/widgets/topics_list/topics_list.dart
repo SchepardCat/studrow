@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studrow/domain/model/topic.dart';
+import 'package:studrow/domain/repository/topic_repository.dart';
 
 
 import 'topic_item_list.dart';
@@ -13,7 +14,7 @@ class TopicsList extends StatefulWidget {
 }
 
 class _TopicsListState extends State<TopicsList> {
-  final List<String> entries = Topic().listTopics;
+
 
   @override
   void initState() {
@@ -22,12 +23,30 @@ class _TopicsListState extends State<TopicsList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: entries.length,
-      itemBuilder: (BuildContext context, int index) {
-        return TopicItemList(listData: entries, index: index);
-      },
+    return FutureBuilder(
+        future: TopicRepository.getTopic(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done){
+            if(snapshot.data == null || snapshot.data!.isEmpty){
+              return const Center(child: Text("Empty!"));
+            }
+            return ListView(
+              padding: const EdgeInsets.all(10),
+              children: [
+                for(var topic in snapshot.data!)
+                  TopicItemList(topic: topic)
+              ],
+            );
+          }
+          return SizedBox();
+        },
     );
+    // return ListView.builder(
+    //   padding: const EdgeInsets.all(8),
+    //   itemCount: entries.length,
+    //   itemBuilder: (BuildContext context, int index) {
+    //     return TopicItemList(listData: entries, index: index);
+    //   },
+    // );
   }
 }
