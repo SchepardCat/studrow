@@ -19,6 +19,16 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add new word"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              iconSize: 32,
+              icon: const Icon(Icons.done),
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: ListView(
