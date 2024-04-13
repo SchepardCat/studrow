@@ -13,7 +13,7 @@ class TopicRepository{
       join(await getDatabasesPath(), _dbName),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE $_tableName(id INTEGER PRIMARY KEY, name TEXT)',
+          'CREATE TABLE $_tableName(id INTEGER PRIMARY KEY NOT NULL, name TEXT)',
         );
       },
       version: 1,
@@ -30,15 +30,35 @@ class TopicRepository{
     );
   }
 
-  static Future<List<Topic>> getTopic() async {
+  static Future<List<Topic>> getTopics() async {
     final db = await _database();
-    final List<Map<String, Object?>> topicMaps = await db.query(_tableName, orderBy: "name ASC");
+    final List<Map<String,Object?>> topicMaps = await db.query(_tableName, orderBy: "name ASC");
     return [
       for (final {
       'id': id as int,
       'name': name as String,
       } in topicMaps)
-        Topic(name: name),
+        Topic(id: id, name: name),
     ];
   }
+
+  static Future<void> updateTopic(Topic topic) async {
+    final db = await _database();
+    await db.update(
+      _tableName,
+      topic.toMap(),
+      where: 'id = ?',
+      whereArgs: [topic.id],
+    );
+  }
+
+  static Future<void> deleteTopic(int id) async {
+    final db = await _database();
+    await db.delete(
+      _tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
 }

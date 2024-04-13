@@ -11,7 +11,7 @@ class TopicProvider with ChangeNotifier{
   }
 
   getTopics() async {
-    topics = await TopicRepository.getTopic();
+    topics = await TopicRepository.getTopics();
     notifyListeners();
   }
 
@@ -21,7 +21,12 @@ class TopicProvider with ChangeNotifier{
   }
 
   update({required Topic topic}) async {
-    await TopicRepository.insert(topic);
+    await TopicRepository.updateTopic(topic);
+    getTopics();
+  }
+
+  delete({required int id}) async {
+    await TopicRepository.deleteTopic(id);
     getTopics();
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
 
 @RoutePage()
@@ -16,7 +17,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-
+    TopicProvider();
     super.initState();
   }
   @override

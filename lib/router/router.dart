@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:studrow/domain/model/topic.dart';
 
 import '../features/account/account_page.dart';
 import '../features/dictionary/presentation/form/form_add_word.dart';
@@ -12,6 +14,7 @@ import '../features/study/presentation/pages/study_card_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import '../features/study/router/study_route_wrapper_screen.dart';
 import '../features/study/router/study_routes.dart';
+import '../features/topic/presentation/pages/topic_details_page.dart';
 import '../features/topic/presentation/pages/topic_page.dart';
 import '../features/topic/router/topic_route_wrapper_screen.dart';
 import '../features/topic/router/topics_routes.dart';

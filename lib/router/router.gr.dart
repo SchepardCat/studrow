@@ -69,6 +69,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const StudyWrapperScreen()),
       );
     },
+    TopicDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<TopicDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TopicDetailsPage(
+          key: args.key,
+          topic: args.topic,
+        ),
+      );
+    },
     TopicWrapperRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -226,6 +236,44 @@ class StudyWrapperRoute extends PageRouteInfo<void> {
   static const String name = 'StudyWrapperRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TopicDetailsPage]
+class TopicDetailsRoute extends PageRouteInfo<TopicDetailsRouteArgs> {
+  TopicDetailsRoute({
+    Key? key,
+    required Topic topic,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TopicDetailsRoute.name,
+          args: TopicDetailsRouteArgs(
+            key: key,
+            topic: topic,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TopicDetailsRoute';
+
+  static const PageInfo<TopicDetailsRouteArgs> page =
+      PageInfo<TopicDetailsRouteArgs>(name);
+}
+
+class TopicDetailsRouteArgs {
+  const TopicDetailsRouteArgs({
+    this.key,
+    required this.topic,
+  });
+
+  final Key? key;
+
+  final Topic topic;
+
+  @override
+  String toString() {
+    return 'TopicDetailsRouteArgs{key: $key, topic: $topic}';
+  }
 }
 
 /// generated route for

@@ -32,12 +32,5 @@ class _TopicsListState extends State<TopicsList> {
                 children: provider.topics.map((e) => TopicItemList(topic: e)).toList());
         },
     );
-    // return ListView.builder(
-    //   padding: const EdgeInsets.all(8),
-    //   itemCount: entries.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return TopicItemList(listData: entries, index: index);
-    //   },
-    // );
   }
 }

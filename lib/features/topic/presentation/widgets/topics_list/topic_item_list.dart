@@ -1,14 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:studrow/router/router.dart';
+import 'package:flutter/widgets.dart';
+import 'package:studrow/domain/model/topic.dart';
+import 'package:auto_route/auto_route.dart';
+import '../../../../../router/router.dart';
 
-import '../../../../../domain/model/topic.dart';
-
-
-class TopicItemList extends StatelessWidget {
+class TopicItemList extends StatefulWidget {
   final Topic topic;
 
   const TopicItemList({required this.topic});
+
+  @override
+  State<TopicItemList> createState() => _TopicItemListState();
+}
+
+class _TopicItemListState extends State<TopicItemList> {
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +23,9 @@ class TopicItemList extends StatelessWidget {
         children: [
           ListTile(
             leading: Icon(Icons.folder),
-            title: Text(topic.name),
+            title: Text(widget.topic.id.toString() + " - " + widget.topic.name),
             onTap: () {
-              AutoRouter.of(context).push(DictionaryRoute());
+              AutoRouter.of(context).push(TopicDetailsRoute(topic: widget.topic));
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),

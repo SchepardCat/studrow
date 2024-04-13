@@ -14,13 +14,8 @@ class TopicsPage extends StatefulWidget {
   State<TopicsPage> createState() => _TopicsPageState();
 }
 
-class _TopicsPageState extends State<TopicsPage> with RouteAware{
-  bool refr = false;
+class _TopicsPageState extends State<TopicsPage>{
 
-  @override
-  void didPopNext() {
-    initState();
-  }
   @override
   void initState() {
     super.initState();

@@ -6,9 +6,7 @@ abstract class TopicRoutes {
     page: TopicWrapperRoute.page,
     children: [
       AutoRoute(page: TopicsRoute.page, initial: true),
-      AutoRoute(page: WordDetailsRoute.page),
-      AutoRoute(page: DictionaryRoute.page),
-      AutoRoute(page: WordFormAddRoute.page),
+      AutoRoute(page: TopicDetailsRoute.page),
     ],
   );
 }
