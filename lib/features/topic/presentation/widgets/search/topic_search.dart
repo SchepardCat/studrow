@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:studrow/features/topic/presentation/widgets/topics_list/topic_item_list.dart';
 
-import '../../../features/topic/presentation/provider/topic_provider.dart';
+import '../../provider/topic_provider.dart';
 
-class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+class TopicSearch extends StatefulWidget {
+  const TopicSearch({super.key});
 
   @override
-  State<SearchWidget> createState() => _SearchWidgetState();
+  State<TopicSearch> createState() => _TopicSearchState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
+class _TopicSearchState extends State<TopicSearch> {
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -31,8 +30,9 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 
   void search(String query) {
-      Provider.of<TopicProvider>(context, listen: false).setSearch(query: query);
+    Provider.of<TopicProvider>(context, listen: false).setSearch(query: query);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +40,8 @@ class _SearchWidgetState extends State<SearchWidget> {
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
       child: TextField(
         onChanged: search,
-          controller: controller,
-          decoration: InputDecoration(
+        controller: controller,
+        decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
@@ -49,12 +49,12 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             hintText: 'Search',
             hintStyle: TextStyle(
-              color: Colors.grey[500],
-              fontSize: 18
+                color: Colors.grey[500],
+                fontSize: 18
             ),
             border: InputBorder.none
-          ),
         ),
-    );
+      ),
+    );;
   }
 }

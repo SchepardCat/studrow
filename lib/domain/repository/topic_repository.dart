@@ -30,14 +30,15 @@ class TopicRepository{
     );
   }
 
-  static Future<List<Topic>> getTopics() async {
+  static Future<List<Topic>> getTopics(String name) async {
+    name = '%' + name + '%';
     final db = await _database();
-    final List<Map<String,Object?>> topicMaps = await db.query(_tableName, orderBy: "name ASC");
+    final List<Map<String,Object?>> topicMaps = await db.query(_tableName,where: 'name LIKE ?', whereArgs: [name], orderBy: "name ASC");
     return [
       for (final {
       'id': id as int,
       'name': name as String,
-      } in topicMaps)
+      } in topicMaps!)
         Topic(id: id, name: name),
     ];
   }

@@ -5,13 +5,19 @@ import '../../../../domain/model/topic.dart';
 
 class TopicProvider with ChangeNotifier{
   List<Topic> topics = [];
+  String search = "";
 
   TopicProvider(){
     getTopics();
   }
 
+  setSearch({required String query}){
+    this.search = query;
+    getTopics();
+  }
+
   getTopics() async {
-    topics = await TopicRepository.getTopics();
+    topics = await TopicRepository.getTopics(search);
     notifyListeners();
   }
 
