@@ -3,7 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 
+import '../../../../domain/model/topic.dart';
 import '../../../../domain/model/word.dart';
+import '../../../../router/router.dart';
+import '../../../topic/presentation/provider/topic_provider.dart';
 
 @RoutePage()
 class WordDetailsPage extends StatefulWidget {
@@ -19,6 +22,8 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _translate = TextEditingController();
   final TextEditingController _example = TextEditingController();
+  final TextEditingController _topic = TextEditingController();
+  Topic? selectedTopic;
   bool dontEdit = true;
 
   @override
@@ -96,10 +101,39 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  onPressed: () {
-                  }, child: const Text('Choose a topic')),
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Consumer<TopicProvider>(
+                builder: (context, provider, child) {
+                  return provider.topics.isEmpty? const Center(child: Text("Empty")):
+                  DropdownMenu<Topic>(
+                    menuHeight: 200,
+                    controller: _topic,
+                    enableFilter: true,
+                    requestFocusOnTap: true,
+                    leadingIcon: const Icon(Icons.search),
+                    label: const Text("Topic"),
+                    inputDecorationTheme: const InputDecorationTheme(
+                      filled: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                    ),
+                    onSelected: (Topic? topic) {
+                      setState(() {
+                        selectedTopic = topic;
+                      });
+                    },
+                    dropdownMenuEntries:
+                    provider.topics.map<DropdownMenuEntry<Topic>>(
+                          (Topic topic) {
+                        return DropdownMenuEntry<Topic>(
+                            value: topic,
+                            label: topic.name,
+                            leadingIcon: Text(topic.id_topic.toString())
+                        );
+                      },
+                    ).toList(),
+                  );
+                },
+              ),
             ),
           ],
         ),

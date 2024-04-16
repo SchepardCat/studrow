@@ -11,22 +11,22 @@ class TopicSearch extends StatefulWidget {
 }
 
 class _TopicSearchState extends State<TopicSearch> {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController searchTopicQuery = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    controller.addListener(searchListener);
+    searchTopicQuery.addListener(searchListener);
   }
   @override
   void dispose() {
-    controller.removeListener(searchListener);
-    controller.dispose();
+    searchTopicQuery.removeListener(searchListener);
+    searchTopicQuery.dispose();
     super.dispose();
   }
 
   void searchListener() {
-    search(controller.text);
+    search(searchTopicQuery.text);
   }
 
   void search(String query) {
@@ -40,12 +40,12 @@ class _TopicSearchState extends State<TopicSearch> {
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
       child: TextField(
         onChanged: search,
-        controller: controller,
+        controller: searchTopicQuery,
         decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
-              onPressed: () => controller.clear(),
+              onPressed: () => searchTopicQuery.clear(),
             ),
             hintText: 'Search',
             hintStyle: TextStyle(

@@ -33,6 +33,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DictionaryWrapperScreen()),
       );
     },
+    ItemTopicListRoute.name: (routeData) {
+      final args = routeData.argsAs<ItemTopicListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ItemTopicListPage(
+          key: args.key,
+          topic: args.topic,
+        ),
+      );
+    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -77,6 +87,12 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           topic: args.topic,
         ),
+      );
+    },
+    TopicListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TopicListPage(),
       );
     },
     TopicWrapperRoute.name: (routeData) {
@@ -156,6 +172,44 @@ class DictionaryWrapperRoute extends PageRouteInfo<void> {
   static const String name = 'DictionaryWrapperRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ItemTopicListPage]
+class ItemTopicListRoute extends PageRouteInfo<ItemTopicListRouteArgs> {
+  ItemTopicListRoute({
+    Key? key,
+    required Topic topic,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ItemTopicListRoute.name,
+          args: ItemTopicListRouteArgs(
+            key: key,
+            topic: topic,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ItemTopicListRoute';
+
+  static const PageInfo<ItemTopicListRouteArgs> page =
+      PageInfo<ItemTopicListRouteArgs>(name);
+}
+
+class ItemTopicListRouteArgs {
+  const ItemTopicListRouteArgs({
+    this.key,
+    required this.topic,
+  });
+
+  final Key? key;
+
+  final Topic topic;
+
+  @override
+  String toString() {
+    return 'ItemTopicListRouteArgs{key: $key, topic: $topic}';
+  }
 }
 
 /// generated route for
@@ -278,6 +332,20 @@ class TopicDetailsRouteArgs {
   String toString() {
     return 'TopicDetailsRouteArgs{key: $key, topic: $topic}';
   }
+}
+
+/// generated route for
+/// [TopicListPage]
+class TopicListRoute extends PageRouteInfo<void> {
+  const TopicListRoute({List<PageRouteInfo>? children})
+      : super(
+          TopicListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TopicListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

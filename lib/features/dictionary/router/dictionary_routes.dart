@@ -9,6 +9,7 @@ abstract class DictionaryRoutes {
       AutoRoute(page: DictionaryRoute.page, initial: true),
       AutoRoute(page: WordFormAddRoute.page),
       AutoRoute(page: WordDetailsRoute.page),
+      AutoRoute(page: TopicListRoute.page),
     ],
   );
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:studrow/features/topic/presentation/widgets/search/topic_search.dart';
 import 'package:studrow/features/topic/presentation/widgets/topics_list/topics_list.dart';
-import '../../../../presentation/widgets/search/search.dart';
+import '../../../dictionary/presentation/widgets/search/dictionary_search.dart';
 
 class TopicsPageBody extends StatelessWidget {
   const TopicsPageBody({super.key});

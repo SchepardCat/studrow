@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:studrow/features/topic/presentation/widgets/topics_list/topic_item_list.dart';
+import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 
-import '../../../features/topic/presentation/provider/topic_provider.dart';
 
-class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+class WordSearch extends StatefulWidget {
+  const WordSearch({super.key});
 
   @override
-  State<SearchWidget> createState() => _SearchWidgetState();
+  State<WordSearch> createState() => _WordSearchState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
-  final TextEditingController controller = TextEditingController();
+class _WordSearchState extends State<WordSearch> {
+  final TextEditingController searchWordQuery = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    controller.addListener(searchListener);
+    searchWordQuery.addListener(searchListener);
   }
   @override
   void dispose() {
-    controller.removeListener(searchListener);
-    controller.dispose();
+    searchWordQuery.removeListener(searchListener);
+    searchWordQuery.dispose();
     super.dispose();
   }
 
   void searchListener() {
-    search(controller.text);
+    search(searchWordQuery.text);
   }
 
   void search(String query) {
-      Provider.of<TopicProvider>(context, listen: false).setSearch(query: query);
+      Provider.of<WordProvider>(context, listen: false).setSearch(query: query);
   }
 
   @override
@@ -40,12 +39,12 @@ class _SearchWidgetState extends State<SearchWidget> {
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
       child: TextField(
         onChanged: search,
-          controller: controller,
+          controller: searchWordQuery,
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
-              onPressed: () => controller.clear(),
+              onPressed: () => searchWordQuery.clear(),
             ),
             hintText: 'Search',
             hintStyle: TextStyle(
