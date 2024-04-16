@@ -5,6 +5,7 @@ import '../../../../domain/model/topic.dart';
 
 class TopicProvider with ChangeNotifier{
   List<Topic> topics = [];
+  List<Topic> topic = [];
   String search = "";
   bool isLoadingTopics = true;
 
@@ -36,6 +37,10 @@ class TopicProvider with ChangeNotifier{
   delete({required int id}) async {
     await MainRepository.deleteTopic(id);
     getTopics();
+  }
+
+  getTopic(int id) async {
+    topic = await MainRepository.getTopic(id);
   }
 
 }

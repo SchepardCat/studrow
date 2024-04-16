@@ -28,7 +28,9 @@ class Word{
 
   @override
   String toString() {
-    return 'Word{id: $id_word, name: $name}';
+    return 'Word{id: $id_word, name: $name, translate: $translate, example: $example,'
+        'topic_id: $topic_id, isLearn: $isLearn, isRepeatFirst: $isRepeatFirst, isRepeatSecond: $isRepeatSecond,'
+        'isRepeatThird: $isRepeatThird}';
   }
 
 }

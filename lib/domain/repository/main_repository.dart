@@ -128,4 +128,17 @@ class MainRepository {
       whereArgs: [id],
     );
   }
+
+  static Future<List<Topic>> getTopic(int id) async {
+    final db = await _database();
+    final List<Map<String, Object?>> topicMaps = await db.query(_tableNameTopic,
+        where: 'id_topic = ', whereArgs: [id]);
+    return [
+      for (final {
+      'id_topic': id_topic as int,
+      'name': name as String,
+      } in topicMaps!)
+        Topic(id_topic: id_topic, name: name),
+    ];
+  }
 }

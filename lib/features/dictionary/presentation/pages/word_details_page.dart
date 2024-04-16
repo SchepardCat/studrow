@@ -24,7 +24,9 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   final TextEditingController _example = TextEditingController();
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
+  int? selectedIdTopic;
   bool dontEdit = true;
+
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       _translate.text = widget.word.translate;
       _example.text = widget.word.example;
     }
+    _getTopicName();
     super.initState();
   }
 
@@ -53,6 +56,12 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                getDownMenu(),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: TextField(
@@ -100,41 +109,6 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Consumer<TopicProvider>(
-                builder: (context, provider, child) {
-                  return provider.topics.isEmpty? const Center(child: Text("Empty")):
-                  DropdownMenu<Topic>(
-                    menuHeight: 200,
-                    controller: _topic,
-                    enableFilter: true,
-                    requestFocusOnTap: true,
-                    leadingIcon: const Icon(Icons.search),
-                    label: const Text("Topic"),
-                    inputDecorationTheme: const InputDecorationTheme(
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-                    ),
-                    onSelected: (Topic? topic) {
-                      setState(() {
-                        selectedTopic = topic;
-                      });
-                    },
-                    dropdownMenuEntries:
-                    provider.topics.map<DropdownMenuEntry<Topic>>(
-                          (Topic topic) {
-                        return DropdownMenuEntry<Topic>(
-                            value: topic,
-                            label: topic.name,
-                            leadingIcon: Text(topic.id_topic.toString())
-                        );
-                      },
-                    ).toList(),
-                  );
-                },
-              ),
-            ),
           ],
         ),
       ),
@@ -148,6 +122,11 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   }
 
   _updateWord() async {
+    if(selectedTopic == null){
+      selectedIdTopic = widget.word.topic_id;
+    } else {
+      selectedIdTopic = selectedTopic?.id_topic;
+    }
     setState(() {
       dontEdit = true;
     });
@@ -156,19 +135,71 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
         name: _name.text,
         translate: _translate.text,
         example: _example.text,
-        topic_id: widget.word.topic_id,
+        topic_id: selectedIdTopic,
         isLearn: 0,
         isRepeatFirst: 0,
         isRepeatSecond: 0,
         isRepeatThird: 0);
     Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
-    print("Update word complete");
+    print("Update word complete ");
+    print(word.toString());
   }
 
   _deleteWord() async {
     Provider.of<WordProvider>(context, listen: false).deleteWord(id: widget.word.id_word!);
     Navigator.pop(context, true);
     print("Delete word complete");
+  }
+
+  Widget getDownMenu(){
+    if(dontEdit){
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Text(
+          'Topic',
+          style: TextStyle(
+            fontSize: 18
+          ),
+        )
+      );
+    }else{
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Consumer<TopicProvider>(
+          builder: (context, provider, child) {
+            return provider.topics.isEmpty? const Center(child: Text("Empty")):
+            DropdownMenu<Topic>(
+              enabled: !dontEdit,
+              menuHeight: 200,
+              controller: _topic,
+              enableFilter: true,
+              requestFocusOnTap: true,
+              leadingIcon: const Icon(Icons.search),
+              label: Text("Topic"),
+              inputDecorationTheme: const InputDecorationTheme(
+                filled: true,
+                contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+              ),
+              onSelected: (Topic? topic) {
+                setState(() {
+                  selectedTopic = topic;
+                });
+              },
+              dropdownMenuEntries:
+              provider.topics.map<DropdownMenuEntry<Topic>>(
+                    (Topic topic) {
+                  return DropdownMenuEntry<Topic>(
+                      value: topic,
+                      label: topic.name,
+                      leadingIcon: Text(topic.id_topic.toString())
+                  );
+                },
+              ).toList(),
+            );
+          },
+        ),
+      );
+    }
   }
 
   Widget getIcon(){
@@ -183,5 +214,11 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
           icon: Icon(Icons.edit)
       );
     }
+  }
+
+  _getTopicName() async {
+    Provider.of<TopicProvider>(context, listen: false).getTopic(widget.word.topic_id!);
+    print(Provider.of<TopicProvider>(context, listen: false).topic);
+    print("fgfg");
   }
 }
