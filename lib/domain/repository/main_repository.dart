@@ -65,24 +65,26 @@ class MainRepository {
     ];
   }
 
-  // static Future<void> updateTopic(Topic topic) async {
-  //   final db = await _database();
-  //   await db.update(
-  //     _tableNameTopic,
-  //     topic.toMap(),
-  //     where: 'id = ?',
-  //     whereArgs: [topic.id_topic],
-  //   );
-  // }
-  //
-  // static Future<void> deleteTopic(int id) async {
-  //   final db = await _database();
-  //   await db.delete(
-  //     _tableNameTopic,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
-  // }
+  static Future<void> updateWord(Word word) async {
+    final db = await _database();
+    await db.update(
+      _tableNameWord,
+      word.toMap(),
+      where: 'id_word = ?',
+      whereArgs: [word.id_word],
+    );
+  }
+
+  static Future<void> deleteWord(int id) async {
+    final db = await _database();
+    await db.delete(
+      _tableNameWord,
+      where: 'id_word = ?',
+      whereArgs: [id],
+    );
+  }
+
+
 
   //Topic
   static Future<void> insert(Topic topic) async {

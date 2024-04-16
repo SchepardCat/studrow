@@ -19,7 +19,7 @@ import '../features/topic/presentation/pages/topic_details_page.dart';
 import '../features/topic/presentation/pages/topic_page.dart';
 import '../features/topic/router/topic_route_wrapper_screen.dart';
 import '../features/topic/router/topics_routes.dart';
-import '../features/word/presentation/pages/word_details_page.dart';
+import '../features/dictionary/presentation/pages/word_details_page.dart';
 import '../ui/main_page.dart';
 part 'router.gr.dart';
 

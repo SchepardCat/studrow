@@ -26,14 +26,14 @@ class WordProvider with ChangeNotifier{
     getWords();
   }
 
-  // update({required Word word}) async {
-  //   await MainRepository.updateWord(topic);
-  //   getWords();
-  // }
-  //
-  // delete({required int id}) async {
-  //   await MainRepository.deleteWord(id);
-  //   getWords();
-  // }
+  updateWord({required Word word}) async {
+    await MainRepository.updateWord(word);
+    getWords();
+  }
+
+  deleteWord({required int id}) async {
+    await MainRepository.deleteWord(id);
+    getWords();
+  }
 
 }
