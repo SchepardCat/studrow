@@ -24,7 +24,6 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
   int? selectedIdTopic;
-  String? selectedTopicName;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +48,45 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Consumer<TopicProvider>(
+                    builder: (context, provider, child) {
+                      return provider.topics.isEmpty? const Center(child: Text("Empty")):
+                      DropdownMenu<Topic>(
+                        controller: _topic,
+                        enableFilter: true,
+                        requestFocusOnTap: true,
+                        leadingIcon: const Icon(Icons.search),
+                        label: const Text("Topic"),
+                        inputDecorationTheme: const InputDecorationTheme(
+                          filled: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                        ),
+                        onSelected: (Topic? topic) {
+                          setState(() {
+                            selectedTopic = topic;
+                          });
+                        },
+                        dropdownMenuEntries:
+                        provider.topics.map<DropdownMenuEntry<Topic>>(
+                              (Topic topic) {
+                            return DropdownMenuEntry<Topic>(
+                                value: topic,
+                                label: topic.name,
+                                leadingIcon: Text(topic.id_topic.toString())
+                            );
+                          },
+                        ).toList(),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: TextField(
@@ -92,40 +130,6 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Consumer<TopicProvider>(
-                builder: (context, provider, child) {
-                  return provider.topics.isEmpty? const Center(child: Text("Empty")):
-                  DropdownMenu<Topic>(
-                    controller: _topic,
-                    enableFilter: true,
-                    requestFocusOnTap: true,
-                    leadingIcon: const Icon(Icons.search),
-                    label: const Text("Topic"),
-                    inputDecorationTheme: const InputDecorationTheme(
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-                    ),
-                    onSelected: (Topic? topic) {
-                      setState(() {
-                        selectedTopic = topic;
-                      });
-                    },
-                    dropdownMenuEntries:
-                    provider.topics.map<DropdownMenuEntry<Topic>>(
-                          (Topic topic) {
-                        return DropdownMenuEntry<Topic>(
-                          value: topic,
-                          label: topic.name,
-                          leadingIcon: Text(topic.id_topic.toString())
-                        );
-                      },
-                    ).toList(),
-                  );
-                },
-              ),
-            ),
           ],
         ),
       ),
@@ -133,27 +137,32 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   }
 
   _insertTopic() async {
+    Word word;
     if(selectedTopic == null){
-      selectedIdTopic = null;
-      selectedTopicName = null;
+      word = Word(
+          name: _name.text,
+          translate: _translate.text,
+          example: _example.text,
+          topic_id: selectedTopic?.id_topic,
+          isLearn: 0,
+          isRepeatFirst: 0,
+          isRepeatSecond: 0,
+          isRepeatThird: 0
+      );
     } else {
-      selectedIdTopic = selectedTopic?.id_topic;
-      selectedTopicName = selectedTopic?.name;
+      word = Word(
+          name: _name.text,
+          translate: _translate.text,
+          example: _example.text,
+          topic_id: selectedTopic?.id_topic,
+          isLearn: 0,
+          isRepeatFirst: 0,
+          isRepeatSecond: 0,
+          isRepeatThird: 0
+      );
     }
-    final Word word = Word(
-      name: _name.text,
-      translate: _translate.text,
-      example: _example.text,
-      topic_id: selectedIdTopic,
-      topic_name: selectedTopicName,
-      isLearn: 0,
-      isRepeatFirst: 0,
-      isRepeatSecond: 0,
-      isRepeatThird: 0
-    );
     Provider.of<WordProvider>(context, listen: false).insertWord(word: word);
     print("Insert word complete");
-    print(word);
   }
 }
 

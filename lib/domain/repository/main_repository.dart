@@ -27,13 +27,11 @@ class MainRepository {
         'translate TEXT,'
         'example TEXT,'
         'topic_id INTEGER,'
-        'topic_name TEXT,'
         'isLearn BOOLEAN,'
         'isRepeatFirst BOOLEAN,'
         'isRepeatSecond BOOLEAN,'
         'isRepeatThird BOOLEAN,'
-        'FOREIGN KEY(topic_id) REFERENCES $_tableNameTopic(id_topic),'
-        'FOREIGN KEY(topic_name) REFERENCES $_tableNameTopic(name))');
+        'FOREIGN KEY(topic_id) REFERENCES $_tableNameTopic(id_topic))');
   }
 
   //Word
@@ -58,13 +56,12 @@ class MainRepository {
       'translate': translate as String,
       'example': example as String,
       'topic_id': topic_id as int,
-      'topic_name': topic_name as String,
       'isLearn': isLearn as int,
       'isRepeatFirst': isRepeatFirst as int,
       'isRepeatSecond': isRepeatSecond as int,
       'isRepeatThird': isRepeatThird as int,
       } in wordsMaps!)
-        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, topic_name: topic_name, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
+        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
     ];
   }
 
@@ -86,8 +83,6 @@ class MainRepository {
       whereArgs: [id],
     );
   }
-
-
 
   //Topic
   static Future<void> insert(Topic topic) async {
@@ -130,6 +125,19 @@ class MainRepository {
       where: 'id_topic = ?',
       whereArgs: [id],
     );
+  }
+
+  static Future<List<Topic>> getTopic(int id) async {
+    final db = await _database();
+    final List<Map<String, Object?>> topicMaps = await db.query(_tableNameTopic,
+        where: 'id_topic = ?', whereArgs: [id]);
+    return [
+      for (final {
+      'id_topic': id_topic as int,
+      'name': name as String,
+      } in topicMaps!)
+        Topic(id_topic: id_topic, name: name),
+    ];
   }
 
 }

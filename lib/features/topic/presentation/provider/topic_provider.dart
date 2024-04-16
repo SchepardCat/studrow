@@ -8,6 +8,7 @@ class TopicProvider with ChangeNotifier{
   List<Topic> topic = [];
   String search = "";
   bool isLoadingTopics = true;
+  bool isLoadingTopicInformation = true;
 
   TopicProvider(){
     getTopics();
@@ -39,5 +40,9 @@ class TopicProvider with ChangeNotifier{
     getTopics();
   }
 
-
+  getTopic(int id) async {
+    topic = await MainRepository.getTopic(id);
+    isLoadingTopicInformation = false;
+    notifyListeners();
+  }
 }
