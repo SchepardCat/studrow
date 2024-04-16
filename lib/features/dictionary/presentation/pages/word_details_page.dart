@@ -25,6 +25,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
   int? selectedIdTopic;
+  String? selectedTopicName;
   bool dontEdit = true;
 
 
@@ -34,8 +35,8 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       _name.text = widget.word.name;
       _translate.text = widget.word.translate;
       _example.text = widget.word.example;
+      selectedTopicName = widget.word.topic_name;
     }
-    _getTopicName();
     super.initState();
   }
 
@@ -124,8 +125,10 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   _updateWord() async {
     if(selectedTopic == null){
       selectedIdTopic = widget.word.topic_id;
+      selectedTopicName = widget.word.topic_name;
     } else {
       selectedIdTopic = selectedTopic?.id_topic;
+      selectedTopicName = selectedTopic?.name;
     }
     setState(() {
       dontEdit = true;
@@ -136,6 +139,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
         translate: _translate.text,
         example: _example.text,
         topic_id: selectedIdTopic,
+        topic_name: selectedTopicName,
         isLearn: 0,
         isRepeatFirst: 0,
         isRepeatSecond: 0,
@@ -156,7 +160,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Text(
-          'Topic',
+          selectedTopicName!,
           style: TextStyle(
             fontSize: 18
           ),
@@ -175,7 +179,6 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
               enableFilter: true,
               requestFocusOnTap: true,
               leadingIcon: const Icon(Icons.search),
-              label: Text("Topic"),
               inputDecorationTheme: const InputDecorationTheme(
                 filled: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 5.0),
@@ -216,9 +219,4 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
     }
   }
 
-  _getTopicName() async {
-    Provider.of<TopicProvider>(context, listen: false).getTopic(widget.word.topic_id!);
-    print(Provider.of<TopicProvider>(context, listen: false).topic);
-    print("fgfg");
-  }
 }

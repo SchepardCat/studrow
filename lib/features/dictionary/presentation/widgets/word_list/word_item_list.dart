@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:studrow/router/router.dart';
 
 import '../../../../../domain/model/word.dart';
+import '../../../../topic/presentation/provider/topic_provider.dart';
 
 class WordItemList extends StatefulWidget {
   final Word word;

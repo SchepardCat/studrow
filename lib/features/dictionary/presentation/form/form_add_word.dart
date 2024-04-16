@@ -23,6 +23,8 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   final TextEditingController _example = TextEditingController();
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
+  int? selectedIdTopic;
+  String? selectedTopicName;
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +133,19 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   }
 
   _insertTopic() async {
+    if(selectedTopic == null){
+      selectedIdTopic = null;
+      selectedTopicName = null;
+    } else {
+      selectedIdTopic = selectedTopic?.id_topic;
+      selectedTopicName = selectedTopic?.name;
+    }
     final Word word = Word(
       name: _name.text,
       translate: _translate.text,
       example: _example.text,
-      topic_id: 1,
+      topic_id: selectedIdTopic,
+      topic_name: selectedTopicName,
       isLearn: 0,
       isRepeatFirst: 0,
       isRepeatSecond: 0,
@@ -143,6 +153,7 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
     );
     Provider.of<WordProvider>(context, listen: false).insertWord(word: word);
     print("Insert word complete");
+    print(word);
   }
 }
 

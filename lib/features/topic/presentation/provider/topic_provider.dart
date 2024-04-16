@@ -39,8 +39,5 @@ class TopicProvider with ChangeNotifier{
     getTopics();
   }
 
-  getTopic(int id) async {
-    topic = await MainRepository.getTopic(id);
-  }
 
 }
