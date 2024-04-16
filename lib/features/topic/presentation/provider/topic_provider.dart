@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:studrow/domain/repository/topic_repository.dart';
+import 'package:studrow/domain/repository/main_repository.dart';
 
 import '../../../../domain/model/topic.dart';
 
 class TopicProvider with ChangeNotifier{
   List<Topic> topics = [];
   String search = "";
+  bool isLoadingTopics = true;
 
   TopicProvider(){
     getTopics();
@@ -17,22 +18,23 @@ class TopicProvider with ChangeNotifier{
   }
 
   getTopics() async {
-    topics = await TopicRepository.getTopics(search);
+    topics = await MainRepository.getTopics(search);
+    isLoadingTopics = false;
     notifyListeners();
   }
 
   insertTopic({required Topic topic}) async {
-    await TopicRepository.insert(topic);
+    await MainRepository.insert(topic);
     getTopics();
   }
 
   update({required Topic topic}) async {
-    await TopicRepository.updateTopic(topic);
+    await MainRepository.updateTopic(topic);
     getTopics();
   }
 
   delete({required int id}) async {
-    await TopicRepository.deleteTopic(id);
+    await MainRepository.deleteTopic(id);
     getTopics();
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
-import 'package:studrow/domain/repository/topic_repository.dart';
+import 'package:studrow/domain/repository/main_repository.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 
 

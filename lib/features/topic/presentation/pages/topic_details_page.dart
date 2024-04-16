@@ -75,13 +75,13 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
     setState(() {
       edit = false;
     });
-    final Topic topic = Topic(id: widget.topic.id, name: _nameTopic.text);
+    final Topic topic = Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
     Provider.of<TopicProvider>(context, listen: false).update(topic: topic);
     print("Update complete");
   }
 
   _deleteTopic() async {
-    Provider.of<TopicProvider>(context, listen: false).delete(id: widget.topic.id!);
+    Provider.of<TopicProvider>(context, listen: false).delete(id: widget.topic.id_topic!);
     Navigator.pop(context, true);
     print("Delete complete");
   }

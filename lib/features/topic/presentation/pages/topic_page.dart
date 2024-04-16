@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:provider/provider.dart';
 import 'package:studrow/features/topic/presentation/pages/dictionary_topic_list.dart';
-import '../form/form_add_list.dart';
-
-
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
+import '../form/form_add_topic.dart';
 
 
 @RoutePage()
@@ -16,10 +16,12 @@ class TopicsPage extends StatefulWidget {
 
 class _TopicsPageState extends State<TopicsPage>{
 
+
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,7 @@ class _TopicsPageState extends State<TopicsPage>{
             context: context,
             builder: (context) {
               return Dialog(
-                child: listFormAdd(),
+                child: TopicFormAdd(),
               );
             },
           );

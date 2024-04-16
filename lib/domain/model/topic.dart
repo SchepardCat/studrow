@@ -1,18 +1,18 @@
 class Topic{
-  int? id;
+  int? id_topic;
   String name;
 
-  Topic({this.id, required this.name});
+  Topic({this.id_topic, required this.name});
 
   Map<String,Object?> toMap() {
     return {
-      'id': id,
+      'id_topic': id_topic,
       'name': name,
     };
   }
 
   @override
   String toString() {
-    return 'Topic{id: $id, name: $name}';
+    return 'Topic{id_topic: $id_topic, name: $name}';
   }
 }

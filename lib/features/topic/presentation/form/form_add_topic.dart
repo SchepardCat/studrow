@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
-import 'package:studrow/domain/repository/topic_repository.dart';
+import 'package:studrow/domain/repository/main_repository.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 
-class listFormAdd extends StatefulWidget {
-  const listFormAdd({super.key});
+class TopicFormAdd extends StatefulWidget {
+  const TopicFormAdd({super.key});
 
   @override
-  State<listFormAdd> createState() => _listFormAddState();
+  State<TopicFormAdd> createState() => _TopicFormAddState();
 }
 
-class _listFormAddState extends State<listFormAdd> {
+class _TopicFormAddState extends State<TopicFormAdd> {
   final _nameTopic = TextEditingController();
 
 

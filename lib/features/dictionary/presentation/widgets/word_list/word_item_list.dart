@@ -2,30 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:studrow/router/router.dart';
 
-class WordItemList extends StatefulWidget {
-  final List<String> listData;
-  final int index;
+import '../../../../../domain/model/word.dart';
 
-  const WordItemList({required this.listData, required this.index});
+class WordItemList extends StatefulWidget {
+  final Word word;
+
+  const WordItemList({required this.word});
 
   @override
-  State<WordItemList> createState() =>
-      new _WordItemListState(listData: listData, index: index);
+  State<WordItemList> createState() => _WordItemListState();
 }
 
 class _WordItemListState extends State<WordItemList> {
-  final List<String> listData;
-  final int index;
-  Color tileCol = Colors.white;
-
-
-  _WordItemListState({required this.listData, required this.index});
-
-
-  @override
-  void initState() {
-    getStud();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +22,10 @@ class _WordItemListState extends State<WordItemList> {
       child: Column(
         children: [
           ListTile(
-            tileColor: tileCol,
-            title: Text('Entry ${listData[index]}'),
+            leading: Icon(Icons.message),
+            title: Text(widget.word.id_word.toString() + " - " + widget.word.name),
             onTap: () {
-              AutoRouter.of(context).push(WordDetailsRoute());
+              AutoRouter.of(context).push(WordDetailsRoute(word: widget.word));
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),
@@ -49,10 +37,4 @@ class _WordItemListState extends State<WordItemList> {
     );
   }
 
-  void getStud(){
-
-    if(listData[index] == "A" || listData[index] == "B") {
-      this.tileCol = Colors.amber[200]!;
-    }
-  }
 }

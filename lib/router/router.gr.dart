@@ -92,9 +92,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     WordDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<WordDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const WordDetailsPage(),
+        child: WordDetailsPage(
+          key: args.key,
+          word: args.word,
+        ),
       );
     },
     WordFormAddRoute.name: (routeData) {
@@ -306,16 +310,40 @@ class TopicsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [WordDetailsPage]
-class WordDetailsRoute extends PageRouteInfo<void> {
-  const WordDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class WordDetailsRoute extends PageRouteInfo<WordDetailsRouteArgs> {
+  WordDetailsRoute({
+    Key? key,
+    required Word word,
+    List<PageRouteInfo>? children,
+  }) : super(
           WordDetailsRoute.name,
+          args: WordDetailsRouteArgs(
+            key: key,
+            word: word,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'WordDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<WordDetailsRouteArgs> page =
+      PageInfo<WordDetailsRouteArgs>(name);
+}
+
+class WordDetailsRouteArgs {
+  const WordDetailsRouteArgs({
+    this.key,
+    required this.word,
+  });
+
+  final Key? key;
+
+  final Word word;
+
+  @override
+  String toString() {
+    return 'WordDetailsRouteArgs{key: $key, word: $word}';
+  }
 }
 
 /// generated route for

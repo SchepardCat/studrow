@@ -23,7 +23,7 @@ class _TopicItemListState extends State<TopicItemList> {
         children: [
           ListTile(
             leading: Icon(Icons.folder),
-            title: Text(widget.topic.id.toString() + " - " + widget.topic.name),
+            title: Text(widget.topic.id_topic.toString() + " - " + widget.topic.name),
             onTap: () {
               AutoRouter.of(context).push(TopicDetailsRoute(topic: widget.topic));
             },

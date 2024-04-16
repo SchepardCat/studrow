@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
 import 'ui/theme/theme.dart';
@@ -25,6 +26,7 @@ class _MainAppState extends State<MainApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TopicProvider()),
+        ChangeNotifierProvider(create: (_) => WordProvider()),
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,

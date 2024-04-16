@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-@RoutePage()
-class WordDetailsPage extends StatelessWidget {
-  const WordDetailsPage({super.key});
+import '../../../../domain/model/word.dart';
 
+@RoutePage()
+class WordDetailsPage extends StatefulWidget {
+  final Word word;
+
+  const WordDetailsPage({super.key, required this.word});
+
+  @override
+  State<WordDetailsPage> createState() => _WordDetailsPageState();
+}
+
+class _WordDetailsPageState extends State<WordDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
