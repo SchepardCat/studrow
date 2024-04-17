@@ -1,5 +1,5 @@
 class CardModel{
-  final int number;
+  final String number;
   final String topic;
   final String word;
   final String translate;

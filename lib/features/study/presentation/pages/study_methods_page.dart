@@ -25,6 +25,7 @@ class _StudyMethodsPageState extends State<StudyMethodsPage> {
       Provider.of<WordProvider>(context, listen: false).getWordsRandomStudy();
       return StudyRandomWord();
     }else if(TypeLearn.topic == widget.typeLearn){
+      Provider.of<WordProvider>(context, listen: false).getWordsRandomStudy();
       return StudyByTopics();
     }else{
       return Container(child: Text("Program error!!!"));
