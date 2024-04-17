@@ -89,7 +89,13 @@ class _StudyPageState extends State<StudyPage> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Study"),
+          title: Center(
+            child: Text(
+              "Study",
+              style: TextStyle(
+                  fontSize: 26, color: Theme.of(context).colorScheme.primary),
+            ),
+          ),
         ),
         body: Center(
           child: Column(
@@ -218,7 +224,7 @@ class _StudyPageState extends State<StudyPage> {
                             requestFocusOnTap: true,
                             leadingIcon: const Icon(Icons.search),
                             inputDecorationTheme: const InputDecorationTheme(
-                              filled: true,
+                              filled: false,
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 5.0),
                             ),

@@ -25,7 +25,8 @@ class _StudyMethodsPageState extends State<StudyMethodsPage> {
       Provider.of<WordProvider>(context, listen: false).getWordsRandomStudy();
       return StudyRandomWord();
     }else if(TypeLearn.topic == widget.typeLearn){
-      Provider.of<WordProvider>(context, listen: false).getWordsRandomStudy();
+      //перебілдить потрібно роути, додати до цієї сторінки параметр такий як topic_id;
+      Provider.of<WordProvider>(context, listen: false).getWordsInTopicDontLearn();
       return StudyByTopics();
     }else{
       return Container(child: Text("Program error!!!"));

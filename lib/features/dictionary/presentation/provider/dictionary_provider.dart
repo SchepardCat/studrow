@@ -54,4 +54,10 @@ class WordProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  getWordsInTopicDontLearn({required int topic_id}) async {
+    wordsForStudy = await MainRepository.getWordsInTopicDontLearn(topic_id);
+    isLoadingListWordForRandom = false;
+    notifyListeners();
+  }
+
 }

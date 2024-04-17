@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import '../../../../domain/model/word.dart';
-import '../../../../presentation/widgets/progress_bar/progress_bar.dart';
 import '../../../../standart_setting.dart';
 import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
@@ -92,13 +91,6 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
                             upSwipeAllowed: false,
                             fillSpace: false,
                           )),
-                      //line progress learning
-                      //1- percent indicator package
-                      //2 - step progress indicator package
-                      ProgressBar(
-                          totalCards: StSetting.numberLearningCardDay,
-                          currentNumber: numberCurrentCard,
-                          widthBar: 320),
                     ])),
           ),
         )
