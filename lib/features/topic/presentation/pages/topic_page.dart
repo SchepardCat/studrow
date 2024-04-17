@@ -22,7 +22,12 @@ class _TopicsPageState extends State<TopicsPage> {
     if (!provider.isLoadingTopicPage) {
       return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Topics" , style: TextStyle(fontSize: 22),)),
+          title: Center(
+              child: Text(
+            "Topics",
+            style: TextStyle(fontSize: 26,
+            color: Theme.of(context).colorScheme.primary),
+          )),
         ),
         body: TopicsPageBody(),
         floatingActionButton: FloatingActionButton.extended(

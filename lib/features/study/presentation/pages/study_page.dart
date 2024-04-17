@@ -37,7 +37,13 @@ class _StudyPageState extends State<StudyPage> {
     if (!provider.isLoadingTopicPage) {
       return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Study", style: TextStyle(fontSize: 22),)),
+          title: Center(
+            child: Text(
+              "Study",
+              style: TextStyle(
+                  fontSize: 26, color: Theme.of(context).colorScheme.primary),
+            ),
+          ),
         ),
         body: Center(
           child: Padding(
@@ -121,9 +127,13 @@ class _StudyPageState extends State<StudyPage> {
                   value: isLearnRandom,
                   onChanged: (bool? value) {
                     setState(() {
-                      isLearnRandom = value!;
-                      isLearnByTopics = !value;
-                      isRepeatOldWord = !value;
+                      if(value! == isLearnByTopics && value! == isRepeatOldWord){
+                        isLearnRandom = value!;
+                      }else{
+                        isLearnRandom = value!;
+                        isLearnByTopics = !value;
+                        isRepeatOldWord = !value;
+                      }
                     });
                   },
                   title: const Text('Random word',
@@ -133,9 +143,13 @@ class _StudyPageState extends State<StudyPage> {
                   value: isLearnByTopics,
                   onChanged: (bool? value) {
                     setState(() {
-                      isLearnByTopics = value!;
-                      isLearnRandom = !value;
-                      isRepeatOldWord = !value;
+                      if(value! == isLearnRandom && value! == isRepeatOldWord){
+                        isLearnByTopics = value!;
+                      }else{
+                        isLearnByTopics = value!;
+                        isLearnRandom = !value;
+                        isRepeatOldWord = !value;
+                      }
                     });
                   },
                   title: const Text('Word by topics'),
@@ -144,9 +158,13 @@ class _StudyPageState extends State<StudyPage> {
                   value: isRepeatOldWord,
                   onChanged: (bool? value) {
                     setState(() {
-                      isRepeatOldWord = value!;
-                      isLearnByTopics = !value;
-                      isLearnRandom = !value;
+                      if(value! == isLearnByTopics && value! == isLearnRandom){
+                        isRepeatOldWord = value!;
+                      }else{
+                        isRepeatOldWord = value!;
+                        isLearnByTopics = !value;
+                        isLearnRandom = !value;
+                      }
                     });
                   },
                   title: const Text('Repeat word'),
@@ -218,6 +236,17 @@ class _StudyPageState extends State<StudyPage> {
   }
 
   pressButtonLearn(){
-    AutoRouter.of(context).push(StudyCardRoute());
+    if(isLearnRandom){
+      AutoRouter.of(context).push(StudyCardRoute());
+    }else if(isLearnByTopics){
+      AutoRouter.of(context).push(StudyCardRoute());
+    }else if(isRepeatOldWord){
+      AutoRouter.of(context).push(RepeatRoute());
+    }else{
+      //message nothing choose
+      //
+      //
+      //
+    }
   }
 }
