@@ -18,6 +18,7 @@ class StudyCardPage extends StatefulWidget {
 }
 
 class _StudyCardPageState extends State<StudyCardPage> {
+
   //налаштування для свайпу карток
   final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
@@ -91,7 +92,6 @@ class _StudyCardPageState extends State<StudyCardPage> {
                                 addListItem(numberCurrentCard);
                               }else{
                                 StSetting.isFinishedLearn = true;
-                                FlashMessage("Very good!!!", "You studied the daily word list").getScaffoldMessage(context);
                               }
                             });
                           },

@@ -1,0 +1,3 @@
+enum TypeLEarn{
+  random, topic;
+}

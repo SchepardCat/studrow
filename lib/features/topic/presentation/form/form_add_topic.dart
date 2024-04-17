@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/domain/repository/main_repository.dart';
+import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 
 class TopicFormAdd extends StatefulWidget {
@@ -90,7 +91,11 @@ class _TopicFormAddState extends State<TopicFormAdd> {
   _insertTopic() async {
     final Topic topic = Topic(name: _nameTopic.text);
     Provider.of<TopicProvider>(context, listen: false).insertTopic(topic: topic);
-    print("Insert complete");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + topic.name + " add.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+
   }
 
 }

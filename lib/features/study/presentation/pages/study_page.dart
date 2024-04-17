@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/study/presentation/pages/study_card_page.dart';
+import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/router/router.dart';
 
 import '../../../../domain/model/topic.dart';
@@ -247,6 +248,7 @@ class _StudyPageState extends State<StudyPage> {
       //
       //
       //
+      FlashMessage(messageShort: "Error!",messageLong:  "Please choose one method learn word",colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
     }
   }
 }

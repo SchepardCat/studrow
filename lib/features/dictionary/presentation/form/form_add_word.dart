@@ -7,6 +7,7 @@ import 'package:studrow/features/dictionary/presentation/provider/dictionary_pro
 import 'package:studrow/router/router.dart';
 
 import '../../../../domain/model/topic.dart';
+import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
 
 @RoutePage()
@@ -162,7 +163,10 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
       );
     }
     Provider.of<WordProvider>(context, listen: false).insertWord(word: word);
-    print("Insert word complete");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Word " + word.name + " add.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 }
 

@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../../../dictionary/presentation/widgets/word_list/word_item_list.dart';
+import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 
 @RoutePage()
 class TopicDetailsPage extends StatefulWidget {
@@ -110,13 +111,20 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
     });
     final Topic topic = Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
     Provider.of<TopicProvider>(context, listen: false).update(topic: topic);
-    print("Update complete");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + topic.name + " update.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+
   }
 
   _deleteTopic() async {
     Provider.of<TopicProvider>(context, listen: false).delete(id: widget.topic.id_topic!);
     Navigator.pop(context, true);
-    print("Delete complete");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + widget.topic.name + " delete.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 
   Widget getAppBar(){

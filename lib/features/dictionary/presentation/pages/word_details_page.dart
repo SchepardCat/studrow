@@ -7,6 +7,7 @@ import 'package:studrow/features/dictionary/presentation/provider/dictionary_pro
 import '../../../../domain/model/topic.dart';
 import '../../../../domain/model/word.dart';
 import '../../../../router/router.dart';
+import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
 
 @RoutePage()
@@ -187,13 +188,19 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
     // wordInTopicByTopic_Id;
     Provider.of<WordProvider>(context, listen: false).getWordsInTopic(topic_id: wordInTopicByTopic_Id!);
     //Оновлення сиску слів в топіку завершено.
-    print("Update word complete ");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Word " + word.name + " update.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 
   _deleteWord() async {
     Provider.of<WordProvider>(context, listen: false).deleteWord(id: widget.word.id_word!);
     Navigator.pop(context, true);
-    print("Delete word complete");
+    //logging transaction
+    //
+    //
+    FlashMessage(messageShort: "Done!",messageLong:  "Word " + widget.word.name + " delete.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 
   Widget getDownMenu(String nameTopic){

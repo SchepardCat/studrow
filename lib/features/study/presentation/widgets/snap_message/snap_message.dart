@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 class FlashMessage{
   final String messageShort;
   final String messageLong;
+  final Color colorMessage;
 
-  FlashMessage(this.messageShort, this.messageLong);
+  FlashMessage({required this.messageShort,required this.messageLong, required this.colorMessage});
 
   getScaffoldMessage(BuildContext context){
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: const Duration(milliseconds: 900),
+          duration: const Duration(seconds: 2),
           content: Container(
             padding: const EdgeInsets.all(14),
-            height: 90,
+            height: 80,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onTertiary,
+              color: colorMessage,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: Column(
@@ -24,20 +25,20 @@ class FlashMessage{
                   messageShort,
                   style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 20
+                      fontSize: 16
                   ),
                 ),
                 Text(
                   messageLong,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
           ),
-          behavior: SnackBarBehavior.floating,
+          behavior: SnackBarBehavior.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
         )
