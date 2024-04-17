@@ -20,7 +20,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Dictionary"),
+          title: Center(child: Text("Dictionary" , style: TextStyle(fontSize: 22),)),
         ),
         body: WordsListPage(),
         floatingActionButton: FloatingActionButton.extended(

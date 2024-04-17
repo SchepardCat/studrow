@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/study/presentation/pages/study_card_page.dart';
@@ -21,6 +22,9 @@ class _StudyPageState extends State<StudyPage> {
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
   bool dontEdit = true;
+  bool isLearnRandom = true;
+  bool isLearnByTopics = false;
+  bool isRepeatOldWord = false;
 
   @override
   void initState() {
@@ -33,72 +37,41 @@ class _StudyPageState extends State<StudyPage> {
     if (!provider.isLoadingTopicPage) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Study"),
+          title: Center(child: Text("Study", style: TextStyle(fontSize: 22),)),
         ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  //Список вибору папки з якої слова будеш вивчати
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Text("Choose topic you want study"),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Consumer<TopicProvider>(
-                        builder: (context, provider, child) {
-                          return provider.topics.isEmpty
-                              ? const Center(child: Text("Empty"))
-                              : DropdownMenu<Topic>(
-                                  width:
-                                      (MediaQuery.of(context).size.width - 36),
-                                  menuHeight: 200,
-                                  label: Text("Choose topic"),
-                                  controller: _topic,
-                                  enableFilter: true,
-                                  requestFocusOnTap: true,
-                                  leadingIcon: const Icon(Icons.search),
-                                  inputDecorationTheme:
-                                      const InputDecorationTheme(
-                                    filled: true,
-                                    contentPadding:
-                                        EdgeInsets.symmetric(vertical: 5.0),
-                                  ),
-                                  onSelected: (Topic? topic) {
-                                    setState(() {
-                                      selectedTopic = topic;
-                                    });
-                                  },
-                                  dropdownMenuEntries: provider.topics
-                                      .map<DropdownMenuEntry<Topic>>(
-                                    (Topic topic) {
-                                      return DropdownMenuEntry<Topic>(
-                                          value: topic,
-                                          label: topic.name,
-                                          leadingIcon:
-                                              Text(topic.id_topic.toString()));
-                                    },
-                                  ).toList(),
-                                );
-                        },
-                      ),
+                  //Список вибору як проходитиме навчання
+                  Container(
+                    child: Column(
+                      children: [
+                        getMethodStudy(),
+                        Divider(
+                          height: 0,
+                        ),
+                        //Список вибору папки з якої слова будеш вивчати
+                        getChooseTopic(),
+                      ],
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        AutoRouter.of(context).push(StudyCardRoute());
-                      },
-                      child: const Text('Study')),
-                  ElevatedButton(
-                      onPressed: () {
-                        AutoRouter.of(context).push(RepeatRoute());
-                      },
-                      child: const Text('Repeat')),
+                  //Кнопка навчання
+                  SizedBox(
+                    width: 150,
+                    height: 70,
+                    child: ElevatedButton(
+                        onPressed: pressButtonLearn,
+                        child: const Text('Learn', style: TextStyle(fontSize: 20),)),
+                  ),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       AutoRouter.of(context).push(RepeatRoute());
+                  //     },
+                  //     child: const Text('Repeat')),
                 ],
               ),
             ),
@@ -120,12 +93,131 @@ class _StudyPageState extends State<StudyPage> {
               ),
               Text(
                 'Loading...',
-                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.secondary),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.secondary),
               ),
             ],
           ),
         ),
       );
     }
+  }
+
+  Widget getMethodStudy() {
+    return Container(
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text("Choose method learn word", style: TextStyle(fontSize: 20),),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+            child: Column(
+              children: <Widget>[
+                const Divider(height: 0),
+                CheckboxListTile(
+                  value: isLearnRandom,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isLearnRandom = value!;
+                      isLearnByTopics = !value;
+                      isRepeatOldWord = !value;
+                    });
+                  },
+                  title: const Text('Random word',
+                  style: TextStyle(fontSize: 16),),
+                ),
+                CheckboxListTile(
+                  value: isLearnByTopics,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isLearnByTopics = value!;
+                      isLearnRandom = !value;
+                      isRepeatOldWord = !value;
+                    });
+                  },
+                  title: const Text('Word by topics'),
+                ),
+                CheckboxListTile(
+                  value: isRepeatOldWord,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isRepeatOldWord = value!;
+                      isLearnByTopics = !value;
+                      isLearnRandom = !value;
+                    });
+                  },
+                  title: const Text('Repeat word'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getChooseTopic() {
+    if(isLearnByTopics){
+      return Container(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text("Choose topic", style: TextStyle(fontSize: 20),),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                child: Consumer<TopicProvider>(
+                  builder: (context, provider, child) {
+                    return provider.topics.isEmpty
+                        ? const Center(child: Text("Empty"))
+                        : DropdownMenu<Topic>(
+                      width: (MediaQuery.of(context).size.width - 36),
+                      menuHeight: 200,
+                      controller: _topic,
+                      enableFilter: true,
+                      requestFocusOnTap: true,
+                      leadingIcon: const Icon(Icons.search),
+                      inputDecorationTheme: const InputDecorationTheme(
+                        filled: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                      ),
+                      onSelected: (Topic? topic) {
+                        setState(() {
+                          selectedTopic = topic;
+                        });
+                      },
+                      dropdownMenuEntries:
+                      provider.topics.map<DropdownMenuEntry<Topic>>(
+                            (Topic topic) {
+                          return DropdownMenuEntry<Topic>(
+                              value: topic,
+                              label: topic.name,
+                              leadingIcon: Text(topic.id_topic.toString(), style: TextStyle(fontSize: 18),));
+                        },
+                      ).toList(),
+                    );
+                  },
+                ),
+              ),
+            ),
+            const Divider(
+              height: 0,
+            ),
+          ],
+        ),
+      );
+    }else{
+      return Container();
+    }
+  }
+
+  pressButtonLearn(){
+    AutoRouter.of(context).push(StudyCardRoute());
   }
 }
