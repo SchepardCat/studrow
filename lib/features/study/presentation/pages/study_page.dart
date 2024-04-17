@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:studrow/features/study/presentation/pages/study_card_page.dart';
+import 'package:studrow/domain/model/type_learn.dart';
+import 'package:studrow/features/study/presentation/pages/study_methods_page.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/router/router.dart';
 
@@ -58,9 +59,6 @@ class _StudyPageState extends State<StudyPage> {
                     child: Column(
                       children: [
                         getMethodStudy(),
-                        Divider(
-                          height: 0,
-                        ),
                         //Список вибору папки з якої слова будеш вивчати
                         getChooseTopic(),
                       ],
@@ -72,7 +70,10 @@ class _StudyPageState extends State<StudyPage> {
                     height: 70,
                     child: ElevatedButton(
                         onPressed: pressButtonLearn,
-                        child: const Text('Learn', style: TextStyle(fontSize: 20),)),
+                        child: const Text(
+                          'Learn',
+                          style: TextStyle(fontSize: 20),
+                        )),
                   ),
                   // ElevatedButton(
                   //     onPressed: () {
@@ -117,36 +118,42 @@ class _StudyPageState extends State<StudyPage> {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
-            child: Text("Choose method learn word", style: TextStyle(fontSize: 20),),
+            child: Text(
+              "Choose method learn word",
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             child: Column(
               children: <Widget>[
-                const Divider(height: 0),
                 CheckboxListTile(
                   value: isLearnRandom,
                   onChanged: (bool? value) {
                     setState(() {
-                      if(value! == isLearnByTopics && value! == isRepeatOldWord){
+                      if (value! == isLearnByTopics &&
+                          value! == isRepeatOldWord) {
                         isLearnRandom = value!;
-                      }else{
+                      } else {
                         isLearnRandom = value!;
                         isLearnByTopics = !value;
                         isRepeatOldWord = !value;
                       }
                     });
                   },
-                  title: const Text('Random word',
-                  style: TextStyle(fontSize: 16),),
+                  title: const Text(
+                    'Random word',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 CheckboxListTile(
                   value: isLearnByTopics,
                   onChanged: (bool? value) {
                     setState(() {
-                      if(value! == isLearnRandom && value! == isRepeatOldWord){
+                      if (value! == isLearnRandom &&
+                          value! == isRepeatOldWord) {
                         isLearnByTopics = value!;
-                      }else{
+                      } else {
                         isLearnByTopics = value!;
                         isLearnRandom = !value;
                         isRepeatOldWord = !value;
@@ -159,9 +166,10 @@ class _StudyPageState extends State<StudyPage> {
                   value: isRepeatOldWord,
                   onChanged: (bool? value) {
                     setState(() {
-                      if(value! == isLearnByTopics && value! == isLearnRandom){
+                      if (value! == isLearnByTopics &&
+                          value! == isLearnRandom) {
                         isRepeatOldWord = value!;
-                      }else{
+                      } else {
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
@@ -179,76 +187,88 @@ class _StudyPageState extends State<StudyPage> {
   }
 
   Widget getChooseTopic() {
-    if(isLearnByTopics){
+    if (isLearnByTopics) {
       return Container(
         child: Column(
           children: [
+            const Divider(
+              height: 0,
+            ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text("Choose topic", style: TextStyle(fontSize: 20),),
+              child: Text(
+                "Choose topic",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
                 child: Consumer<TopicProvider>(
                   builder: (context, provider, child) {
                     return provider.topics.isEmpty
                         ? const Center(child: Text("Empty"))
                         : DropdownMenu<Topic>(
-                      width: (MediaQuery.of(context).size.width - 36),
-                      menuHeight: 200,
-                      controller: _topic,
-                      enableFilter: true,
-                      requestFocusOnTap: true,
-                      leadingIcon: const Icon(Icons.search),
-                      inputDecorationTheme: const InputDecorationTheme(
-                        filled: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-                      ),
-                      onSelected: (Topic? topic) {
-                        setState(() {
-                          selectedTopic = topic;
-                        });
-                      },
-                      dropdownMenuEntries:
-                      provider.topics.map<DropdownMenuEntry<Topic>>(
-                            (Topic topic) {
-                          return DropdownMenuEntry<Topic>(
-                              value: topic,
-                              label: topic.name,
-                              leadingIcon: Text(topic.id_topic.toString(), style: TextStyle(fontSize: 18),));
-                        },
-                      ).toList(),
-                    );
+                            width: (MediaQuery.of(context).size.width - 36),
+                            menuHeight: 200,
+                            controller: _topic,
+                            enableFilter: true,
+                            requestFocusOnTap: true,
+                            leadingIcon: const Icon(Icons.search),
+                            inputDecorationTheme: const InputDecorationTheme(
+                              filled: true,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 5.0),
+                            ),
+                            onSelected: (Topic? topic) {
+                              setState(() {
+                                selectedTopic = topic;
+                              });
+                            },
+                            dropdownMenuEntries:
+                                provider.topics.map<DropdownMenuEntry<Topic>>(
+                              (Topic topic) {
+                                return DropdownMenuEntry<Topic>(
+                                    value: topic,
+                                    label: topic.name,
+                                    leadingIcon: Text(
+                                      topic.id_topic.toString(),
+                                      style: TextStyle(fontSize: 18),
+                                    ));
+                              },
+                            ).toList(),
+                          );
                   },
                 ),
               ),
             ),
-            const Divider(
-              height: 0,
-            ),
           ],
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }
 
-  pressButtonLearn(){
-    if(isLearnRandom){
-      AutoRouter.of(context).push(StudyCardRoute());
-    }else if(isLearnByTopics){
-      AutoRouter.of(context).push(StudyCardRoute());
-    }else if(isRepeatOldWord){
+  pressButtonLearn() {
+    if (isLearnRandom) {
+      AutoRouter.of(context).push(StudyMethodsRoute(TypeLearn: TypeLearn.random));
+    } else if (isLearnByTopics) {
+      AutoRouter.of(context).push(StudyMethodsRoute(TypeLearn: TypeLearn.topic));
+    } else if (isRepeatOldWord) {
       AutoRouter.of(context).push(RepeatRoute());
-    }else{
+    } else {
       //message nothing choose
       //
       //
       //
-      FlashMessage(messageShort: "Error!",messageLong:  "Please choose one method learn word",colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
+      FlashMessage(
+              messageShort: "Error!",
+              messageLong: "Please choose one method learn word",
+              colorMessage: Theme.of(context).colorScheme.errorContainer)
+          .getScaffoldMessage(context);
     }
   }
 }

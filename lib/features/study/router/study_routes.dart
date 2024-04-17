@@ -6,7 +6,7 @@ abstract class StudyRoutes {
     page: StudyWrapperRoute.page,
     children: [
       AutoRoute(page: StudyRoute.page, initial: true),
-      AutoRoute(page: StudyCardRoute.page),
+      AutoRoute(page: StudyMethodsRoute.page),
       AutoRoute(page: RepeatRoute.page),
     ],
   );

@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:studrow/standart_setting.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-import 'package:auto_route/auto_route.dart';
 
 import '../../../../presentation/widgets/progress_bar/progress_bar.dart';
+import '../../../../standart_setting.dart';
 import '../../data/dto/data.dart';
 import '../../domain/model/card_model.dart';
 import '../widgets/card/card_flip.dart';
-import '../widgets/snap_message/snap_message.dart';
 
-@RoutePage()
-class StudyCardPage extends StatefulWidget {
-  const StudyCardPage({super.key});
+class StudyRandomWord extends StatefulWidget {
+  const StudyRandomWord({super.key});
 
   @override
-  State<StudyCardPage> createState() => _StudyCardPageState();
+  State<StudyRandomWord> createState() => _StudyRandomWordState();
 }
 
-class _StudyCardPageState extends State<StudyCardPage> {
-
+class _StudyRandomWordState extends State<StudyRandomWord> {
   //налаштування для свайпу карток
   final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
@@ -64,7 +60,6 @@ class _StudyCardPageState extends State<StudyCardPage> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,5 +120,3 @@ class _StudyCardPageState extends State<StudyCardPage> {
     );
   }
 }
-
-

@@ -13,7 +13,7 @@ import '../features/dictionary/router/dictionary_route_wrapper_screen.dart';
 import '../features/dictionary/router/dictionary_routes.dart';
 import '../features/repeat/exam_page.dart';
 import '../features/settings/settings_page.dart';
-import '../features/study/presentation/pages/study_card_page.dart';
+import '../features/study/presentation/pages/study_methods_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import '../features/study/router/study_route_wrapper_screen.dart';
 import '../features/study/router/study_routes.dart';

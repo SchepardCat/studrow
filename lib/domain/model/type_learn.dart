@@ -1,3 +1,3 @@
-enum TypeLEarn{
+enum TypeLearn{
   random, topic;
 }
