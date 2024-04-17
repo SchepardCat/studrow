@@ -7,6 +7,7 @@ abstract class TopicRoutes {
     children: [
       AutoRoute(page: TopicsRoute.page, initial: true),
       AutoRoute(page: TopicDetailsRoute.page),
+      AutoRoute(page: WordDetailsRoute.page),
     ],
   );
 }

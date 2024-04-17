@@ -29,7 +29,7 @@ class _ProgressBarState extends State<ProgressBar> {
                   percent: widget.currentNumber/widget.totalCards,
                   center: Text("${widget.currentNumber}/${widget.totalCards}"),
                   barRadius: const Radius.circular(8),
-                  progressColor: Theme.of(context).colorScheme.primary,
+                  progressColor: Theme.of(context).colorScheme.primaryContainer,
                   backgroundColor: Theme.of(context).colorScheme.onTertiary,
                 ),
               ),

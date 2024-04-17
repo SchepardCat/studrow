@@ -24,7 +24,7 @@ class _WordItemListState extends State<WordItemList> {
       child: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.message),
+            leading: Icon(Icons.lens, color: Theme.of(context).colorScheme.primaryContainer),
             title: Text(widget.word.id_word.toString() + " - " + widget.word.name),
             onTap: () {
               AutoRouter.of(context).push(WordDetailsRoute(word: widget.word));

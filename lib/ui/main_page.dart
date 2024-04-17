@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
           bottomNavigationBar: NavigationBarTheme(
             data: const NavigationBarThemeData(),
             child: NavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              //backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               height: 90,
               selectedIndex: tabsRouter.activeIndex,
               onDestinationSelected: (index) => _openPage(index, tabsRouter),

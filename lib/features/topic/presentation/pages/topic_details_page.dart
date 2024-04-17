@@ -6,6 +6,9 @@ import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:auto_route/auto_route.dart';
 
+import '../../../dictionary/presentation/provider/dictionary_provider.dart';
+import '../../../dictionary/presentation/widgets/word_list/word_item_list.dart';
+
 @RoutePage()
 class TopicDetailsPage extends StatefulWidget {
   final Topic topic;
@@ -21,6 +24,9 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
 
   @override
   void initState() {
+    if (widget.topic.id_topic!= null){
+      _getWordsInTopic(widget.topic.id_topic!);
+    }
     if(widget.topic != null){
       _nameTopic.text = widget.topic.name;
     }
@@ -30,39 +36,66 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   child: Text(_nameTopic.text),
-    // );
-    return Scaffold(
-      appBar: AppBar(
-        title: getAppBar(),
-        actions: [
-          getIcon(),
-          IconButton(
-              onPressed: _deleteTopic,
-              icon: Icon(Icons.delete)
-          ),
-        ],
-      ),
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "List word in this topic",
-                style: TextStyle(fontSize: 28, color: Colors.black),
-              ),
-              Icon(
-                Icons.assistant_photo,
-                size: 48,
-                color: Colors.black,
-              )
-            ],
+    final provider = Provider.of<WordProvider>(context);
+    if (!provider.isLoadingWOrdInTopicList){
+      return Scaffold(
+        appBar: AppBar(
+          title: getAppBar(),
+          actions: [
+            getIcon(),
+            IconButton(
+                onPressed: _deleteTopic,
+                icon: Icon(Icons.delete)
+            ),
+          ],
+        ),
+
+        //List words in this list
+        body: Consumer<WordProvider>(
+          builder: (context, provider, child) {
+            return provider.wordsInTopic.isEmpty? const Center(
+                child: Text("This topic is empty", style: TextStyle(
+                  fontSize: 24,
+                ),)):
+            ListView(
+                children: provider.wordsInTopic.map((e) => WordItemList(word: e,)).toList());
+          },
+        ),
+      );
+    }else{
+      return Scaffold(
+        appBar: AppBar(
+          title: getAppBar(),
+          actions: [
+            getIcon(),
+            IconButton(
+                onPressed: _deleteTopic,
+                icon: Icon(Icons.delete)
+            ),
+          ],
+        ),
+
+        //List words in this list
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "List word in this topic",
+                  style: TextStyle(fontSize: 28, color: Colors.black),
+                ),
+                Icon(
+                  Icons.assistant_photo,
+                  size: 48,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   _editTopic(){
@@ -111,5 +144,9 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
           icon: Icon(Icons.edit)
       );
     }
+  }
+
+  _getWordsInTopic(int id){
+    Provider.of<WordProvider>(context, listen: false).getWordsInTopic(topic_id: id);
   }
 }

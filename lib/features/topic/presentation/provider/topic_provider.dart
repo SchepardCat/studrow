@@ -7,7 +7,7 @@ class TopicProvider with ChangeNotifier{
   List<Topic> topics = [];
   List<Topic> topic = [];
   String search = "";
-  bool isLoadingTopics = true;
+  bool isLoadingTopicPage = true;
   bool isLoadingTopicInformation = true;
 
   TopicProvider(){
@@ -21,7 +21,7 @@ class TopicProvider with ChangeNotifier{
 
   getTopics() async {
     topics = await MainRepository.getTopics(search);
-    isLoadingTopics = false;
+    isLoadingTopicPage = false;
     notifyListeners();
   }
 

@@ -29,11 +29,13 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   String? selectedTopicName;
   String newTopicName = "";
   bool dontEdit = true;
+  int? wordInTopicByTopic_Id;
 
 
   @override
   void initState() {
     if (widget.word.topic_id!= null){
+      wordInTopicByTopic_Id = widget.word.topic_id!;
       _getDetailsTopic(widget.word.topic_id!);
     }
     if(widget.word != null){
@@ -62,14 +64,14 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              SpinKitFadingCircle(
-                color: Colors.blue,
+            children: [
+              SpinKitWanderingCubes(
+                color: Theme.of(context).colorScheme.secondary,
                 size: 80,
               ),
               Text(
                 'Loading...',
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.secondary),
               ),
             ],
           ),
@@ -180,8 +182,12 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
         isRepeatSecond: 0,
         isRepeatThird: 0);
     Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
+
+    //Після оновлення через список слів в топіку, потрібно оновити сам ліст топіку також раніше створено зміна для оновлення топіку попереднього.
+    // wordInTopicByTopic_Id;
+    Provider.of<WordProvider>(context, listen: false).getWordsInTopic(topic_id: wordInTopicByTopic_Id!);
+    //Оновлення сиску слів в топіку завершено.
     print("Update word complete ");
-    print(word.toString());
   }
 
   _deleteWord() async {

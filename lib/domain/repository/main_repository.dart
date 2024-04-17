@@ -65,6 +65,27 @@ class MainRepository {
     ];
   }
 
+  static Future<List<Word>> getWordsInTopic(int topic_id) async {
+    final db = await _database();
+    final List<Map<String, Object?>> wordsMaps = await db.query(_tableNameWord,
+        where: 'topic_id = ?', whereArgs: [topic_id], orderBy: "name ASC");
+    return [
+      for (final {
+      'id_word': id as int,
+      'name': name as String,
+      'translate': translate as String,
+      'example': example as String,
+      'topic_id': topic_id as int,
+      'isLearn': isLearn as int,
+      'isRepeatFirst': isRepeatFirst as int,
+      'isRepeatSecond': isRepeatSecond as int,
+      'isRepeatThird': isRepeatThird as int,
+      } in wordsMaps!)
+        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
+    ];
+  }
+
+
   static Future<void> updateWord(Word word) async {
     final db = await _database();
     await db.update(
