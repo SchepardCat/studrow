@@ -1,10 +1,16 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
+import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-
+import 'package:appinio_swiper/appinio_swiper.dart';
+import '../../../../domain/model/word.dart';
 import '../../../../presentation/widgets/progress_bar/progress_bar.dart';
 import '../../../../standart_setting.dart';
-import '../../data/dto/data.dart';
-import '../../domain/model/card_model.dart';
+import '../../../../domain/model/card_model.dart';
 import '../widgets/card/card_flip.dart';
 
 class StudyRandomWord extends StatefulWidget {
@@ -15,108 +21,153 @@ class StudyRandomWord extends StatefulWidget {
 }
 
 class _StudyRandomWordState extends State<StudyRandomWord> {
-  //налаштування для свайпу карток
-  final List<SwipeItem> _swipeItems = <SwipeItem>[];
-  late MatchEngine _matchEngine;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  List<Word> wordList = [];
+  List<CardModel> _swipeItems = [];
   int numberCurrentCard = 0;
   bool isFinished = false;
-
-  //test data
-  late Data data = Data(
-      ["1", "2", "3", "4", "5"],
-      ["Eating", "Eating", "Eating", "Eating", "Eating"],
-      ["Їжа", "Їжа", "Їжа", "Їжа", "Їжа"],
-      ["1", "2", "3", "4", "5"],
-      ["(a) cake", "a banana", "a cookie (AmE) / a biscuit (BrE)", "a fish/ fish", "a fruit/ fruit (-s)"],
-      ["торт", "банан", "печиво (амер)/ печиво (брит)", "рибина / риба", "фрукт / фрукти"],
-      ["Do you want some cake?", "I have tree bananas", "Children like cookies/biscuits", "I don`t eat fish", "What is your favorite fruit?"],
-      ["Ви хочете шматок торта?", "У мене є три банана", "Діти люблять печиво", "Я не їм рибу", "Який ваш улюблений фрукт?"]
-  );
-
-
+  AppinioSwiperController _controller = new AppinioSwiperController();
   @override
   void initState() {
-    addListItem(numberCurrentCard);
-    _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
 
-  addListItem(int i){
-    _swipeItems.add(
-      SwipeItem(
-          content: CardModel(
-              data.dataNumber[i],
-              data.dataTopicEN[i],
-              data.dataTopicUA[i],
-              data.dataImage[i],
-              data.dataWordEN[i],
-              data.dataWordUA[i],
-              data.dataSentenceEN[i],
-              data.dataSentenceUA[i]
-          ),
-          likeAction: () {
-          }
-      ),
-    );
+  addListItem(int i) {
+    for (int i = 0; i < wordList.length; i++) {
+      _swipeItems.add(
+        CardModel(
+            number: wordList[i].id_word!,
+            topic: wordList[i].topic_id.toString(),
+            word: wordList[i].name,
+            translate: wordList[i].translate,
+            example: wordList[i].example),
+      );
+    }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text("Learny words"),),
-      body: !StSetting.isFinishedLearn? Center(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-              child: Column(
+    final provider = Provider.of<WordProvider>(context);
+    if (!provider.isLoadingListWordForRandom) {
+      wordList = provider.wordsForStudy;
+      addListItem(numberCurrentCard);
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Learny words"),
+        ),
+        body: !StSetting.isFinishedLearn
+            ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                        //card
+                        Container(
+                          height: 400,
+                          width: 320,
+                          child: AppinioSwiper(
+
+                            cardCount: wordList.length,
+                            cardBuilder: (BuildContext context, int index) {
+                              return CardFlip(
+                                  cardData: _swipeItems[index]);
+                              // return Container(
+                              //   alignment: Alignment.center,
+                              //   child: Text(index.toString()),
+                              //   color: CupertinoColors.activeBlue,
+                              // );
+                            },
+                            defaultDirection: AxisDirection.right,
+                            controller: _controller,
+                            backgroundCardCount: 2,
+                            onSwipeEnd: _swipeEnd,
+                            onEnd: _onEndCard,
+                            swipeOptions: const SwipeOptions.only(right: true,left: true),
+                          ),
+                          // child: SwipeCards(
+                          //   matchEngine: _matchEngine,
+                          //   itemBuilder: (BuildContext context, int index) {
+                          //     return CardFlip(cardData: _swipeItems[index].content);
+                          //   },
+                          //   onStackFinished: () {
+                          //     setState(() {
+                          //       numberCurrentCard ++;
+                          //       if(numberCurrentCard < 4){
+                          //         addListItem(numberCurrentCard);
+                          //       }else{
+                          //         StSetting.isFinishedLearn = true;
+                          //       }
+                          //     });
+                          //   },
+                          //   leftSwipeAllowed: false,
+                          //   upSwipeAllowed: false,
+                          //   fillSpace: false,
+                          // )
+                        ),
+                      ])),
+                ),
+              )
+            : const Center(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //card
-                    Container(
-                        child: SwipeCards(
-                          matchEngine: _matchEngine,
-                          itemBuilder: (BuildContext context, int index) {
-                            return CardFlip(cardData: _swipeItems[index].content);
-                          },
-                          onStackFinished: () {
-                            setState(() {
-                              numberCurrentCard ++;
-                              if(numberCurrentCard < StSetting.numberLearningCardDay){
-                                addListItem(numberCurrentCard);
-                              }else{
-                                StSetting.isFinishedLearn = true;
-                              }
-                            });
-                          },
-                          leftSwipeAllowed: false,
-                          upSwipeAllowed: false,
-                          fillSpace: false,
-                        )
+                    Text(
+                      "Finish learn",
+                      style: TextStyle(fontSize: 32, color: Colors.black),
                     ),
-                    //line progress learning
-                    //1- percent indicator package
-                    //2 - step progress indicator package
-                    ProgressBar(totalCards: StSetting.numberLearningCardDay, currentNumber: numberCurrentCard, widthBar: 320),
-                  ]
-              )
+                    Icon(
+                      Icons.assistant_photo,
+                      size: 48,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
+              ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Study"),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SpinKitWanderingCubes(
+                color: Theme.of(context).colorScheme.secondary,
+                size: 80,
+              ),
+              Text(
+                'Loading...',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.secondary),
+              ),
+            ],
           ),
         ),
-      ) : const Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Finish learn",
-              style: TextStyle(
-                  fontSize: 32,
-                  color: Colors.black
-              ),
-            ),
-            Icon(Icons.assistant_photo,size: 48, color: Colors.black,)
-          ],
-        ),
-      ),
-    );
+      );
+    }
+  }
+  void _swipeEnd(int previousIndex, int targetIndex, SwiperActivity activity) {
+    switch (activity) {
+      case Swipe():
+        print("like" + targetIndex.toString() + ".");
+        break;
+      case Unswipe():
+        print("NO" + targetIndex.toString() + ".");
+        break;
+      case CancelSwipe():
+        print("Error" + targetIndex.toString() + ".");
+        break;
+      case DrivenActivity():
+        print("NORR" + targetIndex.toString() + ".");
+        break;
+    }
+  }
+
+  void _onEndCard() {
+    FlashMessage(messageShort: "Uppps!", messageLong: "You learn all new words", colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 }

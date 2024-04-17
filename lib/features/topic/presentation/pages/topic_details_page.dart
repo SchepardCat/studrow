@@ -38,7 +38,7 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<WordProvider>(context);
-    if (!provider.isLoadingWOrdInTopicList){
+    if (!provider.isLoadingWordInTopicList){
       return Scaffold(
         appBar: AppBar(
           title: getAppBar(),

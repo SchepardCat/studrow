@@ -254,9 +254,9 @@ class _StudyPageState extends State<StudyPage> {
 
   pressButtonLearn() {
     if (isLearnRandom) {
-      AutoRouter.of(context).push(StudyMethodsRoute(TypeLearn: TypeLearn.random));
+      AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
     } else if (isLearnByTopics) {
-      AutoRouter.of(context).push(StudyMethodsRoute(TypeLearn: TypeLearn.topic));
+      AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.topic));
     } else if (isRepeatOldWord) {
       AutoRouter.of(context).push(RepeatRoute());
     } else {

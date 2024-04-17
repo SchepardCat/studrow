@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/model/card_model.dart';
+import '../../../../../domain/model/card_model.dart';
 
 class StudyBackCard extends StatelessWidget {
   final CardModel cardData;
@@ -24,14 +24,14 @@ class StudyBackCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        cardData.number,
+                        cardData.number.toString(),
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black,
                         ),
                       ),
                       Text(
-                        cardData.topicUA,
+                        cardData.topic,
                         style: const TextStyle(
                           fontSize: 22,
                           color: Colors.black,
@@ -39,40 +39,14 @@ class StudyBackCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        cardData.image,
-                        style: const TextStyle(
-                          fontSize: 38,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    cardData.translate,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        cardData.wordUA,
-                        style: const TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        cardData.sentenceUA,
-                        textDirection: TextDirection.ltr,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ), //Column
             ), //Padding
@@ -81,6 +55,4 @@ class StudyBackCard extends StatelessWidget {
       ),
     );
   }
-
-
 }

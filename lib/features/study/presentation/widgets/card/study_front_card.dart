@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../domain/model/card_model.dart';
+import '../../../../../domain/model/card_model.dart';
 
 class StudyFrontCard extends StatelessWidget {
   final CardModel cardData;
@@ -25,14 +25,14 @@ class StudyFrontCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          cardData.number,
+                          cardData.number.toString(),
                           style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                           ),
                         ),
                         Text(
-                          cardData.topicEN,
+                          cardData.topic,
                           style: const TextStyle(
                             fontSize: 22,
                             color: Colors.black,
@@ -40,23 +40,10 @@ class StudyFrontCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                            cardData.image,
-                            style: const TextStyle(
-                              fontSize: 38,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                      ],
-                    ),
                     Column(
                       children: [
                         Text(
-                          cardData.wordEN,
+                          cardData.word,
                            style: const TextStyle(
                              fontSize: 30,
                              color: Colors.black,
@@ -64,7 +51,7 @@ class StudyFrontCard extends StatelessWidget {
                            ),
                         ),
                         Text(
-                          cardData.sentenceEN,
+                          cardData.example,
                           textDirection: TextDirection.ltr,
                           style: const TextStyle(
                             fontSize: 16,
