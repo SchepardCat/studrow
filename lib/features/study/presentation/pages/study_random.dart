@@ -37,7 +37,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
       SwipeItem(
           content: CardModel(
             number: wordList[i].id_word.toString(),
-            topic: wordList[i].topic_id.toString(),
+            topic: wordList[i].topic_name.toString(),
             word: wordList[i].name,
             translate: wordList[i].translate,
             example: wordList[i].example,

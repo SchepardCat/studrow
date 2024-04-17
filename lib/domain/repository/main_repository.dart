@@ -40,7 +40,7 @@ class MainRepository {
     await db.insert(
       _tableNameWord,
       word.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      conflictAlgorithm: ConflictAlgorithm.fail,
     );
   }
 
@@ -106,9 +106,30 @@ class MainRepository {
   }
 
   static Future<List<Word>> getWordsRandomStudy() async {
+    //Запрос для слів з назвою топіку
+    // final db = await _database();
+    // final List<Map<String, Object?>> wordsMaps = await db.query(_tableNameWord,
+    //     where: 'isLearn = ?', whereArgs: [0], orderBy: "name ASC");
+    // return [
+    //   for (final {
+    //   'id_word': id as int,
+    //   'name': name as String,
+    //   'translate': translate as String,
+    //   'example': example as String,
+    //   'topic_id': topic_id as int,
+    //   'isLearn': isLearn as int,
+    //   'isRepeatFirst': isRepeatFirst as int,
+    //   'isRepeatSecond': isRepeatSecond as int,
+    //   'isRepeatThird': isRepeatThird as int,
+    //   } in wordsMaps!)
+    //     Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
+    // ];
     final db = await _database();
-    final List<Map<String, Object?>> wordsMaps = await db.query(_tableNameWord,
-        where: 'isLearn = ?', whereArgs: [0], orderBy: "name ASC");
+    final List<Map<String, Object?>> wordsMaps = await db.rawQuery(
+        "SELECT "
+            "*,"
+            "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
+        "FROM word;");
     return [
       for (final {
       'id_word': id as int,
@@ -116,12 +137,13 @@ class MainRepository {
       'translate': translate as String,
       'example': example as String,
       'topic_id': topic_id as int,
+      'topic_name' : topic_name as String,
       'isLearn': isLearn as int,
       'isRepeatFirst': isRepeatFirst as int,
       'isRepeatSecond': isRepeatSecond as int,
       'isRepeatThird': isRepeatThird as int,
       } in wordsMaps!)
-        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
+        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, topic_name: topic_name, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
     ];
   }
 

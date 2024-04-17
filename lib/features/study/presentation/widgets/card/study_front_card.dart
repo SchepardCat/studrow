@@ -26,40 +26,38 @@ class StudyFrontCard extends StatelessWidget {
                       children: [
                         Text(
                           cardData.number.toString(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                         Text(
                           cardData.topic,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            color: Colors.black,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        Text(
-                          cardData.word,
-                           style: const TextStyle(
-                             fontSize: 30,
-                             color: Colors.black,
-                             fontWeight: FontWeight.w500,
-                           ),
-                        ),
-                        Text(
-                          cardData.example,
-                          textDirection: TextDirection.ltr,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      cardData.word,
+                      maxLines: 3,
+                      style: const TextStyle(
+                        fontSize: 32,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      maxLines: 3,
+                      cardData.example,
+                      textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.outline,
+                        fontWeight: FontWeight.w500,
+                      ),
                     )
                   ],
                 ), //Column
