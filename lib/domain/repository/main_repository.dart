@@ -120,7 +120,7 @@ class MainRepository {
         "SELECT "
             "*,"
             "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
-        "FROM word WHERE isLearn = 0;");
+        "FROM word WHERE isLearn = 0 ORDER BY random();");
     return [
       for (final {
       'id_word': id as int,
