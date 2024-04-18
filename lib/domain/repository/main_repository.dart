@@ -50,6 +50,17 @@ class MainRepository {
   }
 
 
+  //Repeat
+  static Future<int?> getCountRepetition(int isLearn, int isRepeatFirst, int isRepeatSecond, isRepeatThird) async {
+    final db = await _database();
+    int? count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $_tableNameWord '
+        'WHERE isLearn = ? AND isRepeatFirst = ? AND isRepeatSecond = ? AND isRepeatThird = ?;',
+        [isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird]));
+    await db.close();
+    return count;
+  }
+
+
   //Word
   static Future<void> insertWord(Word word) async {
     final db = await _database();
@@ -107,7 +118,7 @@ class MainRepository {
         "SELECT "
             "*,"
             "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
-            "FROM word WHERE topic_id = ? AND isLearn = ?;", [topic_id, 0]);
+            "FROM $_tableNameWord WHERE topic_id = ? AND isLearn = ?;", [topic_id, 0]);
     return [
       for (final {
       'id_word': id as int,
@@ -132,7 +143,7 @@ class MainRepository {
         "SELECT "
             "*,"
             "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
-        "FROM word WHERE isLearn = 0 ORDER BY random() LIMIT 10;");
+        "FROM $_tableNameWord WHERE isLearn = 0 ORDER BY random() LIMIT 10;");
     return [
       for (final {
       'id_word': id as int,

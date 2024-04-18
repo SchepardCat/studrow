@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
 
+import '../features/dictionary/presentation/provider/dictionary_provider.dart';
+
 @RoutePage()
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -18,6 +20,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     TopicProvider();
+    WordProvider();
     super.initState();
   }
   @override

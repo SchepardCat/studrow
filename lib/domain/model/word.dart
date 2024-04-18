@@ -17,6 +17,18 @@ class Word{
     this.isLearn = isLearned;
   }
 
+  setIsRepeatFirst(int isRepeatedFirst){
+    this.isRepeatFirst = isRepeatedFirst;
+  }
+
+  setIsRepeatSecond(int isRepeatedSecond){
+    this.isRepeatSecond = isRepeatedSecond;
+  }
+
+  setIsRepeatThird(int isRepeatedThird){
+    this.isRepeatThird = isRepeatedThird;
+  }
+
   Map<String,Object?> toMap() {
     return {
       'id_word': id_word,

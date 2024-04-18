@@ -79,7 +79,6 @@ class _AccountPageState extends State<AccountPage> {
       ),
     );
   }
-
   void pressButtonLearn() async {
     Provider.of<WordProvider>(context, listen: false).insertTestWords(20);
     print("Add all test data");
