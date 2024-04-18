@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/type_learn.dart';
-import 'package:studrow/features/study/presentation/pages/study_methods_page.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/router/router.dart';
 
@@ -242,10 +241,7 @@ class _StudyPageState extends State<StudyPage> {
                                 return DropdownMenuEntry<Topic>(
                                     value: topic,
                                     label: topic.name,
-                                    leadingIcon: Text(
-                                      topic.id_topic.toString(),
-                                      style: TextStyle(fontSize: 18),
-                                    ));
+                                    );
                               },
                             ).toList(),
                           );

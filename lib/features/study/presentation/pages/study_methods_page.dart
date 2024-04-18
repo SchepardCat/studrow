@@ -22,11 +22,21 @@ class _StudyMethodsPageState extends State<StudyMethodsPage> {
   @override
   Widget build(BuildContext context) {
     if(TypeLearn.random == widget.typeLearn){
-      Provider.of<WordProvider>(context, listen: false).getWordsRandomStudy();
+      final provider = Provider.of<WordProvider>(context, listen: false);
+      //
+      //Потрібна для того щоб пофіксити ситуацію, коли слово вивчене, повернено до попереднього меню
+      //і знову зайдено то слово залишалось, так як список слів не перезбирався.
+      provider.isLoadingListWordForRandom = true;
+      //
+      provider.getWordsRandomStudy();
       return StudyRandomWord();
     }else if(TypeLearn.topic == widget.typeLearn){
       if(widget.topic_id != null){
-        Provider.of<WordProvider>(context, listen: false).getWordsInTopicDontLearn(topic_id: widget.topic_id!);
+        final provider = Provider.of<WordProvider>(context, listen: false);
+        //Вирішення проблеми аналогічно з рандом сторінкою
+        provider.isLoadingListWordByTopic = true;
+        //
+        provider.getWordsInTopicDontLearn(topic_id: widget.topic_id!);
         return StudyByTopics();
       }else{
         return Container(child: Text("Program error!!!"));

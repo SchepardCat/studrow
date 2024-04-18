@@ -34,6 +34,10 @@ class MainRepository {
         'FOREIGN KEY(topic_id) REFERENCES $_tableNameTopic(id_topic))');
   }
 
+
+
+
+
   //Word
   static Future<void> insertWord(Word word) async {
     final db = await _database();
@@ -110,13 +114,13 @@ class MainRepository {
   }
 
   static Future<List<Word>> getWordsRandomStudy() async {
-    //Запрос для слів з назвою топіку
+    //Запрос для рандомних слів
     final db = await _database();
     final List<Map<String, Object?>> wordsMaps = await db.rawQuery(
         "SELECT "
             "*,"
             "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
-        "FROM word;");
+        "FROM word WHERE isLearn = 0;");
     return [
       for (final {
       'id_word': id as int,
@@ -133,7 +137,6 @@ class MainRepository {
         Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, topic_name: topic_name, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
     ];
   }
-
 
   static Future<void> updateWord(Word word) async {
     final db = await _database();
@@ -153,6 +156,11 @@ class MainRepository {
       whereArgs: [id],
     );
   }
+
+
+
+
+
 
   //Topic
   static Future<void> insert(Topic topic) async {

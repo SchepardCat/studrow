@@ -6,6 +6,7 @@ import '../../../../domain/model/word.dart';
 import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
+import '../widgets/snap_message/snap_message.dart';
 
 class StudyRandomWord extends StatefulWidget {
   const StudyRandomWord({super.key});
@@ -42,8 +43,15 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
             word: wordList[i].name,
             translate: wordList[i].translate,
             example: wordList[i].example,
+            wordOb: wordList[i]
           ),
-          likeAction: () {}),
+          likeAction: (){
+            _learnWord(wordList[i]);
+          },
+          nopeAction: (){
+            _getWordToRepeat(wordList[i]);
+          },
+      ),
     );
   }
 
@@ -52,13 +60,13 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     final provider = Provider.of<WordProvider>(context);
     if (!provider.isLoadingListWordForRandom) {
       wordList = provider.wordsForStudy;
-      if (firstCall) {
-        createForm();
-        firstCall = false;
-      }
       if (wordList.isEmpty) {
         return listWordsEmpty();
       } else {
+        if (firstCall) {
+          createForm();
+          firstCall = false;
+        }
         if (isFinished) {
           return listWordsEmpty();
         } else {
@@ -95,7 +103,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
                             }
                           });
                         },
-                        leftSwipeAllowed: false,
+                        leftSwipeAllowed: true,
                         upSwipeAllowed: false,
                         fillSpace: false,
                       )),
@@ -174,5 +182,33 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
         ),
       ),
     );
+  }
+
+  _learnWord(Word word) async {
+    //LEFT_SWIPE
+    //Вивчаємо слово і записуємо в бд
+    //знаходимо слово по id та записуємо в нього isLearn = 1;
+    word.setIsLearned(1);
+    Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
+    //
+    //logging
+    //
+    //
+    print("Learn word random");
+    //
+    //
+    if(numberCurrentCard == wordList.length-1){
+      FlashMessage(
+          messageShort: "Excellent result",
+          messageLong: "Keep it up",
+          colorMessage: Theme.of(context).colorScheme.primaryContainer)
+          .getScaffoldMessage(context);
+    }
+  }
+
+  _getWordToRepeat(Word word){
+    //RIGHT_SWIPE
+    wordList.add(word);
+    print("repeat word");
   }
 }

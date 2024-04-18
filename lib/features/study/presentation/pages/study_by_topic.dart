@@ -6,6 +6,7 @@ import '../../../../domain/model/word.dart';
 import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
+import '../widgets/snap_message/snap_message.dart';
 
 class StudyByTopics extends StatefulWidget {
   const StudyByTopics({super.key});
@@ -28,21 +29,27 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     super.initState();
   }
 
-  createForm(){
+  createForm() {
     addListItem(numberCurrentCard);
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
   }
+
   addListItem(int i) {
     _swipeItems.add(
       SwipeItem(
           content: CardModel(
-            number: wordList[i].id_word.toString(),
-            topic: wordList[i].topic_id.toString(),
-            word: wordList[i].name,
-            translate: wordList[i].translate,
-            example: wordList[i].example,
-          ),
-          likeAction: () {}),
+              number: wordList[i].id_word.toString(),
+              topic: wordList[i].topic_name!,
+              word: wordList[i].name,
+              translate: wordList[i].translate,
+              example: wordList[i].example,
+              wordOb: wordList[i]),
+          likeAction: () {
+            _learnWord(wordList[i]);
+          },
+          nopeAction: (){
+            _getWordToRepeat(wordList[i]);
+          }),
     );
   }
 
@@ -51,17 +58,16 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     final provider = Provider.of<WordProvider>(context);
     if (!provider.isLoadingListWordByTopic) {
       wordList = provider.wordsForStudyByTopic;
-      if(wordList.isEmpty){
+      if (wordList.isEmpty) {
         return listWordsEmpty();
-      }else{
-        if(firstCall){
+      } else {
+        if (firstCall) {
           createForm();
           firstCall = false;
         }
-        if(isFinished){
+        if (isFinished) {
           return listWordsEmpty();
-        }
-        else{
+        } else {
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
@@ -78,36 +84,34 @@ class _StudyByTopicsState extends State<StudyByTopics> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          //card
-                          Container(
-                              child: SwipeCards(
-                                matchEngine: _matchEngine,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return CardFlip(cardData: _swipeItems[index]
-                                      .content);
-                                },
-                                onStackFinished: () {
-                                  setState(() {
-                                    numberCurrentCard++;
-                                    if (numberCurrentCard <
-                                        wordList.length) {
-                                      addListItem(numberCurrentCard);
-                                    } else {
-                                      isFinished = true;
-                                    }
-                                  });
-                                },
-                                leftSwipeAllowed: false,
-                                upSwipeAllowed: false,
-                                fillSpace: false,
-                              )),
-                        ])),
+                      //card
+                      Container(
+                          child: SwipeCards(
+                        matchEngine: _matchEngine,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CardFlip(cardData: _swipeItems[index].content);
+                        },
+                        onStackFinished: () {
+                          setState(() {
+                            numberCurrentCard++;
+                            if (numberCurrentCard < wordList.length) {
+                              addListItem(numberCurrentCard);
+                            } else {
+                              isFinished = true;
+                            }
+                          });
+                        },
+                        leftSwipeAllowed: true,
+                        upSwipeAllowed: false,
+                        fillSpace: false,
+                      )),
+                    ])),
               ),
             ),
           );
         }
       }
-    }else{
+    } else {
       return getSpinKit();
     }
   }
@@ -140,7 +144,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     );
   }
 
-  Widget listWordsEmpty(){
+  Widget listWordsEmpty() {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -176,5 +180,33 @@ class _StudyByTopicsState extends State<StudyByTopics> {
         ),
       ),
     );
+  }
+
+  _learnWord(Word word) async {
+    //LEFT_SWIPE
+    //Вивчаємо слово і записуємо в бд
+    //знаходимо слово по id та записуємо в нього isLearn = 1;
+    word.setIsLearned(1);
+    Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
+    //
+    //logging
+    //
+    //
+    print("Learn word random");
+    //
+    //
+    if(numberCurrentCard == wordList.length-1){
+      FlashMessage(
+          messageShort: "Excellent result",
+          messageLong: "Keep it up",
+          colorMessage: Theme.of(context).colorScheme.primaryContainer)
+          .getScaffoldMessage(context);
+    }
+  }
+
+  _getWordToRepeat(Word word){
+    //RIGHT_SWIPE
+    wordList.add(word);
+    print("repeat word");
   }
 }

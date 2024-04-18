@@ -13,6 +13,10 @@ class Word{
 
   Word({this.id_word,required this.name, required this.translate,  required this.example, this.topic_id, this.topic_name, required this.isLearn, required  this.isRepeatFirst, required  this.isRepeatSecond, required this.isRepeatThird});
 
+  setIsLearned(int isLearned){
+    this.isLearn = isLearned;
+  }
+
   Map<String,Object?> toMap() {
     return {
       'id_word': id_word,
