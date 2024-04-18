@@ -67,10 +67,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
           createForm();
           firstCall = false;
         }
-        if (isFinished) {
-          return listWordsEmpty();
-        } else {
-          return Scaffold(
+        return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
               title: Text(
@@ -98,8 +95,18 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
                             numberCurrentCard++;
                             if (numberCurrentCard < wordList.length) {
                               addListItem(numberCurrentCard);
-                            } else {
-                              isFinished = true;
+                            }else{
+                              _swipeItems.clear();
+                              final provider = Provider.of<WordProvider>(context, listen: false);
+                              provider.isLoadingListWordForRandom = true;
+                              provider.getWordsRandomStudy();
+                              firstCall = true;
+                              numberCurrentCard = 0;
+                              FlashMessage(
+                                  messageShort: "Excellent result",
+                                  messageLong: "Keep it up",
+                                  colorMessage: Theme.of(context).colorScheme.primaryContainer)
+                                  .getScaffoldMessage(context);
                             }
                           });
                         },
@@ -111,7 +118,6 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
               ),
             ),
           );
-        }
       }
     } else {
       return getSpinKit();
@@ -191,19 +197,10 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     word.setIsLearned(1);
     Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
     //
+
     //logging
-    //
-    //
     print("Learn word random");
     //
-    //
-    if(numberCurrentCard == wordList.length-1){
-      FlashMessage(
-          messageShort: "Excellent result",
-          messageLong: "Keep it up",
-          colorMessage: Theme.of(context).colorScheme.primaryContainer)
-          .getScaffoldMessage(context);
-    }
   }
 
   _getWordToRepeat(Word word){
