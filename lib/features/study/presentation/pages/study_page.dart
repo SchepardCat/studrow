@@ -289,11 +289,11 @@ class _StudyPageState extends State<StudyPage> {
       final providerRepeat = Provider.of<WordProvider>(context, listen: false);
       if(providerRepeat.isLoadingListFirstRepetition != null &&
           providerRepeat.isLoadingListSecondRepetition != null &&
-          providerRepeat.isLoadingListThirdRepetition !=null){
+          providerRepeat.isLoadingListThirdRepetition !=null) {
         if(providerRepeat.isLoadingListFirstRepetition! > 40 ||
             providerRepeat.isLoadingListSecondRepetition! > 120 ||
             providerRepeat.isLoadingListThirdRepetition! > 250){
-          AutoRouter.of(context).push(RepeatRoute());
+          _logicGetWordsList();
         }else{
           FlashMessage(
               messageShort: "Error!",
@@ -318,6 +318,36 @@ class _StudyPageState extends State<StudyPage> {
               messageLong: "Please choose one method learn word",
               colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
+    }
+  }
+
+  _logicGetWordsList() async {
+    //logic get list
+    final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+    if(providerRepeat.isLoadingListFirstRepetition! > 40){
+      //>40
+      providerRepeat.getRepeatWordsList(1,0,0,0);
+      AutoRouter.of(context).push(StudyRepeatWordsRoute());
+      //logging
+      print(providerRepeat.isLoadingListFirstRepetition);
+      return 0;
+    }
+    if(providerRepeat.isLoadingListSecondRepetition! > 120){
+      //>120
+      providerRepeat.getRepeatWordsList(1,1,0,0);
+      AutoRouter.of(context).push(StudyRepeatWordsRoute());
+      //logging
+      print(providerRepeat.isLoadingListSecondRepetition);
+      return 0;
+    }
+
+    if(providerRepeat.isLoadingListThirdRepetition! > 250){
+      //>250
+      providerRepeat.getRepeatWordsList(1,1,1,0);
+      AutoRouter.of(context).push(StudyRepeatWordsRoute());
+      //logging
+      print(providerRepeat.isLoadingListThirdRepetition);
+      return 0;
     }
   }
 }

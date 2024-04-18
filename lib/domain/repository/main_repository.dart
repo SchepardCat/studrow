@@ -50,8 +50,11 @@ class MainRepository {
   }
 
 
+
+
+
   //Repeat
-  static Future<int?> getCountRepetition(int isLearn, int isRepeatFirst, int isRepeatSecond, isRepeatThird) async {
+  static Future<int?> getCountRepetition(int isLearn, int isRepeatFirst, int isRepeatSecond, int isRepeatThird) async {
     final db = await _database();
     int? count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $_tableNameWord '
         'WHERE isLearn = ? AND isRepeatFirst = ? AND isRepeatSecond = ? AND isRepeatThird = ?;',
@@ -59,6 +62,36 @@ class MainRepository {
     await db.close();
     return count;
   }
+  static Future<List<Word>> getWordsListRepetition(int isLearn, int isRepeatFirst, int isRepeatSecond, int isRepeatThird) async {
+    //Запрос для рандомних слів
+    final db = await _database();
+    final List<Map<String, Object?>> wordsMaps = await db.rawQuery(
+        "SELECT "
+            "*,"
+            "(SELECT topic.name FROM topic WHERE id_topic = topic_id) as topic_name "
+            "FROM $_tableNameWord WHERE isLearn = ? AND isRepeatFirst = ? AND "
+            "isRepeatSecond = ? AND isRepeatThird = ? ORDER BY random();", [isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird]);
+    return [
+      for (final {
+      'id_word': id as int,
+      'name': name as String,
+      'translate': translate as String,
+      'example': example as String,
+      'topic_id': topic_id as int,
+      'topic_name' : topic_name as String,
+      'isLearn': isLearn as int,
+      'isRepeatFirst': isRepeatFirst as int,
+      'isRepeatSecond': isRepeatSecond as int,
+      'isRepeatThird': isRepeatThird as int,
+      } in wordsMaps!)
+        Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, topic_name: topic_name, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
+    ];
+  }
+
+
+
+
+
 
 
   //Word

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +10,16 @@ import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
 import '../widgets/snap_message/snap_message.dart';
 
-class StudyRepeatWords extends StatefulWidget {
-  const StudyRepeatWords({super.key});
+
+@RoutePage()
+class StudyRepeatWordsPage extends StatefulWidget {
+  const StudyRepeatWordsPage({super.key});
 
   @override
-  State<StudyRepeatWords> createState() => _StudyRepeatWordsState();
+  State<StudyRepeatWordsPage> createState() => _StudyRepeatWordsPageState();
 }
 
-class _StudyRepeatWordsState extends State<StudyRepeatWords> {
+class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
   List<Word> wordList = [];
   final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
@@ -59,8 +62,8 @@ class _StudyRepeatWordsState extends State<StudyRepeatWords> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<WordProvider>(context);
-    if (!provider.isLoadingListWordForRandom) {
-      wordList = provider.wordsForStudy;
+    if (!provider.isLoadingWordsListRepetition) {
+      wordList = provider.wordsListRepetition;
       if (wordList.isEmpty) {
         return listWordsEmpty();
       } else {
@@ -72,7 +75,7 @@ class _StudyRepeatWordsState extends State<StudyRepeatWords> {
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text(
-              "Learny words",
+              "Repeat words",
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -97,17 +100,17 @@ class _StudyRepeatWordsState extends State<StudyRepeatWords> {
                                   if (numberCurrentCard < wordList.length) {
                                     addListItem(numberCurrentCard);
                                   }else{
-                                    _swipeItems.clear();
-                                    final provider = Provider.of<WordProvider>(context, listen: false);
-                                    provider.isLoadingListWordForRandom = true;
-                                    provider.getWordsRandomStudy();
-                                    firstCall = true;
-                                    numberCurrentCard = 0;
-                                    FlashMessage(
-                                        messageShort: "Excellent result",
-                                        messageLong: "Keep it up",
-                                        colorMessage: Theme.of(context).colorScheme.primaryContainer)
-                                        .getScaffoldMessage(context);
+                                    // _swipeItems.clear();
+                                    // final provider = Provider.of<WordProvider>(context, listen: false);
+                                    // provider.isLoadingListWordForRandom = true;
+                                    // provider.getWordsRandomStudy();
+                                    // firstCall = true;
+                                    // numberCurrentCard = 0;
+                                    // FlashMessage(
+                                    //     messageShort: "Excellent result",
+                                    //     messageLong: "Keep it up",
+                                    //     colorMessage: Theme.of(context).colorScheme.primaryContainer)
+                                    //     .getScaffoldMessage(context);
                                   }
                                 });
                               },
@@ -194,20 +197,31 @@ class _StudyRepeatWordsState extends State<StudyRepeatWords> {
   _learnWord(Word word) async {
     //LEFT_SWIPE
     //Перевіряємо слово до якого типу повторення воно належить
-    //Вивчаємо слово і записуємо в бд
-    //знаходимо слово по id та записуємо в нього isLearn = 1;
-    //word.setIsLearned(1);
-    //Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
-    //
-
-    //logging
-    print("Learn word random");
-    //
+    final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+    if(!providerRepeat.isLoadingFirstList && providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+      word.setIsRepeatFirst(1);
+      //logging
+      print("first repeat");
+    }
+    if(!providerRepeat.isLoadingFirstList && !providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+      word.setIsRepeatSecond(1);
+      //logging
+      print("second repeat");
+    }
+    if(!providerRepeat.isLoadingFirstList && !providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+      word.setIsRepeatThird(1);
+      //logging
+      print("third repeat");
+    }
+    providerRepeat.updateWord(word: word);
   }
 
   _getWordToRepeat(Word word){
     //RIGHT_SWIPE
-    //wordList.add(word);
-    //print("repeat word");
+    wordList.add(word);
+    print("loop word");
   }
+
+
+
 }

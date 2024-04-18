@@ -39,12 +39,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainPage(),
       );
     },
-    RepeatRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RepeatPage(),
-      );
-    },
     SettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -66,6 +60,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const StudyPage(),
+      );
+    },
+    StudyRepeatWordsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StudyRepeatWordsPage(),
       );
     },
     StudyWrapperRoute.name: (routeData) {
@@ -178,20 +178,6 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RepeatPage]
-class RepeatRoute extends PageRouteInfo<void> {
-  const RepeatRoute({List<PageRouteInfo>? children})
-      : super(
-          RepeatRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RepeatRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [SettingsPage]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
@@ -258,6 +244,20 @@ class StudyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StudyRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [StudyRepeatWordsPage]
+class StudyRepeatWordsRoute extends PageRouteInfo<void> {
+  const StudyRepeatWordsRoute({List<PageRouteInfo>? children})
+      : super(
+          StudyRepeatWordsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StudyRepeatWordsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

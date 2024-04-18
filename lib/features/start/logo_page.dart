@@ -12,9 +12,6 @@ class _LogoPageState extends State<LogoPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.popAndPushNamed(context, '/main');
-    });
   }
 
   @override
