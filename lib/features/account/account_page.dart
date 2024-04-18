@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:provider/provider.dart';
 
 import '../../presentation/widgets/progress_bar/progress_bar.dart';
+import '../dictionary/presentation/provider/dictionary_provider.dart';
 
 @RoutePage()
 class AccountPage extends StatefulWidget {
@@ -61,6 +63,13 @@ class _AccountPageState extends State<AccountPage> {
                             totalCards: 543, currentNumber: 403, widthBar: 120),
                       ],
                     ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                        onPressed: pressButtonLearn,
+                        child: const Text(
+                          'Add test data',
+                          style: TextStyle(fontSize: 20),
+                        )),
                   ],
                 ),
               ],
@@ -69,5 +78,10 @@ class _AccountPageState extends State<AccountPage> {
         ),
       ),
     );
+  }
+
+  void pressButtonLearn() async {
+    Provider.of<WordProvider>(context, listen: false).insertTestWords(20);
+    print("Add all test data");
   }
 }

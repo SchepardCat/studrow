@@ -63,4 +63,9 @@ class WordProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  insertTestWords(int number) async {
+    await MainRepository.insertTestWords(number);
+    getWords();
+  }
+
 }

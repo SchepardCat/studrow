@@ -9,6 +9,7 @@ class MainRepository {
   static const _dbName = 'learny_word.db';
   static const _tableNameTopic = 'topic';
   static const _tableNameWord = 'word';
+  static int i = 20;
 
   static Future<Database> _database() async {
     final database = openDatabase(
@@ -35,7 +36,18 @@ class MainRepository {
   }
 
 
-
+  //TestData
+  static Future<void> insertTestWords(int number) async {
+    number = number + i;
+    final db = await _database();
+    for(i; i < number; i++){
+      await db.execute(
+          "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'testData + $i','testData + $i','testData + $i', 12, 0, 0, 0, 0]
+      );
+      print("Add $i test data");
+    }
+  }
 
 
   //Word
