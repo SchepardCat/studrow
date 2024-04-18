@@ -4,6 +4,7 @@ import 'package:studrow/domain/model/word.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
+import 'features/study/presentation/provider/study_provider.dart';
 import 'ui/theme/theme.dart';
 import 'ui/theme/typography.dart';
 
@@ -28,6 +29,7 @@ class _MainAppState extends State<MainApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => TopicProvider()),
         ChangeNotifierProvider(create: (_) => WordProvider()),
+        ChangeNotifierProvider(create: (_) => StudyProvider()),
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,

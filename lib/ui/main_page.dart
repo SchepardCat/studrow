@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/features/start/logo_page.dart';
+import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
 
@@ -21,14 +23,20 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState(){
-    WordProvider();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     final providerTopic = Provider.of<TopicProvider>(context);
     final providerWord = Provider.of<WordProvider>(context);
-    if(!providerWord.isLoadingRepetition && !providerTopic.isLoadingTopicPage){
+    final providerStudy = Provider.of<StudyProvider>(context);
+    if(!providerWord.isLoadingWord
+      && !providerTopic.isLoadingTopicPage
+    && !providerStudy.isLoadingRepetition
+    ){
+      print(providerStudy.isLoadingListFirstRepetition);
+      print(providerStudy.isLoadingListSecondRepetition);
+      print(providerStudy.isLoadingListThirdRepetition);
       return AutoTabsRouter(
         routes: const [
           AccountRoute(),

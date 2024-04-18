@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 
 import '../../../../domain/model/card_model.dart';
@@ -61,7 +62,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<WordProvider>(context);
+    final provider = Provider.of<StudyProvider>(context);
     if (!provider.isLoadingWordsListRepetition) {
       wordList = provider.wordsListRepetition;
       if (wordList.isEmpty) {
@@ -197,7 +198,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
   _learnWord(Word word) async {
     //LEFT_SWIPE
     //Перевіряємо слово до якого типу повторення воно належить
-    final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+    final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
     if(!providerRepeat.isLoadingFirstList && providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
       word.setIsRepeatFirst(1);
       //logging

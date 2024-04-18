@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import '../../../../domain/model/word.dart';
 import '../../../../domain/model/card_model.dart';
@@ -57,7 +58,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<WordProvider>(context);
+    final provider = Provider.of<StudyProvider>(context);
     if (!provider.isLoadingListWordForRandom) {
       wordList = provider.wordsForStudy;
       if (wordList.isEmpty) {
@@ -97,7 +98,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
                               addListItem(numberCurrentCard);
                             }else{
                               _swipeItems.clear();
-                              final provider = Provider.of<WordProvider>(context, listen: false);
+                              final provider = Provider.of<StudyProvider>(context, listen: false);
                               provider.isLoadingListWordForRandom = true;
                               provider.getWordsRandomStudy();
                               firstCall = true;

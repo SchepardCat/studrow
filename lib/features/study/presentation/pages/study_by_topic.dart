@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import '../../../../domain/model/word.dart';
 import '../../../../domain/model/card_model.dart';
@@ -55,7 +56,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<WordProvider>(context);
+    final provider = Provider.of<StudyProvider>(context);
     if (!provider.isLoadingListWordByTopic) {
       wordList = provider.wordsForStudyByTopic;
       if (wordList.isEmpty) {

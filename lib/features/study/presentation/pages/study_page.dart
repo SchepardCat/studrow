@@ -10,6 +10,7 @@ import 'package:studrow/features/study/presentation/widgets/snap_message/snap_me
 import 'package:studrow/router/router.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
+import '../provider/study_provider.dart';
 
 @RoutePage()
 class StudyPage extends StatefulWidget {
@@ -179,6 +180,8 @@ class _StudyPageState extends State<StudyPage> {
                           value! == isLearnRandom) {
                         isRepeatOldWord = value!;
                       } else {
+                        final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
+                        providerRepeat.getRepeatFilled();
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
@@ -286,7 +289,8 @@ class _StudyPageState extends State<StudyPage> {
       _topic.clear();
     } else if (isRepeatOldWord) {
       //logic repeat study
-      final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+      final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
+      providerRepeat.getRepeatFilled();
       if(providerRepeat.isLoadingListFirstRepetition != null &&
           providerRepeat.isLoadingListSecondRepetition != null &&
           providerRepeat.isLoadingListThirdRepetition !=null) {
@@ -323,7 +327,7 @@ class _StudyPageState extends State<StudyPage> {
 
   _logicGetWordsList() async {
     //logic get list
-    final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+    final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
     if(providerRepeat.isLoadingListFirstRepetition! > 40){
       //>40
       providerRepeat.getRepeatWordsList(1,0,0,0);
