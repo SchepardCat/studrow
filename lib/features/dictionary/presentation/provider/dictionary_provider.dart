@@ -27,11 +27,11 @@ class WordProvider with ChangeNotifier{
   //
   //list second repeating words
   List<Word> wordsSecondRepetition = [];
-  bool isLoadingListSecondRepetition = true;
+  int? isLoadingListSecondRepetition;
   //
   //list third repeating words
   List<Word> wordsThirdRepetition = [];
-  bool isLoadingListThirdRepetition = true;
+  int? isLoadingListThirdRepetition;
   //
 
   WordProvider(){
@@ -89,11 +89,9 @@ class WordProvider with ChangeNotifier{
   }
 
   getRepeatFilled() async {
-    final isLoadingListFirstRepetition = await MainRepository.getCountRepetition(1,0,0,0);
-    final isLoadingListSecondRepetition = await MainRepository.getCountRepetition(1,1,0,0);
-    final isLoadingListThirdRepetition = await MainRepository.getCountRepetition(1,1,1,0);
-    print(isLoadingListFirstRepetition);
-    print(isLoadingListSecondRepetition);
-    print(isLoadingListThirdRepetition);
+    isLoadingListFirstRepetition = await MainRepository.getCountRepetition(1,0,0,0);
+    isLoadingListSecondRepetition = await MainRepository.getCountRepetition(1,1,0,0);
+    isLoadingListThirdRepetition = await MainRepository.getCountRepetition(1,1,1,0);
+    notifyListeners();
   }
 }

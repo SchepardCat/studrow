@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/type_learn.dart';
+import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/router/router.dart';
-
 import '../../../../domain/model/topic.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
 
@@ -23,9 +23,13 @@ class _StudyPageState extends State<StudyPage> {
   final TextEditingController _topic = TextEditingController();
   Topic? selectedTopic;
   bool dontEdit = true;
+  //checkbox
   bool isLearnRandom = true;
   bool isLearnByTopics = false;
   bool isRepeatOldWord = false;
+  //
+  //logic repeat and study
+  String titleButton = "Learn";
 
   @override
   void initState() {
@@ -35,7 +39,8 @@ class _StudyPageState extends State<StudyPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TopicProvider>(context);
-    if (!provider.isLoadingTopicPage) {
+    if (!provider.isLoadingTopicPage)
+    {
       return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -67,12 +72,7 @@ class _StudyPageState extends State<StudyPage> {
                   SizedBox(
                     width: 150,
                     height: 70,
-                    child: ElevatedButton(
-                        onPressed: pressButtonLearn,
-                        child: const Text(
-                          'Learn',
-                          style: TextStyle(fontSize: 20),
-                        )),
+                    child: getButton(titleButton),
                   ),
                   // ElevatedButton(
                   //     onPressed: () {
@@ -143,6 +143,7 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnRandom = value!;
                         isLearnByTopics = !value;
                         isRepeatOldWord = !value;
+                        titleButton = "Learn";
                       }
                     });
                   },
@@ -164,6 +165,7 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnByTopics = value!;
                         isLearnRandom = !value;
                         isRepeatOldWord = !value;
+                        titleButton = "Learn";
                       }
                     });
                   },
@@ -180,6 +182,7 @@ class _StudyPageState extends State<StudyPage> {
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
+                        titleButton = "Repeat";
                       }
                     });
                   },
@@ -257,7 +260,16 @@ class _StudyPageState extends State<StudyPage> {
     }
   }
 
-  pressButtonLearn() {
+  Widget getButton(String name){
+    return ElevatedButton(
+        onPressed: pressButtonLearn,
+        child: Text(
+          name,
+          style: TextStyle(fontSize: 20),
+        ));
+  }
+
+  pressButtonLearn() async {
     if (isLearnRandom) {
       AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
     } else if (isLearnByTopics) {
@@ -273,8 +285,30 @@ class _StudyPageState extends State<StudyPage> {
       selectedTopic = null;
       _topic.clear();
     } else if (isRepeatOldWord) {
-      AutoRouter.of(context).push(RepeatRoute());
-    } else {
+      //logic repeat study
+      final providerRepeat = Provider.of<WordProvider>(context, listen: false);
+      if(providerRepeat.isLoadingListFirstRepetition != null &&
+          providerRepeat.isLoadingListSecondRepetition != null &&
+          providerRepeat.isLoadingListThirdRepetition !=null){
+        if(providerRepeat.isLoadingListFirstRepetition! > 40 ||
+            providerRepeat.isLoadingListSecondRepetition! > 120 ||
+            providerRepeat.isLoadingListThirdRepetition! > 250){
+          AutoRouter.of(context).push(RepeatRoute());
+        }else{
+          FlashMessage(
+              messageShort: "Error!",
+              messageLong: "Nothing words for repeat",
+              colorMessage: Theme.of(context).colorScheme.primaryContainer)
+              .getScaffoldMessage(context);
+        }
+      }else{
+        FlashMessage(
+            messageShort: "NULL!",
+            messageLong: "Nothing words for repeat",
+            colorMessage: Theme.of(context).colorScheme.primaryContainer)
+            .getScaffoldMessage(context);
+      }
+    }else{
       //message nothing choose
       //
       //
