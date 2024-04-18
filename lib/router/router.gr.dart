@@ -58,6 +58,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: StudyMethodsPage(
           key: args.key,
           typeLearn: args.typeLearn,
+          topic_id: args.topicid,
         ),
       );
     },
@@ -210,12 +211,14 @@ class StudyMethodsRoute extends PageRouteInfo<StudyMethodsRouteArgs> {
   StudyMethodsRoute({
     Key? key,
     required TypeLearn typeLearn,
+    int? topicid,
     List<PageRouteInfo>? children,
   }) : super(
           StudyMethodsRoute.name,
           args: StudyMethodsRouteArgs(
             key: key,
             typeLearn: typeLearn,
+            topicid: topicid,
           ),
           initialChildren: children,
         );
@@ -230,15 +233,18 @@ class StudyMethodsRouteArgs {
   const StudyMethodsRouteArgs({
     this.key,
     required this.typeLearn,
+    this.topicid,
   });
 
   final Key? key;
 
   final TypeLearn typeLearn;
 
+  final int? topicid;
+
   @override
   String toString() {
-    return 'StudyMethodsRouteArgs{key: $key, typeLearn: $typeLearn}';
+    return 'StudyMethodsRouteArgs{key: $key, typeLearn: $typeLearn, topicid: $topicid}';
   }
 }
 

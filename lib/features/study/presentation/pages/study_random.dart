@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import '../../../../domain/model/word.dart';
-import '../../../../standart_setting.dart';
 import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
@@ -28,10 +28,11 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     super.initState();
   }
 
-  createForm(){
+  createForm() {
     addListItem(numberCurrentCard);
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
   }
+
   addListItem(int i) {
     _swipeItems.add(
       SwipeItem(
@@ -51,68 +52,127 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     final provider = Provider.of<WordProvider>(context);
     if (!provider.isLoadingListWordForRandom) {
       wordList = provider.wordsForStudy;
-      if(firstCall){
+      if (firstCall) {
         createForm();
         firstCall = false;
       }
-      return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("Learny words"),
-        ),
-        body: !StSetting.isFinishedLearn
-            ? Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+      if (wordList.isEmpty) {
+        return listWordsEmpty();
+      } else {
+        if (isFinished) {
+          return listWordsEmpty();
+        } else {
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(
+              title: Text(
+                "Learny words",
+                style: TextStyle(
+                    fontSize: 26, color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                       //card
                       Container(
                           child: SwipeCards(
-                            matchEngine: _matchEngine,
-                            itemBuilder: (BuildContext context, int index) {
-                              return CardFlip(cardData: _swipeItems[index]
-                                  .content);
-                            },
-                            onStackFinished: () {
-                              setState(() {
-                                numberCurrentCard++;
-                                if (numberCurrentCard <
-                                    wordList.length) {
-                                  addListItem(numberCurrentCard);
-                                } else {
-                                  StSetting.isFinishedLearn = true;
-                                }
-                              });
-                            },
-                            leftSwipeAllowed: false,
-                            upSwipeAllowed: false,
-                            fillSpace: false,
-                          )),
+                        matchEngine: _matchEngine,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CardFlip(cardData: _swipeItems[index].content);
+                        },
+                        onStackFinished: () {
+                          setState(() {
+                            numberCurrentCard++;
+                            if (numberCurrentCard < wordList.length) {
+                              addListItem(numberCurrentCard);
+                            } else {
+                              isFinished = true;
+                            }
+                          });
+                        },
+                        leftSwipeAllowed: false,
+                        upSwipeAllowed: false,
+                        fillSpace: false,
+                      )),
                     ])),
-          ),
-        )
-            : const Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Finish learn",
-                style: TextStyle(fontSize: 32, color: Colors.black),
               ),
-              Icon(
-                Icons.assistant_photo,
-                size: 48,
-                color: Colors.black,
-              )
-            ],
-          ),
-        ),
-      );
-    }else{
-      return Container();
+            ),
+          );
+        }
+      }
+    } else {
+      return getSpinKit();
     }
+  }
+
+  Widget getSpinKit() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Learny words",
+          style: TextStyle(
+              fontSize: 26, color: Theme.of(context).colorScheme.primary),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SpinKitWanderingCubes(
+              color: Theme.of(context).colorScheme.secondary,
+              size: 80,
+            ),
+            Text(
+              'Loading...',
+              style: TextStyle(
+                  fontSize: 20, color: Theme.of(context).colorScheme.secondary),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget listWordsEmpty() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Learny words",
+          style: TextStyle(
+              fontSize: 26, color: Theme.of(context).colorScheme.primary),
+        ),
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Done!!!",
+                  style: TextStyle(fontSize: 26, color: Colors.black),
+                ),
+                Icon(
+                  Icons.assistant_photo,
+                  size: 48,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            Text(
+              "Learned all the words",
+              maxLines: 3,
+              style: TextStyle(fontSize: 26, color: Colors.black),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

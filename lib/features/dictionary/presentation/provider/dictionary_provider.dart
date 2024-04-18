@@ -8,6 +8,9 @@ class WordProvider with ChangeNotifier{
   //study card list
   List<Word> wordsForStudy = [];
   bool isLoadingListWordForRandom = true;
+  //study card list by topic
+  List<Word> wordsForStudyByTopic = [];
+  bool isLoadingListWordByTopic = true;
   //
   String search = "";
   bool isLoadingWord = true;
@@ -55,8 +58,8 @@ class WordProvider with ChangeNotifier{
   }
 
   getWordsInTopicDontLearn({required int topic_id}) async {
-    wordsForStudy = await MainRepository.getWordsInTopicDontLearn(topic_id);
-    isLoadingListWordForRandom = false;
+    wordsForStudyByTopic = await MainRepository.getWordsInTopicDontLearn(topic_id);
+    isLoadingListWordByTopic = false;
     notifyListeners();
   }
 

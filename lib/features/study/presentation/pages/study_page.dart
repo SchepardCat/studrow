@@ -156,6 +156,8 @@ class _StudyPageState extends State<StudyPage> {
                   value: isLearnByTopics,
                   onChanged: (bool? value) {
                     setState(() {
+                      selectedTopic = null;
+                      _topic.clear();
                       if (value! == isLearnRandom &&
                           value! == isRepeatOldWord) {
                         isLearnByTopics = value!;
@@ -221,6 +223,7 @@ class _StudyPageState extends State<StudyPage> {
                             menuHeight: 200,
                             controller: _topic,
                             enableFilter: true,
+                            label: Text("Topic"),
                             requestFocusOnTap: true,
                             leadingIcon: const Icon(Icons.search),
                             inputDecorationTheme: const InputDecorationTheme(
@@ -262,7 +265,17 @@ class _StudyPageState extends State<StudyPage> {
     if (isLearnRandom) {
       AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
     } else if (isLearnByTopics) {
-      AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.topic));
+      if(selectedTopic != null){
+        AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.topic, topicid: selectedTopic!.id_topic));
+      }else{
+        FlashMessage(
+            messageShort: "Error!",
+            messageLong: "Please choose topic",
+            colorMessage: Theme.of(context).colorScheme.errorContainer)
+            .getScaffoldMessage(context);
+      }
+      selectedTopic = null;
+      _topic.clear();
     } else if (isRepeatOldWord) {
       AutoRouter.of(context).push(RepeatRoute());
     } else {
@@ -273,7 +286,7 @@ class _StudyPageState extends State<StudyPage> {
       FlashMessage(
               messageShort: "Error!",
               messageLong: "Please choose one method learn word",
-              colorMessage: Theme.of(context).colorScheme.errorContainer)
+              colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }
   }
