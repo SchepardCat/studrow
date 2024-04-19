@@ -17,16 +17,16 @@ class StudyProvider with ChangeNotifier{
   List<Word> wordsListRepetition = [];
   //
   //list first repetition words
-  int? isLoadingListFirstRepetition;
-  bool isLoadingFirstList = true;
+  int? countFirstRepetition;
+  bool isLoadingFirstListCount = true;
   //
   //list second repetition words
-  int? isLoadingListSecondRepetition;
-  bool isLoadingSecondList = true;
+  int? countSecondRepetition;
+  bool isLoadingSecondListCount = true;
   //
   //list third repetition words
-  int? isLoadingListThirdRepetition;
-  bool isLoadingThirdList = true;
+  int? countThirdRepetition;
+  bool isLoadingThirdListCount = true;
   //
 
   StudyProvider(){
@@ -62,10 +62,13 @@ class StudyProvider with ChangeNotifier{
   }
 
   getRepeatFilled() async {
-    isLoadingListFirstRepetition = await MainRepository.getCountRepetition(1,0,0,0);
-    isLoadingListSecondRepetition = await MainRepository.getCountRepetition(1,1,0,0);
-    isLoadingListThirdRepetition = await MainRepository.getCountRepetition(1,1,1,0);
+    countFirstRepetition = await MainRepository.getCountRepetition(1,0,0,0);
+    countSecondRepetition = await MainRepository.getCountRepetition(1,1,0,0);
+    countThirdRepetition = await MainRepository.getCountRepetition(1,1,1,0);
     isLoadingRepetition = false;
+    print(countFirstRepetition);
+    print(countSecondRepetition);
+    print(countThirdRepetition);
     notifyListeners();
   }
 
@@ -73,13 +76,13 @@ class StudyProvider with ChangeNotifier{
     wordsListRepetition =  await MainRepository.getWordsListRepetition(isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird);
     isLoadingWordsListRepetition = false;
     if(isLearn == 1 && isRepeatFirst == 0 && isRepeatSecond == 0 && isRepeatThird == 0){
-      isLoadingFirstList = false;
+      isLoadingFirstListCount = false;
     }
     if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 0 && isRepeatThird == 0){
-      isLoadingSecondList = false;
+      isLoadingSecondListCount = false;
     }
     if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 1 && isRepeatThird == 0){
-      isLoadingThirdList = false;
+      isLoadingThirdListCount = false;
     }
     notifyListeners();
   }

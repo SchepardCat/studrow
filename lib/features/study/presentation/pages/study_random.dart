@@ -198,7 +198,6 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     word.setIsLearned(1);
     Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
     //
-
     //logging
     print("Learn word random");
     //

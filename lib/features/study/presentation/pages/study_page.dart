@@ -31,6 +31,7 @@ class _StudyPageState extends State<StudyPage> {
   //
   //logic repeat and study
   String titleButton = "Learn";
+  bool mustRepeatWord = false;
 
   @override
   void initState() {
@@ -180,8 +181,6 @@ class _StudyPageState extends State<StudyPage> {
                           value! == isLearnRandom) {
                         isRepeatOldWord = value!;
                       } else {
-                        final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-                        providerRepeat.getRepeatFilled();
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
@@ -273,54 +272,77 @@ class _StudyPageState extends State<StudyPage> {
   }
 
   pressButtonLearn() async {
-    if (isLearnRandom) {
-      AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
-    } else if (isLearnByTopics) {
-      if(selectedTopic != null){
-        AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.topic, topicid: selectedTopic!.id_topic));
-      }else{
-        FlashMessage(
-            messageShort: "Error!",
-            messageLong: "Please choose topic",
-            colorMessage: Theme.of(context).colorScheme.errorContainer)
-            .getScaffoldMessage(context);
+    //logic main
+
+    //logic check must repeat study
+    final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
+    providerRepeat.getRepeatFilled();
+    if(providerRepeat.countFirstRepetition != null &&
+        providerRepeat.countSecondRepetition != null &&
+        providerRepeat.countThirdRepetition !=null) {
+      if(providerRepeat.countFirstRepetition! > 5 ||
+          providerRepeat.countSecondRepetition! > 70 ||
+          providerRepeat.countThirdRepetition! > 57) {
+        mustRepeatWord = true;
       }
-      selectedTopic = null;
-      _topic.clear();
-    } else if (isRepeatOldWord) {
-      //logic repeat study
-      final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-      providerRepeat.getRepeatFilled();
-      if(providerRepeat.isLoadingListFirstRepetition != null &&
-          providerRepeat.isLoadingListSecondRepetition != null &&
-          providerRepeat.isLoadingListThirdRepetition !=null) {
-        if(providerRepeat.isLoadingListFirstRepetition! > 40 ||
-            providerRepeat.isLoadingListSecondRepetition! > 120 ||
-            providerRepeat.isLoadingListThirdRepetition! > 250){
-          _logicGetWordsList();
-        }else{
-          FlashMessage(
-              messageShort: "Error!",
-              messageLong: "Nothing words for repeat",
-              colorMessage: Theme.of(context).colorScheme.primaryContainer)
-              .getScaffoldMessage(context);
-        }
+    }
+    //random
+    if (isLearnRandom) {
+      if(!mustRepeatWord){
+        AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
       }else{
         FlashMessage(
-            messageShort: "NULL!",
-            messageLong: "Nothing words for repeat",
+            messageShort: "You must repeat some word!",
+            messageLong: "Please choose repeat word",
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
-    }else{
-      //message nothing choose
-      //
-      //
-      //
-      FlashMessage(
+    }
+    //
+    //topics study
+    else if (isLearnByTopics) {
+      if(!mustRepeatWord) {
+        if (selectedTopic != null) {
+          AutoRouter.of(context).push(StudyMethodsRoute(
+              typeLearn: TypeLearn.topic, topicid: selectedTopic!.id_topic));
+        } else {
+          FlashMessage(
               messageShort: "Error!",
-              messageLong: "Please choose one method learn word",
-              colorMessage: Theme.of(context).colorScheme.primaryContainer)
+              messageLong: "Please choose topic",
+              colorMessage: Theme
+                  .of(context)
+                  .colorScheme
+                  .errorContainer)
+              .getScaffoldMessage(context);
+        }
+        selectedTopic = null;
+        _topic.clear();
+      }else{
+        FlashMessage(
+            messageShort: "You must repeat some word!",
+            messageLong: "Please choose repeat word",
+            colorMessage: Theme.of(context).colorScheme.primaryContainer)
+            .getScaffoldMessage(context);
+      }
+    }
+    //
+    //repeat
+    else if(isRepeatOldWord){
+      if(mustRepeatWord){
+        _logicGetWordsList();
+      }else{
+        FlashMessage(
+            messageShort: "Nothing repeat!",
+            messageLong: "Please choose learn word",
+            colorMessage: Theme.of(context).colorScheme.primaryContainer)
+            .getScaffoldMessage(context);
+      }
+    }
+    else{
+      FlashMessage(
+          messageShort: "Error!",
+          messageLong: "Please choose one method learn word",
+          colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }
   }
@@ -328,29 +350,32 @@ class _StudyPageState extends State<StudyPage> {
   _logicGetWordsList() async {
     //logic get list
     final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-    if(providerRepeat.isLoadingListFirstRepetition! > 40){
+    if(providerRepeat.countFirstRepetition! > 5){
       //>40
       providerRepeat.getRepeatWordsList(1,0,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
-      print(providerRepeat.isLoadingListFirstRepetition);
+      print(providerRepeat.countFirstRepetition);
+      mustRepeatWord = false;
       return 0;
     }
-    if(providerRepeat.isLoadingListSecondRepetition! > 120){
+    if(providerRepeat.countSecondRepetition! > 70){
       //>120
       providerRepeat.getRepeatWordsList(1,1,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
-      print(providerRepeat.isLoadingListSecondRepetition);
+      print(providerRepeat.countSecondRepetition);
+      mustRepeatWord = false;
       return 0;
     }
 
-    if(providerRepeat.isLoadingListThirdRepetition! > 250){
+    if(providerRepeat.countThirdRepetition! > 57){
       //>250
       providerRepeat.getRepeatWordsList(1,1,1,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
-      print(providerRepeat.isLoadingListThirdRepetition);
+      print(providerRepeat.countThirdRepetition);
+      mustRepeatWord = false;
       return 0;
     }
   }

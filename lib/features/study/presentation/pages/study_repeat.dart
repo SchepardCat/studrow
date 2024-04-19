@@ -7,7 +7,6 @@ import 'package:swipe_cards/swipe_cards.dart';
 
 import '../../../../domain/model/card_model.dart';
 import '../../../../domain/model/word.dart';
-import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
 import '../widgets/snap_message/snap_message.dart';
 
@@ -101,17 +100,18 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
                                   if (numberCurrentCard < wordList.length) {
                                     addListItem(numberCurrentCard);
                                   }else{
+                                    isFinished = true;
                                     // _swipeItems.clear();
                                     // final provider = Provider.of<WordProvider>(context, listen: false);
                                     // provider.isLoadingListWordForRandom = true;
                                     // provider.getWordsRandomStudy();
                                     // firstCall = true;
                                     // numberCurrentCard = 0;
-                                    // FlashMessage(
-                                    //     messageShort: "Excellent result",
-                                    //     messageLong: "Keep it up",
-                                    //     colorMessage: Theme.of(context).colorScheme.primaryContainer)
-                                    //     .getScaffoldMessage(context);
+                                    FlashMessage(
+                                        messageShort: "Excellent result",
+                                        messageLong: "",
+                                        colorMessage: Theme.of(context).colorScheme.primaryContainer)
+                                        .getScaffoldMessage(context);
                                   }
                                 });
                               },
@@ -199,22 +199,28 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     //LEFT_SWIPE
     //Перевіряємо слово до якого типу повторення воно належить
     final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-    if(!providerRepeat.isLoadingFirstList && providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+    if(!providerRepeat.isLoadingFirstListCount && providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
       word.setIsRepeatFirst(1);
       //logging
       print("first repeat");
+      providerRepeat.updateWord(word: word);
+      providerRepeat.getRepeatFilled();
     }
-    if(!providerRepeat.isLoadingFirstList && !providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+    if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
       word.setIsRepeatSecond(1);
       //logging
       print("second repeat");
+      providerRepeat.updateWord(word: word);
+      providerRepeat.getRepeatFilled();
     }
-    if(!providerRepeat.isLoadingFirstList && !providerRepeat.isLoadingSecondList && providerRepeat.isLoadingThirdList){
+    if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && !providerRepeat.isLoadingThirdListCount){
       word.setIsRepeatThird(1);
       //logging
       print("third repeat");
+      providerRepeat.updateWord(word: word);
+      providerRepeat.getRepeatFilled();
     }
-    providerRepeat.updateWord(word: word);
+    print("no work");
   }
 
   _getWordToRepeat(Word word){

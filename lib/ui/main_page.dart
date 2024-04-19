@@ -34,9 +34,6 @@ class _MainPageState extends State<MainPage> {
       && !providerTopic.isLoadingTopicPage
     && !providerStudy.isLoadingRepetition
     ){
-      print(providerStudy.isLoadingListFirstRepetition);
-      print(providerStudy.isLoadingListSecondRepetition);
-      print(providerStudy.isLoadingListThirdRepetition);
       return AutoTabsRouter(
         routes: const [
           AccountRoute(),
