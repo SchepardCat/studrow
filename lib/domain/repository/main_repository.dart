@@ -43,11 +43,13 @@ class MainRepository {
     for(i; i < number; i++){
       await db.execute(
           "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
-              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'testData + $i','testData + $i','testData + $i', 12, 0, 0, 0, 0]
+              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'testData + $i','testData + $i','testData + $i', 1, 0, 0, 0, 0]
       );
       print("Add $i test data");
     }
   }
+
+
 
 
 
@@ -87,6 +89,8 @@ class MainRepository {
         Word(id_word: id, name: name, translate: translate, example: example, topic_id: topic_id, topic_name: topic_name, isLearn: isLearn, isRepeatFirst: isRepeatFirst, isRepeatSecond: isRepeatSecond, isRepeatThird: isRepeatThird),
     ];
   }
+
+
 
 
 
@@ -212,6 +216,9 @@ class MainRepository {
       whereArgs: [id],
     );
   }
+
+
+
 
 
 

@@ -101,6 +101,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
                                     addListItem(numberCurrentCard);
                                   }else{
                                     isFinished = true;
+                                    wordList.clear();
                                     // _swipeItems.clear();
                                     // final provider = Provider.of<WordProvider>(context, listen: false);
                                     // provider.isLoadingListWordForRandom = true;
@@ -161,7 +162,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          "Repeat words",
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
@@ -185,7 +186,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
               ],
             ),
             Text(
-              "Learned all the words",
+              "Repeat all the words",
               maxLines: 3,
               style: TextStyle(fontSize: 26, color: Colors.black),
             ),
@@ -205,22 +206,23 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
       print("first repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
-    }
-    if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
+    }else if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
       word.setIsRepeatSecond(1);
       //logging
       print("second repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
-    }
-    if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && !providerRepeat.isLoadingThirdListCount){
+    }else if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && !providerRepeat.isLoadingThirdListCount){
       word.setIsRepeatThird(1);
       //logging
       print("third repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
+    }else{
+      wordList.add(word);
+      print("no work");
     }
-    print("no work");
+
   }
 
   _getWordToRepeat(Word word){

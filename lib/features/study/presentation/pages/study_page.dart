@@ -280,9 +280,9 @@ class _StudyPageState extends State<StudyPage> {
     if(providerRepeat.countFirstRepetition != null &&
         providerRepeat.countSecondRepetition != null &&
         providerRepeat.countThirdRepetition !=null) {
-      if(providerRepeat.countFirstRepetition! > 5 ||
-          providerRepeat.countSecondRepetition! > 70 ||
-          providerRepeat.countThirdRepetition! > 57) {
+      if(providerRepeat.countFirstRepetition! > 3 ||
+          providerRepeat.countSecondRepetition! > 7 ||
+          providerRepeat.countThirdRepetition! > 12) {
         mustRepeatWord = true;
       }
     }
@@ -350,33 +350,27 @@ class _StudyPageState extends State<StudyPage> {
   _logicGetWordsList() async {
     //logic get list
     final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-    if(providerRepeat.countFirstRepetition! > 5){
+    if(providerRepeat.countFirstRepetition! > 3){
       //>40
       providerRepeat.getRepeatWordsList(1,0,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
       print(providerRepeat.countFirstRepetition);
       mustRepeatWord = false;
-      return 0;
-    }
-    if(providerRepeat.countSecondRepetition! > 70){
+    }else if(providerRepeat.countSecondRepetition! > 7){
       //>120
       providerRepeat.getRepeatWordsList(1,1,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
       print(providerRepeat.countSecondRepetition);
       mustRepeatWord = false;
-      return 0;
-    }
-
-    if(providerRepeat.countThirdRepetition! > 57){
+    }else if(providerRepeat.countThirdRepetition! > 12){
       //>250
       providerRepeat.getRepeatWordsList(1,1,1,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
       //logging
       print(providerRepeat.countThirdRepetition);
       mustRepeatWord = false;
-      return 0;
     }
   }
 }

@@ -73,15 +73,19 @@ class StudyProvider with ChangeNotifier{
   }
 
   getRepeatWordsList(int isLearn, int isRepeatFirst, int isRepeatSecond, int isRepeatThird) async {
+    isLoadingFirstListCount = true;
+    isLoadingSecondListCount = true;
+    isLoadingThirdListCount = true;
     wordsListRepetition =  await MainRepository.getWordsListRepetition(isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird);
     isLoadingWordsListRepetition = false;
     if(isLearn == 1 && isRepeatFirst == 0 && isRepeatSecond == 0 && isRepeatThird == 0){
       isLoadingFirstListCount = false;
-    }
-    if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 0 && isRepeatThird == 0){
+    }else if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 0 && isRepeatThird == 0){
+      isLoadingFirstListCount = false;
       isLoadingSecondListCount = false;
-    }
-    if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 1 && isRepeatThird == 0){
+    }else if(isLearn == 1 && isRepeatFirst == 1 && isRepeatSecond == 1 && isRepeatThird == 0){
+      isLoadingFirstListCount = false;
+      isLoadingSecondListCount = false;
       isLoadingThirdListCount = false;
     }
     notifyListeners();
