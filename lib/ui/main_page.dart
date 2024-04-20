@@ -20,9 +20,15 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  bool isLoading = true;
 
   @override
   void initState(){
+    Future.delayed(Duration(seconds: 5), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
     super.initState();
   }
   @override
@@ -33,6 +39,7 @@ class _MainPageState extends State<MainPage> {
     if(!providerWord.isLoadingWord
       && !providerTopic.isLoadingTopicPage
     && !providerStudy.isLoadingRepetition
+    && !isLoading
     ){
       return AutoTabsRouter(
         routes: const [

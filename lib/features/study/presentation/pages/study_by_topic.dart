@@ -17,6 +17,7 @@ class StudyByTopics extends StatefulWidget {
 }
 
 class _StudyByTopicsState extends State<StudyByTopics> {
+  bool isLoading = true;
   List<Word> wordList = [];
   final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
@@ -27,6 +28,11 @@ class _StudyByTopicsState extends State<StudyByTopics> {
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 1), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
     super.initState();
   }
 
@@ -57,7 +63,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<StudyProvider>(context);
-    if (!provider.isLoadingListWordByTopic) {
+    if (!provider.isLoadingListWordByTopic && !isLoading) {
       wordList = provider.wordsForStudyByTopic;
       if (wordList.isEmpty) {
         return listWordsEmpty();
@@ -130,7 +136,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SpinKitWanderingCubes(
+            SpinKitRotatingPlain(
               color: Theme.of(context).colorScheme.secondary,
               size: 80,
             ),

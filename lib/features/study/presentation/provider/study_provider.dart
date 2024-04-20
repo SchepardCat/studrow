@@ -76,6 +76,7 @@ class StudyProvider with ChangeNotifier{
     isLoadingFirstListCount = true;
     isLoadingSecondListCount = true;
     isLoadingThirdListCount = true;
+    isLoadingWordsListRepetition = true;
     wordsListRepetition =  await MainRepository.getWordsListRepetition(isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird);
     isLoadingWordsListRepetition = false;
     if(isLearn == 1 && isRepeatFirst == 0 && isRepeatSecond == 0 && isRepeatThird == 0){

@@ -4,7 +4,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-
 import '../../../../domain/model/card_model.dart';
 import '../../../../domain/model/word.dart';
 import '../widgets/card/card_flip.dart';
@@ -20,6 +19,7 @@ class StudyRepeatWordsPage extends StatefulWidget {
 }
 
 class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
+  bool isLoading = true;
   List<Word> wordList = [];
   final List<SwipeItem> _swipeItems = <SwipeItem>[];
   late MatchEngine _matchEngine;
@@ -30,6 +30,11 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 1), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
     super.initState();
   }
 
@@ -62,7 +67,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<StudyProvider>(context);
-    if (!provider.isLoadingWordsListRepetition) {
+    if (!provider.isLoadingWordsListRepetition && !isLoading) {
       wordList = provider.wordsListRepetition;
       if (wordList.isEmpty) {
         return listWordsEmpty();
@@ -102,15 +107,13 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
                                   }else{
                                     isFinished = true;
                                     wordList.clear();
-                                    // _swipeItems.clear();
-                                    // final provider = Provider.of<WordProvider>(context, listen: false);
-                                    // provider.isLoadingListWordForRandom = true;
-                                    // provider.getWordsRandomStudy();
-                                    // firstCall = true;
-                                    // numberCurrentCard = 0;
+                                    _swipeItems.clear();
+                                    _logicGetWordsList();
+                                    firstCall = true;
+                                    numberCurrentCard = 0;
                                     FlashMessage(
                                         messageShort: "Excellent result",
-                                        messageLong: "",
+                                        messageLong: "Keep it up",
                                         colorMessage: Theme.of(context).colorScheme.primaryContainer)
                                         .getScaffoldMessage(context);
                                   }
@@ -143,7 +146,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SpinKitWanderingCubes(
+            SpinKitRotatingPlain(
               color: Theme.of(context).colorScheme.secondary,
               size: 80,
             ),
@@ -231,6 +234,25 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     print("loop word");
   }
 
-
+  _logicGetWordsList() async {
+    //logic get list
+    final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
+    if(providerRepeat.countFirstRepetition! > 3){
+      //>40
+      providerRepeat.getRepeatWordsList(1,0,0,0);
+      //logging
+      print("reload 1");
+    }else if(providerRepeat.countSecondRepetition! > 7){
+      //>120
+      providerRepeat.getRepeatWordsList(1,1,0,0);
+      //logging
+      print("reload 2");
+    }else if(providerRepeat.countThirdRepetition! > 12){
+      //>250
+      providerRepeat.getRepeatWordsList(1,1,1,0);
+      //logging
+      print("reload 3");
+    }
+  }
 
 }

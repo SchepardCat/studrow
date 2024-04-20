@@ -16,10 +16,21 @@ class TopicsPage extends StatefulWidget {
 }
 
 class _TopicsPageState extends State<TopicsPage> {
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 1), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TopicProvider>(context);
-    if (!provider.isLoadingTopicPage) {
+    if (!provider.isLoadingTopicPage && !isLoading) {
       return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -55,7 +66,7 @@ class _TopicsPageState extends State<TopicsPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SpinKitWanderingCubes(
+              SpinKitRotatingPlain(
                 color: Theme.of(context).colorScheme.secondary,
                 size: 80,
               ),

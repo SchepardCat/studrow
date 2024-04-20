@@ -22,6 +22,7 @@ class StudyPage extends StatefulWidget {
 
 class _StudyPageState extends State<StudyPage> {
   final TextEditingController _topic = TextEditingController();
+  bool isLoading = true;
   Topic? selectedTopic;
   bool dontEdit = true;
   //checkbox
@@ -35,13 +36,18 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 1), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TopicProvider>(context);
-    if (!provider.isLoadingTopicPage)
+    if (!provider.isLoadingTopicPage && !isLoading)
     {
       return Scaffold(
         appBar: AppBar(
@@ -102,7 +108,7 @@ class _StudyPageState extends State<StudyPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SpinKitWanderingCubes(
+              SpinKitRotatingPlain(
                 color: Theme.of(context).colorScheme.secondary,
                 size: 80,
               ),

@@ -20,7 +20,7 @@ class _WordItemListState extends State<WordItemList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         children: [
           ListTile(
@@ -29,9 +29,9 @@ class _WordItemListState extends State<WordItemList> {
             onTap: () {
               AutoRouter.of(context).push(WordDetailsRoute(word: widget.word));
             },
-            trailing: Icon(Icons.arrow_forward, ),
+            trailing: const Icon(Icons.arrow_forward, ),
           ),
-          Divider(
+          const Divider(
             height: 0,
           )
         ],

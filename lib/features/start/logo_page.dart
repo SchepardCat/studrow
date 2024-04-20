@@ -25,13 +25,13 @@ class _LogoPageState extends State<LogoPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "LOGO",
+                "Learny words",
                 style: TextStyle(
-                    fontSize: 72,
+                    fontSize: 48,
                     color: Theme.of(context).colorScheme.primaryContainer),
               ),
               const SizedBox(height: 50),
-              SpinKitFoldingCube(
+              SpinKitRotatingPlain(
                 color: Theme.of(context).colorScheme.primaryContainer,
                 size: 50,
               )
