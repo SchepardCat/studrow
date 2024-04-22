@@ -31,14 +31,27 @@ class _AccountPageState extends State<AccountPage> {
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("Hi, welcome back  ",
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),),
+                      Icon(Icons.waving_hand),
+                    ],
+                  ),
+                ),
                 Column(
                   children: [
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Вивчено слів сьогодні"),
+                        Text("Learn words", style: TextStyle(fontSize: 16),),
                         ProgressBar(
                             totalCards: 5, currentNumber: 1, widthBar: 120)
                       ],
@@ -47,7 +60,7 @@ class _AccountPageState extends State<AccountPage> {
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Загальна кількість слів"),
+                        Text("All words", style: TextStyle(fontSize: 16),),
                         ProgressBar(
                             totalCards: 1500,
                             currentNumber: 543,
@@ -58,7 +71,7 @@ class _AccountPageState extends State<AccountPage> {
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Потрібно повторити слів"),
+                        Text("Must repeat word", style: TextStyle(fontSize: 16),),
                         ProgressBar(
                             totalCards: 543, currentNumber: 403, widthBar: 120),
                       ],
