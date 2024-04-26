@@ -296,8 +296,8 @@ class _StudyPageState extends State<StudyPage> {
         AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
       }else{
         FlashMessage(
-            messageShort: "You must repeat some word!",
-            messageLong: "Please choose repeat word",
+            messageShort: Constants.STUDY_MESSAGE_SHORT_MUST_REPEAT,
+            messageLong: Constants.STUDY_MESSAGE_LONG_MUST_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
@@ -311,8 +311,8 @@ class _StudyPageState extends State<StudyPage> {
               typeLearn: TypeLearn.topic, topicid: selectedTopic!.id_topic));
         } else {
           FlashMessage(
-              messageShort: "Error!",
-              messageLong: "Please choose topic",
+              messageShort: Constants.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_TOPIC,
+              messageLong: Constants.STUDY_MESSAGE_LONG_ERROR_CHOOSE_TOPIC,
               colorMessage: Theme
                   .of(context)
                   .colorScheme
@@ -323,8 +323,8 @@ class _StudyPageState extends State<StudyPage> {
         _topic.clear();
       }else{
         FlashMessage(
-            messageShort: "You must repeat some word!",
-            messageLong: "Please choose repeat word",
+            messageShort: Constants.STUDY_MESSAGE_SHORT_MUST_REPEAT,
+            messageLong: Constants.STUDY_MESSAGE_LONG_MUST_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
@@ -336,16 +336,16 @@ class _StudyPageState extends State<StudyPage> {
         _logicGetWordsList();
       }else{
         FlashMessage(
-            messageShort: "Nothing repeat!",
-            messageLong: "Please choose learn word",
+            messageShort: Constants.STUDY_MESSAGE_SHORT_NOTHING_REPEAT,
+            messageLong: Constants.STUDY_MESSAGE_LONG_NOTHING_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
     }
     else{
       FlashMessage(
-          messageShort: "Error!",
-          messageLong: "Please choose one method learn word",
+          messageShort: Constants.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_METHOD_LEARN,
+          messageLong: Constants.STUDY_MESSAGE_LONG_ERROR_CHOOSE_METHOD_LEARN,
           colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }
@@ -358,22 +358,16 @@ class _StudyPageState extends State<StudyPage> {
       //>40
       providerRepeat.getRepeatWordsList(1,0,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
-      //logging
-      print(providerRepeat.countFirstRepetition);
       mustRepeatWord = false;
     }else if(providerRepeat.countSecondRepetition! > 7){
       //>120
       providerRepeat.getRepeatWordsList(1,1,0,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
-      //logging
-      print(providerRepeat.countSecondRepetition);
       mustRepeatWord = false;
     }else if(providerRepeat.countThirdRepetition! > 12){
       //>250
       providerRepeat.getRepeatWordsList(1,1,1,0);
       AutoRouter.of(context).push(StudyRepeatWordsRoute());
-      //logging
-      print(providerRepeat.countThirdRepetition);
       mustRepeatWord = false;
     }
   }
