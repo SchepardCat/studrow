@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/type_learn.dart';
-import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/router/router.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
 import '../provider/study_provider.dart';
+import 'package:studrow/assets/constants.dart' as Constants;
 
 @RoutePage()
 class StudyPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _StudyPageState extends State<StudyPage> {
   bool isRepeatOldWord = false;
   //
   //logic repeat and study
-  String titleButton = "Learn";
+  String titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
   bool mustRepeatWord = false;
 
   @override
@@ -53,7 +53,7 @@ class _StudyPageState extends State<StudyPage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              "Study",
+              Constants.STUDY_TITLE,
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -66,27 +66,19 @@ class _StudyPageState extends State<StudyPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  //Список вибору як проходитиме навчання
                   Container(
                     child: Column(
                       children: [
                         getMethodStudy(),
-                        //Список вибору папки з якої слова будеш вивчати
                         getChooseTopic(),
                       ],
                     ),
                   ),
-                  //Кнопка навчання
                   SizedBox(
                     width: 150,
                     height: 70,
                     child: getButton(titleButton),
                   ),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       AutoRouter.of(context).push(RepeatRoute());
-                  //     },
-                  //     child: const Text('Repeat')),
                 ],
               ),
             ),
@@ -98,7 +90,7 @@ class _StudyPageState extends State<StudyPage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              "Study",
+              Constants.STUDY_TITLE,
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -113,7 +105,7 @@ class _StudyPageState extends State<StudyPage> {
                 size: 80,
               ),
               Text(
-                'Loading...',
+                Constants.SPINKIT_LOADING,
                 style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).colorScheme.secondary),
@@ -132,7 +124,7 @@ class _StudyPageState extends State<StudyPage> {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              "Choose method learn word",
+              Constants.STUDY_CHOOSE_METOD_LEARN_WORD_TITLE,
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -151,12 +143,12 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnRandom = value!;
                         isLearnByTopics = !value;
                         isRepeatOldWord = !value;
-                        titleButton = "Learn";
+                        titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
                       }
                     });
                   },
                   title: const Text(
-                    'Random word',
+                    Constants.STUDY_CHECKBOX_FIRST,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -173,11 +165,14 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnByTopics = value!;
                         isLearnRandom = !value;
                         isRepeatOldWord = !value;
-                        titleButton = "Learn";
+                        titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
                       }
                     });
                   },
-                  title: const Text('Word by topics'),
+                  title: const Text(
+                    Constants.STUDY_CHECKBOX_SECOND,
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 CheckboxListTile(
                   value: isRepeatOldWord,
@@ -190,11 +185,14 @@ class _StudyPageState extends State<StudyPage> {
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
-                        titleButton = "Repeat";
+                        titleButton = Constants.STUDY_MAIN_BUTTON_REPEAT;
                       }
                     });
                   },
-                  title: const Text('Repeat word'),
+                  title: const Text(
+                    Constants.STUDY_CHECKBOX_THIRD,
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ],
             ),
@@ -215,7 +213,7 @@ class _StudyPageState extends State<StudyPage> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                "Choose topic",
+                Constants.STUDY_CHOOSE_TOPIC_TITLE,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -227,13 +225,13 @@ class _StudyPageState extends State<StudyPage> {
                 child: Consumer<TopicProvider>(
                   builder: (context, provider, child) {
                     return provider.topics.isEmpty
-                        ? const Center(child: Text("Empty"))
+                        ? const Center(child: Text(Constants.LIST_EMPTY))
                         : DropdownMenu<Topic>(
                             width: (MediaQuery.of(context).size.width - 36),
                             menuHeight: 200,
                             controller: _topic,
                             enableFilter: true,
-                            label: Text("Topic"),
+                            label: Text(Constants.STUDY_SEARCH_TOPIC_LABLE),
                             requestFocusOnTap: true,
                             leadingIcon: const Icon(Icons.search),
                             inputDecorationTheme: const InputDecorationTheme(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:studrow/assets/constants.dart' as Constants;
 
 class LogoPage extends StatefulWidget {
   const LogoPage({super.key});
@@ -25,7 +26,7 @@ class _LogoPageState extends State<LogoPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Learny words",
+                Constants.NAME_APP,
                 style: TextStyle(
                     fontSize: 48,
                     color: Theme.of(context).colorScheme.primaryContainer),
