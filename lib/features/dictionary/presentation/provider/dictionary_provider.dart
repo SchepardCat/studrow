@@ -52,11 +52,4 @@ class WordProvider with ChangeNotifier{
   }
 
 
-  //Account_provider
-  insertTestWords(int number) async {
-    await MainRepository.insertTestWords(number);
-    getWords();
-  }
-
-
 }

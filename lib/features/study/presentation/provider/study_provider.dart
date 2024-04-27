@@ -57,9 +57,6 @@ class StudyProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  insertTestWords(int number) async {
-    await MainRepository.insertTestWords(number);
-  }
 
   getRepeatFilled() async {
     countFirstRepetition = await MainRepository.getCountRepetition(1,0,0,0);

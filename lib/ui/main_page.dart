@@ -39,8 +39,7 @@ class _MainPageState extends State<MainPage> {
     if(!providerWord.isLoadingWord
       && !providerTopic.isLoadingTopicPage
     && !providerStudy.isLoadingRepetition
-    && !isLoading
-    ){
+    && !isLoading){
       return AutoTabsRouter(
         routes: const [
           StudyRoute(),
@@ -76,4 +75,5 @@ class _MainPageState extends State<MainPage> {
   void _openPage(int index, TabsRouter tabsRouter) {
     tabsRouter.setActiveIndex(index);
   }
+
 }
