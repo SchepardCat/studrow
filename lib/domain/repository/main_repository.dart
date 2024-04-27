@@ -42,14 +42,8 @@ class MainRepository {
 
   static Future<void> insertTestWords(Database db) async {
     //Eating
-    await db.execute(
-        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-        [null, 'a cake', 'торт', 'Do you want some cake?', 1, 0, 0, 0, 0]);
-    await db.execute(
-        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-        [null, '(a) banana', 'банан', 'I have three bananas', 1, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'a cake', 'торт', 'Do you want some cake?', 1, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, '(a) banana', 'банан', 'I have three bananas', 1, 0, 0, 0, 0]);
     await db.execute(
         "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
@@ -494,8 +488,151 @@ class MainRepository {
           0,
           0
         ]);
-  }
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a newspaper/a paper',
+          'газета/газета',
+          'I read this newspaper yesterday',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a plate',
+          'тарілка',
+          'a soup plate',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a refregirator/a fridge',
+          'холодильник/холодильник',
+          'Put the butter in the fridge',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a room',
+          'кімната, приміщення',
+          'a living room',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a shower',
+          'душ',
+          'I am having a shower',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a table',
+          'стіл',
+          'a coffee table',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a toilet',
+          'туалет',
+          'Where is the toilet?',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute(
+        "INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          null,
+          'a wall',
+          'стіна, мур',
+          'The picture is on the wall',
+          2,
+          0,
+          0,
+          0,
+          0
+        ]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'a window', 'вікно', 'Please, close the window!', 2, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'a home', 'дім', 'i am going home', 2, 0, 0, 0, 0]);
 
+    //Everyday Life
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'noise (a)/noisy', 'шум/шумний', 'Don`t make a noise!', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'clean (to)/clean', 'чистити, прибирати/чистий', 'I am cleaning the windows now', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'come (to)(came-come)', 'приходити, приїзжати', 'Where do you come from?', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'get(to)(got-gotten)', 'отримати, дістатись', 'How can i get there?', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'give (to)(gave-given)', 'давати', 'Give me some time', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'go (to)(went-gone)', 'їхати, йти', 'I am going to work', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'make (to)(made-made)', 'робити', 'Can you make me some coffee?', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'put (to)(put-put)', 'ставити, класти', 'Put the hat on', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'sit (so)(sat-sat)', 'сидіти', 'Sit down', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'sleep (to)(slept-slept)/sleep', 'спати/сон', 'I am going to sleep!', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'take (to)(took-taken)', 'брати, приймати', 'Take a pen with you!', 3, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'wash (to)', 'мити', 'I washed my hands', 3, 0, 0, 0, 0]);
+
+    //Good & Services
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'bar (a)', 'бар', 'That bar is closed today', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'cafe (a)', 'кафе, кав`ярня', 'Let`s go to a cafe', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'restaurant (a)', 'ресторан', 'They had supper at the restaurant', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'shop (a)', 'магазин', 'a shop window', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'shopping', 'покупки', 'We go shopping together', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'buy (to)(bought-bought)', 'купувати', 'Will you buy some cheese?', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'choose (to)(chose-chosen)', 'вибирати', 'It`s difficuit to choose', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'close (to)/closed', 'замикати/зачинений', 'The museum is closed', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'need (to)', 'потребувати', 'I need to go shopping', 4, 0, 0, 0, 0]);
+    await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'open (to)/open', 'відчиняти/відчинений', 'Who opened the door?', 4, 0, 0, 0, 0]);
+
+
+
+
+  }
   static Future<void> insertTopics(Database db) async {
     await db.execute(
         "INSERT INTO $_tableNameTopic(id_topic,name) "
