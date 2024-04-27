@@ -14,20 +14,20 @@ class TopicItemList extends StatefulWidget {
 }
 
 class _TopicItemListState extends State<TopicItemList> {
-
   @override
   Widget build(BuildContext context) {
+    Color colorTile = Theme.of(context).colorScheme.primaryContainer;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.folder, color: Theme.of(context).colorScheme.secondary),
+            leading: Icon(Icons.folder, color: colorTile),
             title: Text(widget.topic.name),
             onTap: () {
               AutoRouter.of(context).push(TopicDetailsRoute(topic: widget.topic));
             },
-            trailing: Icon(Icons.arrow_forward, ),
+            trailing: Icon(Icons.arrow_forward, size: 18,),
           ),
           const Divider(
             height: 0,

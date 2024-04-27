@@ -111,8 +111,12 @@ class MainRepository {
   static Future<List<Word>> getWords(String name) async {
     name = '%' + name + '%';
     final db = await _database();
-    final List<Map<String, Object?>> wordsMaps = await db.query(_tableNameWord,
+    List<Map<String, Object?>> wordsMaps = await db.query(_tableNameWord,
         where: 'name LIKE ?', whereArgs: [name], orderBy: "name ASC");
+    if(wordsMaps.isEmpty){
+      wordsMaps = await db.query(_tableNameWord,
+          where: 'translate LIKE ?', whereArgs: [name], orderBy: "name ASC");
+    }
     return [
       for (final {
       'id_word': id as int,
