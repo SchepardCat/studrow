@@ -1,10 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:studrow/router/router.dart';
-
 import '../../../../../domain/model/word.dart';
-import '../../../../topic/presentation/provider/topic_provider.dart';
 
 class WordItemList extends StatefulWidget {
   final Word word;
@@ -25,7 +22,7 @@ class _WordItemListState extends State<WordItemList> {
         children: [
           ListTile(
             leading: Icon(Icons.lens, color: Theme.of(context).colorScheme.primaryContainer),
-            title: Text(widget.word.id_word.toString() + " - " + widget.word.name),
+            title: Text(widget.word.name),
             onTap: () {
               AutoRouter.of(context).push(WordDetailsRoute(word: widget.word));
             },

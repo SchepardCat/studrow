@@ -6,7 +6,6 @@ import 'package:studrow/features/dictionary/presentation/form/form_list_topic.da
 
 import '../domain/model/type_learn.dart';
 import '../domain/model/word.dart';
-import '../features/account/account_page.dart';
 import '../features/dictionary/presentation/form/form_add_word.dart';
 import '../features/dictionary/presentation/pages/dictionary_page.dart';
 import '../features/dictionary/presentation/pages/dictionary_word_list.dart';
@@ -35,17 +34,13 @@ class AppRouter extends _$AppRouter {
         page: MainRoute.page,
         initial: true,
         children: [
-          AutoRoute(
-              page: AccountRoute.page,
-              path: 'account'
-          ),
           StudyRoutes.routes,
           TopicRoutes.routes,
           DictionaryRoutes.routes,
-          AutoRoute(
-              page: SettingsRoute.page,
-              path: 'settings'
-          ),
+          // AutoRoute(
+          //     page: SettingsRoute.page,
+          //     path: 'settings'
+          // ),
         ]),
 
   ];

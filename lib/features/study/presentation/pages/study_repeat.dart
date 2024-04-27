@@ -8,7 +8,7 @@ import '../../../../domain/model/card_model.dart';
 import '../../../../domain/model/word.dart';
 import '../widgets/card/card_flip.dart';
 import '../widgets/snap_message/snap_message.dart';
-
+import 'package:studrow/assets/constants.dart' as Const;
 
 @RoutePage()
 class StudyRepeatWordsPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), (){
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
@@ -52,12 +52,11 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
             word: wordList[i].name,
             translate: wordList[i].translate,
             example: wordList[i].example,
-            wordOb: wordList[i]
-        ),
-        likeAction: (){
+            wordOb: wordList[i]),
+        likeAction: () {
           _learnWord(wordList[i]);
         },
-        nopeAction: (){
+        nopeAction: () {
           _getWordToRepeat(wordList[i]);
         },
       ),
@@ -80,7 +79,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text(
-              "Repeat words",
+              Const.STUDY_APP_BAR_REPEAT_WORDS,
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -92,38 +91,40 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        //card
-                        Container(
-                            child: SwipeCards(
-                              matchEngine: _matchEngine,
-                              itemBuilder: (BuildContext context, int index) {
-                                return CardFlip(cardData: _swipeItems[index].content);
-                              },
-                              onStackFinished: () {
-                                setState(() {
-                                  numberCurrentCard++;
-                                  if (numberCurrentCard < wordList.length) {
-                                    addListItem(numberCurrentCard);
-                                  }else{
-                                    isFinished = true;
-                                    wordList.clear();
-                                    _swipeItems.clear();
-                                    _logicGetWordsList();
-                                    firstCall = true;
-                                    numberCurrentCard = 0;
-                                    FlashMessage(
-                                        messageShort: "Excellent result",
-                                        messageLong: "Keep it up",
-                                        colorMessage: Theme.of(context).colorScheme.primaryContainer)
-                                        .getScaffoldMessage(context);
-                                  }
-                                });
-                              },
-                              leftSwipeAllowed: true,
-                              upSwipeAllowed: false,
-                              fillSpace: false,
-                            )),
-                      ])),
+                    //card
+                    Container(
+                        child: SwipeCards(
+                      matchEngine: _matchEngine,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CardFlip(cardData: _swipeItems[index].content);
+                      },
+                      onStackFinished: () {
+                        setState(() {
+                          numberCurrentCard++;
+                          if (numberCurrentCard < wordList.length) {
+                            addListItem(numberCurrentCard);
+                          } else {
+                            isFinished = true;
+                            wordList.clear();
+                            _swipeItems.clear();
+                            _logicGetWordsList();
+                            firstCall = true;
+                            numberCurrentCard = 0;
+                            FlashMessage(
+                                    messageShort: Const.STUDY_GOOD_RESULT_SHORT,
+                                    messageLong: Const.STUDY_GOOD_RESULT_LONG,
+                                    colorMessage: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer)
+                                .getScaffoldMessage(context);
+                          }
+                        });
+                      },
+                      leftSwipeAllowed: true,
+                      upSwipeAllowed: false,
+                      fillSpace: false,
+                    )),
+                  ])),
             ),
           ),
         );
@@ -137,7 +138,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          Const.STUDY_APP_BAR_REPEAT_WORDS,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
@@ -151,7 +152,7 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
               size: 80,
             ),
             Text(
-              'Loading...',
+              Const.SPINKIT_LOADING,
               style: TextStyle(
                   fontSize: 20, color: Theme.of(context).colorScheme.secondary),
             ),
@@ -165,35 +166,16 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Repeat words",
+          Const.STUDY_APP_BAR_REPEAT_WORDS,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Done!!!",
-                  style: TextStyle(fontSize: 26, color: Colors.black),
-                ),
-                Icon(
-                  Icons.assistant_photo,
-                  size: 48,
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            Text(
-              "Repeat all the words",
-              maxLines: 3,
-              style: TextStyle(fontSize: 26, color: Colors.black),
-            ),
-          ],
+        child: Text(
+          Const.STUDY_ALL_REPEATED_WORDS,
+          maxLines: 3,
+          style: TextStyle(fontSize: 26, color: Colors.black),
         ),
       ),
     );
@@ -203,32 +185,37 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
     //LEFT_SWIPE
     //Перевіряємо слово до якого типу повторення воно належить
     final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-    if(!providerRepeat.isLoadingFirstListCount && providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
+    if (!providerRepeat.isLoadingFirstListCount &&
+        providerRepeat.isLoadingSecondListCount &&
+        providerRepeat.isLoadingThirdListCount) {
       word.setIsRepeatFirst(1);
       //logging
       print("first repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
-    }else if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && providerRepeat.isLoadingThirdListCount){
+    } else if (!providerRepeat.isLoadingFirstListCount &&
+        !providerRepeat.isLoadingSecondListCount &&
+        providerRepeat.isLoadingThirdListCount) {
       word.setIsRepeatSecond(1);
       //logging
       print("second repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
-    }else if(!providerRepeat.isLoadingFirstListCount && !providerRepeat.isLoadingSecondListCount && !providerRepeat.isLoadingThirdListCount){
+    } else if (!providerRepeat.isLoadingFirstListCount &&
+        !providerRepeat.isLoadingSecondListCount &&
+        !providerRepeat.isLoadingThirdListCount) {
       word.setIsRepeatThird(1);
       //logging
       print("third repeat");
       providerRepeat.updateWord(word: word);
       providerRepeat.getRepeatFilled();
-    }else{
+    } else {
       wordList.add(word);
       print("no work");
     }
-
   }
 
-  _getWordToRepeat(Word word){
+  _getWordToRepeat(Word word) {
     //RIGHT_SWIPE
     wordList.add(word);
     print("loop word");
@@ -237,22 +224,21 @@ class _StudyRepeatWordsPageState extends State<StudyRepeatWordsPage> {
   _logicGetWordsList() async {
     //logic get list
     final providerRepeat = Provider.of<StudyProvider>(context, listen: false);
-    if(providerRepeat.countFirstRepetition! > 3){
+    if (providerRepeat.countFirstRepetition! > 3) {
       //>40
-      providerRepeat.getRepeatWordsList(1,0,0,0);
+      providerRepeat.getRepeatWordsList(1, 0, 0, 0);
       //logging
       print("reload 1");
-    }else if(providerRepeat.countSecondRepetition! > 7){
+    } else if (providerRepeat.countSecondRepetition! > 7) {
       //>120
-      providerRepeat.getRepeatWordsList(1,1,0,0);
+      providerRepeat.getRepeatWordsList(1, 1, 0, 0);
       //logging
       print("reload 2");
-    }else if(providerRepeat.countThirdRepetition! > 12){
+    } else if (providerRepeat.countThirdRepetition! > 12) {
       //>250
-      providerRepeat.getRepeatWordsList(1,1,1,0);
+      providerRepeat.getRepeatWordsList(1, 1, 1, 0);
       //logging
       print("reload 3");
     }
   }
-
 }

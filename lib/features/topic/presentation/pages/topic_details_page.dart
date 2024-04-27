@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../../../dictionary/presentation/widgets/word_list/word_item_list.dart';
@@ -22,9 +23,15 @@ class TopicDetailsPage extends StatefulWidget {
 class _TopicDetailsPageState extends State<TopicDetailsPage> {
   final TextEditingController _nameTopic = TextEditingController();
   bool edit = false;
+  bool isLoading = true;
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 1), (){
+      setState(() {
+        isLoading = false;
+      });
+    });
     if (widget.topic.id_topic!= null){
       _getWordsInTopic(widget.topic.id_topic!);
     }
@@ -38,7 +45,7 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<WordProvider>(context);
-    if (!provider.isLoadingWordInTopicList){
+    if (!provider.isLoadingWordInTopicList && !isLoading){
       return Scaffold(
         appBar: AppBar(
           title: getAppBar(),
@@ -55,7 +62,7 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
         body: Consumer<WordProvider>(
           builder: (context, provider, child) {
             return provider.wordsInTopic.isEmpty? const Center(
-                child: Text("This topic is empty", style: TextStyle(
+                child: Text(Const.TOPICS_DETAILS_EMPTY, style: TextStyle(
                   fontSize: 24,
                 ),)):
             ListView(
@@ -77,22 +84,21 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
         ),
 
         //List words in this list
-        body: Container(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "List word in this topic",
-                  style: TextStyle(fontSize: 28, color: Colors.black),
-                ),
-                Icon(
-                  Icons.assistant_photo,
-                  size: 48,
-                  color: Colors.black,
-                )
-              ],
-            ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SpinKitRotatingPlain(
+                color: Theme.of(context).colorScheme.secondary,
+                size: 80,
+              ),
+              Text(
+                Const.SPINKIT_LOADING,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.secondary),
+              ),
+            ],
           ),
         ),
       );

@@ -8,6 +8,7 @@ import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
 import '../widgets/snap_message/snap_message.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 class StudyByTopics extends StatefulWidget {
   const StudyByTopics({super.key});
@@ -28,7 +29,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), (){
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
@@ -54,7 +55,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
           likeAction: () {
             _learnWord(wordList[i]);
           },
-          nopeAction: (){
+          nopeAction: () {
             _getWordToRepeat(wordList[i]);
           }),
     );
@@ -79,7 +80,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
             key: _scaffoldKey,
             appBar: AppBar(
               title: Text(
-                "Learny words",
+                Const.STUDY_APP_BAR_STUDY_BY_TOPICS,
                 style: TextStyle(
                     fontSize: 26, color: Theme.of(context).colorScheme.primary),
               ),
@@ -127,7 +128,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          Const.STUDY_APP_BAR_STUDY_BY_TOPICS,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
@@ -141,7 +142,7 @@ class _StudyByTopicsState extends State<StudyByTopics> {
               size: 80,
             ),
             Text(
-              'Loading...',
+              Const.SPINKIT_LOADING,
               style: TextStyle(
                   fontSize: 20, color: Theme.of(context).colorScheme.secondary),
             ),
@@ -155,35 +156,16 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          Const.STUDY_APP_BAR_STUDY_BY_TOPICS,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Done!!!",
-                  style: TextStyle(fontSize: 26, color: Colors.black),
-                ),
-                Icon(
-                  Icons.assistant_photo,
-                  size: 48,
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            Text(
-              "Learned all the words",
-              maxLines: 3,
-              style: TextStyle(fontSize: 26, color: Colors.black),
-            ),
-          ],
+        child: Text(
+          Const.STUDY_ALL_LEARNED_WORDS,
+          maxLines: 3,
+          style: TextStyle(fontSize: 26, color: Colors.black),
         ),
       ),
     );
@@ -202,16 +184,16 @@ class _StudyByTopicsState extends State<StudyByTopics> {
     print("Learn word random");
     //
     //
-    if(numberCurrentCard == wordList.length-1){
+    if (numberCurrentCard == wordList.length - 1) {
       FlashMessage(
-          messageShort: "Excellent result",
-          messageLong: "Keep it up",
-          colorMessage: Theme.of(context).colorScheme.primaryContainer)
+              messageShort: Const.STUDY_GOOD_RESULT_SHORT,
+              messageLong: Const.STUDY_GOOD_RESULT_LONG,
+              colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }
   }
 
-  _getWordToRepeat(Word word){
+  _getWordToRepeat(Word word) {
     //RIGHT_SWIPE
     wordList.add(word);
     print("repeat word");

@@ -9,6 +9,7 @@ import '../../../../domain/model/word.dart';
 import '../../../../router/router.dart';
 import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 @RoutePage()
 class WordDetailsPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
                 size: 80,
               ),
               Text(
-                'Loading...',
+                Const.SPINKIT_LOADING,
                 style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.secondary),
               ),
             ],
@@ -92,63 +93,65 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
           ],
         ),
         body: Center(
-          child: ListView(
-            padding: EdgeInsets.all(20),
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  getDownMenu(selectedTopicName!),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: TextField(
-                  autofocus: true,
-                  readOnly: dontEdit,
-                  controller: _name,
-                  decoration: InputDecoration(
-                    hintText: 'new word',
-                    hintStyle: TextStyle(
-                      color: Colors.grey[500],
-                      fontWeight: FontWeight.w100,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    getDownMenu(selectedTopicName!),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: TextField(
+                    autofocus: true,
+                    readOnly: dontEdit,
+                    controller: _name,
+                    decoration: InputDecoration(
+                      hintText: Const.DICTIONARY_ADD_FORM_FIELD_NAME_HINT,
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.w100,
+                      ),
+                      filled: true,
                     ),
-                    filled: true,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: TextField(
-                  readOnly: dontEdit,
-                  controller: _translate,
-                  decoration: InputDecoration(
-                    hintText: 'translation',
-                    hintStyle: TextStyle(
-                      color: Colors.grey[500],
-                      fontWeight: FontWeight.w100,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: TextField(
+                    readOnly: dontEdit,
+                    controller: _translate,
+                    decoration: InputDecoration(
+                      hintText: Const.DICTIONARY_ADD_FORM_FIELD_TRANSLATE_HINT,
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.w100,
+                      ),
+                      filled: true,
                     ),
-                    filled: true,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: TextField(
-                  readOnly: dontEdit,
-                  maxLines: 4,
-                  controller: _example,
-                  decoration: InputDecoration(
-                    hintText: 'example',
-                    hintStyle: TextStyle(
-                      color: Colors.grey[500],
-                      fontWeight: FontWeight.w100,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: TextField(
+                    readOnly: dontEdit,
+                    maxLines: 4,
+                    controller: _example,
+                    decoration: InputDecoration(
+                      hintText: Const.DICTIONARY_ADD_FORM_FIELD_EXAMPLE_HINT,
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.w100,
+                      ),
+                      filled: true,
                     ),
-                    filled: true,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

@@ -9,6 +9,7 @@ import 'package:studrow/router/router.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 @RoutePage()
 class WordFormAddPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new word"),
+        title: const Text(Const.DICTIONARY_ADD_FORM_TITLE),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -46,92 +47,94 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
         ],
       ),
       body: Center(
-        child: ListView(
-          padding: EdgeInsets.all(20),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Consumer<TopicProvider>(
-                    builder: (context, provider, child) {
-                      return provider.topics.isEmpty? const Center(child: Text("Empty")):
-                      DropdownMenu<Topic>(
-                        controller: _topic,
-                        enableFilter: true,
-                        requestFocusOnTap: true,
-                        leadingIcon: const Icon(Icons.search),
-                        label: const Text("Topic"),
-                        inputDecorationTheme: const InputDecorationTheme(
-                          filled: true,
-                          contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-                        ),
-                        onSelected: (Topic? topic) {
-                          setState(() {
-                            selectedTopic = topic;
-                          });
-                        },
-                        dropdownMenuEntries:
-                        provider.topics.map<DropdownMenuEntry<Topic>>(
-                              (Topic topic) {
-                            return DropdownMenuEntry<Topic>(
-                                value: topic,
-                                label: topic.name,
-                                leadingIcon: Text(topic.id_topic.toString())
-                            );
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Consumer<TopicProvider>(
+                      builder: (context, provider, child) {
+                        return provider.topics.isEmpty? const Center(child: Text(Const.TOPICS_EMPTY)):
+                        DropdownMenu<Topic>(
+                          controller: _topic,
+                          enableFilter: true,
+                          requestFocusOnTap: true,
+                          leadingIcon: const Icon(Icons.search),
+                          label: const Text(Const.DICTIONARY_ADD_FORM_TITLE_CHOOSE_TOPIC_TITLE),
+                          inputDecorationTheme: const InputDecorationTheme(
+                            filled: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                          ),
+                          onSelected: (Topic? topic) {
+                            setState(() {
+                              selectedTopic = topic;
+                            });
                           },
-                        ).toList(),
-                      );
-                    },
+                          dropdownMenuEntries:
+                          provider.topics.map<DropdownMenuEntry<Topic>>(
+                                (Topic topic) {
+                              return DropdownMenuEntry<Topic>(
+                                  value: topic,
+                                  label: topic.name,
+                                  leadingIcon: Text(topic.id_topic.toString())
+                              );
+                            },
+                          ).toList(),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: TextField(
-                controller: _name,
-                decoration: InputDecoration(
-                  hintText: 'new word',
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w100,
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: TextField(
+                  controller: _name,
+                  decoration: InputDecoration(
+                    hintText: Const.DICTIONARY_ADD_FORM_FIELD_NAME_HINT,
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w100,
+                    ),
+                    filled: true,
                   ),
-                  filled: true,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: TextField(
-                controller: _translate,
-                decoration: InputDecoration(
-                  hintText: 'translation',
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w100,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: TextField(
+                  controller: _translate,
+                  decoration: InputDecoration(
+                    hintText: Const.DICTIONARY_ADD_FORM_FIELD_TRANSLATE_HINT,
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w100,
+                    ),
+                    filled: true,
                   ),
-                  filled: true,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: TextField(
-                maxLines: 4,
-                controller: _example,
-                decoration: InputDecoration(
-                  hintText: 'example',
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w100,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: TextField(
+                  maxLines: 4,
+                  controller: _example,
+                  decoration: InputDecoration(
+                    hintText: Const.DICTIONARY_ADD_FORM_FIELD_EXAMPLE_HINT,
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w100,
+                    ),
+                    filled: true,
                   ),
-                  filled: true,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

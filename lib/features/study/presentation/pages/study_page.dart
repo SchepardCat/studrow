@@ -10,7 +10,7 @@ import 'package:studrow/router/router.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
 import '../provider/study_provider.dart';
-import 'package:studrow/assets/constants.dart' as Constants;
+import 'package:studrow/assets/constants.dart' as Const;
 
 @RoutePage()
 class StudyPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _StudyPageState extends State<StudyPage> {
   bool isRepeatOldWord = false;
   //
   //logic repeat and study
-  String titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
+  String titleButton = Const.STUDY_MAIN_BUTTON_LEARN;
   bool mustRepeatWord = false;
 
   @override
@@ -53,7 +53,7 @@ class _StudyPageState extends State<StudyPage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              Constants.STUDY_TITLE,
+              Const.STUDY_TITLE,
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -61,7 +61,7 @@ class _StudyPageState extends State<StudyPage> {
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,7 +76,7 @@ class _StudyPageState extends State<StudyPage> {
                   ),
                   SizedBox(
                     width: 150,
-                    height: 70,
+                    height: 60,
                     child: getButton(titleButton),
                   ),
                 ],
@@ -90,7 +90,7 @@ class _StudyPageState extends State<StudyPage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              Constants.STUDY_TITLE,
+              Const.STUDY_TITLE,
               style: TextStyle(
                   fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
@@ -105,7 +105,7 @@ class _StudyPageState extends State<StudyPage> {
                 size: 80,
               ),
               Text(
-                Constants.SPINKIT_LOADING,
+                Const.SPINKIT_LOADING,
                 style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).colorScheme.secondary),
@@ -124,7 +124,7 @@ class _StudyPageState extends State<StudyPage> {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              Constants.STUDY_CHOOSE_METOD_LEARN_WORD_TITLE,
+              Const.STUDY_CHOOSE_METOD_LEARN_WORD_TITLE,
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -143,12 +143,12 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnRandom = value!;
                         isLearnByTopics = !value;
                         isRepeatOldWord = !value;
-                        titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
+                        titleButton = Const.STUDY_MAIN_BUTTON_LEARN;
                       }
                     });
                   },
                   title: const Text(
-                    Constants.STUDY_CHECKBOX_FIRST,
+                    Const.STUDY_CHECKBOX_FIRST,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -165,12 +165,12 @@ class _StudyPageState extends State<StudyPage> {
                         isLearnByTopics = value!;
                         isLearnRandom = !value;
                         isRepeatOldWord = !value;
-                        titleButton = Constants.STUDY_MAIN_BUTTON_LEARN;
+                        titleButton = Const.STUDY_MAIN_BUTTON_LEARN;
                       }
                     });
                   },
                   title: const Text(
-                    Constants.STUDY_CHECKBOX_SECOND,
+                    Const.STUDY_CHECKBOX_SECOND,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -185,12 +185,12 @@ class _StudyPageState extends State<StudyPage> {
                         isRepeatOldWord = value!;
                         isLearnByTopics = !value;
                         isLearnRandom = !value;
-                        titleButton = Constants.STUDY_MAIN_BUTTON_REPEAT;
+                        titleButton = Const.STUDY_MAIN_BUTTON_REPEAT;
                       }
                     });
                   },
                   title: const Text(
-                    Constants.STUDY_CHECKBOX_THIRD,
+                    Const.STUDY_CHECKBOX_THIRD,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -213,7 +213,7 @@ class _StudyPageState extends State<StudyPage> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                Constants.STUDY_CHOOSE_TOPIC_TITLE,
+                Const.STUDY_CHOOSE_TOPIC_TITLE,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -221,17 +221,17 @@ class _StudyPageState extends State<StudyPage> {
               width: double.infinity,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 8),
                 child: Consumer<TopicProvider>(
                   builder: (context, provider, child) {
                     return provider.topics.isEmpty
-                        ? const Center(child: Text(Constants.LIST_EMPTY))
+                        ? const Center(child: Text(Const.LIST_EMPTY))
                         : DropdownMenu<Topic>(
                             width: (MediaQuery.of(context).size.width - 36),
                             menuHeight: 200,
                             controller: _topic,
                             enableFilter: true,
-                            label: Text(Constants.STUDY_SEARCH_TOPIC_LABLE),
+                            label: Text(Const.STUDY_SEARCH_TOPIC_LABLE),
                             requestFocusOnTap: true,
                             leadingIcon: const Icon(Icons.search),
                             inputDecorationTheme: const InputDecorationTheme(
@@ -296,8 +296,8 @@ class _StudyPageState extends State<StudyPage> {
         AutoRouter.of(context).push(StudyMethodsRoute(typeLearn: TypeLearn.random));
       }else{
         FlashMessage(
-            messageShort: Constants.STUDY_MESSAGE_SHORT_MUST_REPEAT,
-            messageLong: Constants.STUDY_MESSAGE_LONG_MUST_REPEAT,
+            messageShort: Const.STUDY_MESSAGE_SHORT_MUST_REPEAT,
+            messageLong: Const.STUDY_MESSAGE_LONG_MUST_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
@@ -311,8 +311,8 @@ class _StudyPageState extends State<StudyPage> {
               typeLearn: TypeLearn.topic, topicid: selectedTopic!.id_topic));
         } else {
           FlashMessage(
-              messageShort: Constants.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_TOPIC,
-              messageLong: Constants.STUDY_MESSAGE_LONG_ERROR_CHOOSE_TOPIC,
+              messageShort: Const.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_TOPIC,
+              messageLong: Const.STUDY_MESSAGE_LONG_ERROR_CHOOSE_TOPIC,
               colorMessage: Theme
                   .of(context)
                   .colorScheme
@@ -323,8 +323,8 @@ class _StudyPageState extends State<StudyPage> {
         _topic.clear();
       }else{
         FlashMessage(
-            messageShort: Constants.STUDY_MESSAGE_SHORT_MUST_REPEAT,
-            messageLong: Constants.STUDY_MESSAGE_LONG_MUST_REPEAT,
+            messageShort: Const.STUDY_MESSAGE_SHORT_MUST_REPEAT,
+            messageLong: Const.STUDY_MESSAGE_LONG_MUST_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
@@ -336,16 +336,16 @@ class _StudyPageState extends State<StudyPage> {
         _logicGetWordsList();
       }else{
         FlashMessage(
-            messageShort: Constants.STUDY_MESSAGE_SHORT_NOTHING_REPEAT,
-            messageLong: Constants.STUDY_MESSAGE_LONG_NOTHING_REPEAT,
+            messageShort: Const.STUDY_MESSAGE_SHORT_NOTHING_REPEAT,
+            messageLong: Const.STUDY_MESSAGE_LONG_NOTHING_REPEAT,
             colorMessage: Theme.of(context).colorScheme.primaryContainer)
             .getScaffoldMessage(context);
       }
     }
     else{
       FlashMessage(
-          messageShort: Constants.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_METHOD_LEARN,
-          messageLong: Constants.STUDY_MESSAGE_LONG_ERROR_CHOOSE_METHOD_LEARN,
+          messageShort: Const.STUDY_MESSAGE_SHORT_ERROR_CHOOSE_METHOD_LEARN,
+          messageLong: Const.STUDY_MESSAGE_LONG_ERROR_CHOOSE_METHOD_LEARN,
           colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/domain/repository/main_repository.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 
 import 'topic_item_list.dart';
@@ -27,7 +28,7 @@ class _TopicsListState extends State<TopicsList> {
   Widget build(BuildContext context) {
     return Consumer<TopicProvider>(
         builder: (context, provider, child) {
-          return provider.topics.isEmpty? const Center(child: Text("Empty")):
+          return provider.topics.isEmpty? const Center(child: Text(Const.TOPICS_EMPTY)):
               ListView(
                 children: provider.topics.map((e) => TopicItemList(topic: e)).toList());
         },

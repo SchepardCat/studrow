@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:studrow/assets/constants.dart' as Const;
 import '../../provider/topic_provider.dart';
 
 class TopicSearch extends StatefulWidget {
@@ -47,7 +47,7 @@ class _TopicSearchState extends State<TopicSearch> {
               icon: const Icon(Icons.clear),
               onPressed: () => searchTopicQuery.clear(),
             ),
-            hintText: 'Search',
+            hintText: Const.SEARCH_TITLE,
             hintStyle: TextStyle(
                 color: Colors.grey[500],
                 fontSize: 18

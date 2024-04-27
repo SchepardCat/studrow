@@ -23,13 +23,13 @@ class _TopicItemListState extends State<TopicItemList> {
         children: [
           ListTile(
             leading: Icon(Icons.folder, color: Theme.of(context).colorScheme.secondary),
-            title: Text(widget.topic.id_topic.toString() + " - " + widget.topic.name),
+            title: Text(widget.topic.name),
             onTap: () {
               AutoRouter.of(context).push(TopicDetailsRoute(topic: widget.topic));
             },
             trailing: Icon(Icons.arrow_forward, ),
           ),
-          Divider(
+          const Divider(
             height: 0,
           )
         ],

@@ -8,6 +8,7 @@ import '../../../../domain/model/card_model.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../widgets/card/card_flip.dart';
 import '../widgets/snap_message/snap_message.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 class StudyRandomWord extends StatefulWidget {
   const StudyRandomWord({super.key});
@@ -28,7 +29,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), (){
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
@@ -44,20 +45,19 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
   addListItem(int i) {
     _swipeItems.add(
       SwipeItem(
-          content: CardModel(
+        content: CardModel(
             number: wordList[i].id_word.toString(),
             topic: wordList[i].topic_name.toString(),
             word: wordList[i].name,
             translate: wordList[i].translate,
             example: wordList[i].example,
-            wordOb: wordList[i]
-          ),
-          likeAction: (){
-            _learnWord(wordList[i]);
-          },
-          nopeAction: (){
-            _getWordToRepeat(wordList[i]);
-          },
+            wordOb: wordList[i]),
+        likeAction: () {
+          _learnWord(wordList[i]);
+        },
+        nopeAction: () {
+          _getWordToRepeat(wordList[i]);
+        },
       ),
     );
   }
@@ -75,56 +75,61 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
           firstCall = false;
         }
         return Scaffold(
-            key: _scaffoldKey,
-            appBar: AppBar(
-              title: Text(
-                "Learny words",
-                style: TextStyle(
-                    fontSize: 26, color: Theme.of(context).colorScheme.primary),
-              ),
+          key: _scaffoldKey,
+          appBar: AppBar(
+            title: Text(
+              Const.STUDY_APP_BAR_RANDOM,
+              style: TextStyle(
+                  fontSize: 26, color: Theme.of(context).colorScheme.primary),
             ),
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                      //card
-                      Container(
-                          child: SwipeCards(
-                        matchEngine: _matchEngine,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CardFlip(cardData: _swipeItems[index].content);
-                        },
-                        onStackFinished: () {
-                          setState(() {
-                            numberCurrentCard++;
-                            if (numberCurrentCard < wordList.length) {
-                              addListItem(numberCurrentCard);
-                            }else{
-                              _swipeItems.clear();
-                              final provider = Provider.of<StudyProvider>(context, listen: false);
-                              provider.isLoadingListWordForRandom = true;
-                              provider.getWordsRandomStudy();
-                              firstCall = true;
-                              numberCurrentCard = 0;
-                              FlashMessage(
-                                  messageShort: "Excellent result",
-                                  messageLong: "Keep it up",
-                                  colorMessage: Theme.of(context).colorScheme.primaryContainer)
-                                  .getScaffoldMessage(context);
-                            }
-                          });
-                        },
-                        leftSwipeAllowed: true,
-                        upSwipeAllowed: false,
-                        fillSpace: false,
-                      )),
-                    ])),
-              ),
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    //card
+                    Container(
+                        child: SwipeCards(
+                      matchEngine: _matchEngine,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CardFlip(cardData: _swipeItems[index].content);
+                      },
+                      onStackFinished: () {
+                        setState(() {
+                          numberCurrentCard++;
+                          if (numberCurrentCard < wordList.length) {
+                            addListItem(numberCurrentCard);
+                          } else {
+                            _swipeItems.clear();
+                            final provider = Provider.of<StudyProvider>(context,
+                                listen: false);
+                            provider.isLoadingListWordForRandom = true;
+                            provider.getWordsRandomStudy();
+                            firstCall = true;
+                            numberCurrentCard = 0;
+                            FlashMessage(
+                                    messageShort:
+                                        Const.STUDY_GOOD_RESULT_SHORT,
+                                    messageLong:
+                                        Const.STUDY_GOOD_RESULT_LONG,
+                                    colorMessage: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer)
+                                .getScaffoldMessage(context);
+                          }
+                        });
+                      },
+                      leftSwipeAllowed: true,
+                      upSwipeAllowed: false,
+                      fillSpace: false,
+                    )),
+                  ])),
             ),
-          );
+          ),
+        );
       }
     } else {
       return getSpinKit();
@@ -135,7 +140,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          Const.STUDY_APP_BAR_RANDOM,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
@@ -149,7 +154,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
               size: 80,
             ),
             Text(
-              'Loading...',
+              Const.SPINKIT_LOADING,
               style: TextStyle(
                   fontSize: 20, color: Theme.of(context).colorScheme.secondary),
             ),
@@ -163,35 +168,16 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Learny words",
+          Const.STUDY_APP_BAR_RANDOM,
           style: TextStyle(
               fontSize: 26, color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Done!!!",
-                  style: TextStyle(fontSize: 26, color: Colors.black),
-                ),
-                Icon(
-                  Icons.assistant_photo,
-                  size: 48,
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            Text(
-              "Learned all the words",
-              maxLines: 3,
-              style: TextStyle(fontSize: 26, color: Colors.black),
-            ),
-          ],
+        child: Text(
+          Const.STUDY_ALL_LEARNED_WORDS,
+          maxLines: 3,
+          style: TextStyle(fontSize: 26, color: Colors.black),
         ),
       ),
     );
@@ -209,7 +195,7 @@ class _StudyRandomWordState extends State<StudyRandomWord> {
     //
   }
 
-  _getWordToRepeat(Word word){
+  _getWordToRepeat(Word word) {
     //RIGHT_SWIPE
     wordList.add(word);
     print("repeat word");

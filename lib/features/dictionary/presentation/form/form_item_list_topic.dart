@@ -32,7 +32,7 @@ class _ItemTopicListPageState extends State<ItemTopicListPage> {
               }
             },
           ),
-          Divider(
+          const Divider(
             height: 0,
           )
         ],

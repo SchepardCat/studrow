@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:studrow/features/dictionary/presentation/form/form_add_word.dart';
 import 'package:studrow/features/dictionary/presentation/pages/dictionary_word_list.dart';
 import 'package:studrow/router/router.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 @RoutePage()
 class DictionaryPage extends StatefulWidget {
@@ -20,7 +19,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            "Dictionary",
+            Const.DICTIONARY_APP_BAR_TITLE,
             style: TextStyle(
                 fontSize: 26, color: Theme.of(context).colorScheme.primary),
           ),
@@ -31,9 +30,9 @@ class _DictionaryPageState extends State<DictionaryPage> {
         onPressed: () {
           AutoRouter.of(context).push(WordFormAddRoute());
         },
-        tooltip: 'Form add new word',
+        tooltip: Const.DICTIONARY_BOTTOM_BUTTON_TOOLTIP,
         icon: const Icon(Icons.add),
-        label: Text("New word"),
+        label: Text(Const.DICTIONARY_BOTTOM_BUTTON_TITLE),
       ),
     );
   }

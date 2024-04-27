@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:studrow/features/start/logo_page.dart';
+import 'package:studrow/features/logo/logo_page.dart';
 import 'package:studrow/features/study/presentation/provider/study_provider.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
-import 'package:studrow/assets/constants.dart' as Constants;
+import 'package:studrow/assets/constants.dart' as Const;
 
 import '../features/dictionary/presentation/provider/dictionary_provider.dart';
 
@@ -43,7 +43,6 @@ class _MainPageState extends State<MainPage> {
     ){
       return AutoTabsRouter(
         routes: const [
-          AccountRoute(),
           StudyRoute(),
           TopicsRoute(),
           DictionaryRoute(),
@@ -60,10 +59,9 @@ class _MainPageState extends State<MainPage> {
                 selectedIndex: tabsRouter.activeIndex,
                 onDestinationSelected: (index) => _openPage(index, tabsRouter),
                 destinations: const [
-                  NavigationDestination(icon: Icon(Icons.home), label: Constants.NAVIGATOR_BAR_HOME),
-                  NavigationDestination(icon: Icon(Icons.book), label: Constants.NAVIGATOR_BAR_STUDY),
-                  NavigationDestination(icon: Icon(Icons.folder), label: Constants.NAVIGATOR_BAR_TOPICS),
-                  NavigationDestination(icon: Icon(Icons.chrome_reader_mode), label: Constants.NAVIGATOR_BAR_DICTIONARY),
+                  NavigationDestination(icon: Icon(Icons.book), label: Const.NAVIGATOR_BAR_STUDY),
+                  NavigationDestination(icon: Icon(Icons.folder), label: Const.NAVIGATOR_BAR_TOPICS),
+                  NavigationDestination(icon: Icon(Icons.chrome_reader_mode), label: Const.NAVIGATOR_BAR_DICTIONARY),
                 ],
               ),
             ),

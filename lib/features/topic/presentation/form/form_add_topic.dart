@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
-import 'package:studrow/domain/repository/main_repository.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
+import 'package:studrow/assets/constants.dart' as Const;
 
 class TopicFormAdd extends StatefulWidget {
   const TopicFormAdd({super.key});
@@ -30,7 +30,7 @@ class _TopicFormAddState extends State<TopicFormAdd> {
             children: [
               Expanded(
                 child: Text(
-                  "Add new list",
+                  Const.TOPIC_ADD_FORM_TITLE,
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -43,7 +43,7 @@ class _TopicFormAddState extends State<TopicFormAdd> {
                     autofocus: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: "Name of new list",
+                      hintText: Const.TOPIC_ADD_FORM_FIELD_TITLE,
                       hintStyle: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
@@ -61,7 +61,7 @@ class _TopicFormAddState extends State<TopicFormAdd> {
                         print("Cancel button form add");
                         Navigator.pop(context, true);
                       },
-                      child: const Text('Cancel'),
+                      child: const Text(Const.TOPIC_ADD_FORM_BUTTON_CANCEL),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Theme.of(context).colorScheme.primaryContainer),
@@ -72,7 +72,7 @@ class _TopicFormAddState extends State<TopicFormAdd> {
                         Navigator.pop(context, true);
                         _insertTopic();
                       },
-                      child: const Text('Add'),
+                      child: const Text(Const.TOPIC_ADD_FORM_BUTTON_ADD),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Theme.of(context).colorScheme.primaryContainer),

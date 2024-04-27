@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
-
+import 'package:studrow/assets/constants.dart' as Const;
 
 class WordSearch extends StatefulWidget {
   const WordSearch({super.key});
@@ -46,7 +46,7 @@ class _WordSearchState extends State<WordSearch> {
               icon: const Icon(Icons.clear),
               onPressed: () => searchWordQuery.clear(),
             ),
-            hintText: 'Search',
+            hintText: Const.SEARCH_TITLE,
             hintStyle: TextStyle(
               color: Colors.grey[500],
               fontSize: 18
