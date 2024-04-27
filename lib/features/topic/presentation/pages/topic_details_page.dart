@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
+import 'package:studrow/features/topic/presentation/form/dialog_delete_topic.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:studrow/assets/constants.dart' as Const;
@@ -27,15 +28,15 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), (){
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
     });
-    if (widget.topic.id_topic!= null){
+    if (widget.topic.id_topic != null) {
       _getWordsInTopic(widget.topic.id_topic!);
     }
-    if(widget.topic != null){
+    if (widget.topic != null) {
       _nameTopic.text = widget.topic.name;
     }
     Widget title = Text(_nameTopic.text);
@@ -44,42 +45,49 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<WordProvider>(context);
-    if (!provider.isLoadingWordInTopicList && !isLoading){
+    final providerWord = Provider.of<WordProvider>(context);
+    final providerTopic = Provider.of<TopicProvider>(context);
+    if(providerTopic.isDeleteTopicAndWord){
+      Navigator.pop(context, true);
+      providerTopic.isDeleteTopicAndWord = false;
+    }
+    if (!providerWord.isLoadingWordInTopicList && !isLoading) {
       return Scaffold(
         appBar: AppBar(
           title: getAppBar(),
           actions: [
             getIcon(),
-            IconButton(
-                onPressed: _deleteTopic,
-                icon: Icon(Icons.delete)
-            ),
+            IconButton(onPressed: _deleteTopic, icon: Icon(Icons.delete)),
           ],
         ),
 
         //List words in this list
         body: Consumer<WordProvider>(
           builder: (context, provider, child) {
-            return provider.wordsInTopic.isEmpty? const Center(
-                child: Text(Const.TOPICS_DETAILS_EMPTY, style: TextStyle(
-                  fontSize: 24,
-                ),)):
-            ListView(
-                children: provider.wordsInTopic.map((e) => WordItemList(word: e,)).toList());
+            return provider.wordsInTopic.isEmpty
+                ? const Center(
+                    child: Text(
+                    Const.TOPICS_DETAILS_EMPTY,
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ))
+                : ListView(
+                    children: provider.wordsInTopic
+                        .map((e) => WordItemList(
+                              word: e,
+                            ))
+                        .toList());
           },
         ),
       );
-    }else{
+    } else {
       return Scaffold(
         appBar: AppBar(
           title: getAppBar(),
           actions: [
             getIcon(),
-            IconButton(
-                onPressed: _deleteTopic,
-                icon: Icon(Icons.delete)
-            ),
+            IconButton(onPressed: _deleteTopic, icon: Icon(Icons.delete)),
           ],
         ),
 
@@ -105,7 +113,7 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
     }
   }
 
-  _editTopic(){
+  _editTopic() {
     setState(() {
       edit = true;
     });
@@ -115,25 +123,55 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
     setState(() {
       edit = false;
     });
-    final Topic topic = Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
+    final Topic topic =
+        Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
     Provider.of<TopicProvider>(context, listen: false).update(topic: topic);
     //logging transaction
     //
     //
-    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + topic.name + " update.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
-
+    FlashMessage(
+            messageShort: "Done!",
+            messageLong: "Topic " + topic.name + " update.",
+            colorMessage: Theme.of(context).colorScheme.primaryContainer)
+        .getScaffoldMessage(context);
   }
 
   _deleteTopic() async {
-    Provider.of<TopicProvider>(context, listen: false).delete(id: widget.topic.id_topic!);
-    Navigator.pop(context, true);
-    //logging transaction
-    //
-    //
-    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + widget.topic.name + " delete.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+    final providerWord = Provider.of<WordProvider>(context, listen: false);
+    //Add dialog delete topic and words or not
+    if (providerWord.wordsInTopic.isEmpty) {
+      Provider.of<TopicProvider>(context, listen: false)
+          .delete(id: widget.topic.id_topic!);
+      Navigator.pop(context, true);
+      //logging transaction
+      //
+      //
+      FlashMessage(
+              messageShort: "Done!",
+              messageLong: "Topic " + widget.topic.name + " delete.",
+              colorMessage: Theme.of(context).colorScheme.primaryContainer)
+          .getScaffoldMessage(context);
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+                child: DialogDeleteTopic(topic: widget.topic)
+            );
+          }
+      );
+      //Navigator.pop(context, true);
+      // Navigator.pop(context, true);
+      // FlashMessage(
+      //     messageShort: "Done!",
+      //     messageLong: "Topic " + widget.topic.name + " delete.",
+      //     colorMessage: Theme.of(context).colorScheme.primaryContainer)
+      //     .getScaffoldMessage(context);
+    }
+
   }
 
-  Widget getAppBar(){
+  Widget getAppBar() {
     if (edit) {
       return TextField(
         controller: _nameTopic,
@@ -141,26 +179,21 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
           filled: true,
         ),
       );
-    }else{
+    } else {
       return Text(_nameTopic.text);
     }
   }
 
-  Widget getIcon(){
+  Widget getIcon() {
     if (edit) {
-      return IconButton(
-          onPressed: _updateTopic,
-          icon: Icon(Icons.done)
-      );
+      return IconButton(onPressed: _updateTopic, icon: Icon(Icons.done));
     } else {
-      return IconButton(
-          onPressed: _editTopic,
-          icon: Icon(Icons.edit)
-      );
+      return IconButton(onPressed: _editTopic, icon: Icon(Icons.edit));
     }
   }
 
-  _getWordsInTopic(int id){
-    Provider.of<WordProvider>(context, listen: false).getWordsInTopic(topic_id: id);
+  _getWordsInTopic(int id) {
+    Provider.of<WordProvider>(context, listen: false)
+        .getWordsInTopic(topic_id: id);
   }
 }

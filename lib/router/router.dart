@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:studrow/domain/model/topic.dart';
-import 'package:studrow/features/dictionary/presentation/form/form_item_list_topic.dart';
-import 'package:studrow/features/dictionary/presentation/form/form_list_topic.dart';
-
 import '../domain/model/type_learn.dart';
 import '../domain/model/word.dart';
 import '../features/dictionary/presentation/form/form_add_word.dart';
@@ -11,7 +8,6 @@ import '../features/dictionary/presentation/pages/dictionary_page.dart';
 import '../features/dictionary/presentation/pages/dictionary_word_list.dart';
 import '../features/dictionary/router/dictionary_route_wrapper_screen.dart';
 import '../features/dictionary/router/dictionary_routes.dart';
-import '../features/settings/settings_page.dart';
 import '../features/study/presentation/pages/study_methods_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import '../features/study/presentation/pages/study_repeat.dart';

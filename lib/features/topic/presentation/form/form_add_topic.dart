@@ -95,7 +95,6 @@ class _TopicFormAddState extends State<TopicFormAdd> {
     //
     //
     FlashMessage(messageShort: "Done!",messageLong:  "Topic " + topic.name + " add.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
-
   }
 
 }

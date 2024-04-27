@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:studrow/domain/model/word.dart';
 import 'package:studrow/domain/repository/main_repository.dart';
 
 import '../../../../domain/model/topic.dart';
@@ -9,6 +10,7 @@ class TopicProvider with ChangeNotifier{
   String search = "";
   bool isLoadingTopicPage = true;
   bool isLoadingTopicInformation = true;
+  bool isDeleteTopicAndWord = false;
 
   TopicProvider(){
     getTopics();
@@ -17,6 +19,10 @@ class TopicProvider with ChangeNotifier{
   setSearch({required String query}){
     this.search = query;
     getTopics();
+  }
+
+  setDeleteTopicAndWords(){
+    this.isDeleteTopicAndWord = true;
   }
 
   getTopics() async {

@@ -45,7 +45,11 @@ const String TOPIC_ADD_FORM_TITLE = "Add new topic";
 const String TOPIC_ADD_FORM_FIELD_TITLE = "Name of new topic";
 const String TOPIC_ADD_FORM_BUTTON_ADD = "Add";
 const String TOPIC_ADD_FORM_BUTTON_CANCEL = "Cancel";
-
+const String TOPIC_DELETE_DIALOG_TITLE = "You want delete this topic but this topic include words.";
+const String TOPIC_DELETE_DIALOG_SUBTITLE = "Choose what to do next";
+const String TOPIC_DELETE_DIALOG_FIELD_CANCEL = "Cancel";
+const String TOPIC_DELETE_DIALOG_FIELD_TRANSFER_DELETE = "Transfer words and delete topic";
+const String TOPIC_DELETE_DIALOG_FIELD_DELETE = "Delete all";
 //dictionary_page
 const String DICTIONARY_APP_BAR_TITLE = "Dictionary";
 const String DICTIONARY_BOTTOM_BUTTON_TOOLTIP = "Form add new word";
