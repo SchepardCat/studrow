@@ -46,11 +46,12 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TopicProvider>(context);
+    final provider = Provider.of<StudyProvider>(context);
     if (!provider.isLoadingTopicPage && !isLoading)
     {
       return Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           title: Center(
             child: Text(
               Const.STUDY_TITLE,
@@ -222,7 +223,7 @@ class _StudyPageState extends State<StudyPage> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8),
-                child: Consumer<TopicProvider>(
+                child: Consumer<StudyProvider>(
                   builder: (context, provider, child) {
                     return provider.topics.isEmpty
                         ? const Center(child: Text(Const.LIST_EMPTY))

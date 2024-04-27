@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/domain/model/word.dart';
 import 'package:studrow/domain/repository/main_repository.dart';
 
@@ -29,8 +30,27 @@ class StudyProvider with ChangeNotifier{
   bool isLoadingThirdListCount = true;
   //
 
+  //Search Topic bug fix
+  List<Topic> topics = [];
+  String search = "";
+  bool isLoadingTopicPage = true;
+
+  setSearch({required String query}){
+    this.search = query;
+    getTopics();
+  }
+
+  getTopics() async {
+    topics = await MainRepository.getTopics(search);
+    isLoadingTopicPage = false;
+    notifyListeners();
+  }
+  //Search Topic bug fix
+
+
   StudyProvider(){
     getRepeatFilled();
+    getTopics();
   }
 
   insertWord({required Word word}) async {
