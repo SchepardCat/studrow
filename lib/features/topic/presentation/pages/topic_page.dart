@@ -33,6 +33,7 @@ class _TopicsPageState extends State<TopicsPage> {
     if (!provider.isLoadingTopicPage && !isLoading) {
       return Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           title: Center(
               child: Text(
             Const.TOPICS_APP_BAR_TITLE,

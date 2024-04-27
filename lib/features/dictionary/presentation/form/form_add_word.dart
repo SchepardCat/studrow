@@ -31,6 +31,7 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: const Text(Const.DICTIONARY_ADD_FORM_TITLE),
         actions: [
           Padding(

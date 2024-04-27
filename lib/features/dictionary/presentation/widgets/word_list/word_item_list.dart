@@ -18,7 +18,7 @@ class _WordItemListState extends State<WordItemList> {
   Widget build(BuildContext context) {
     Color colorTile = Theme.of(context).colorScheme.primaryContainer;
     if(widget.word.isLearn == 1){
-      colorTile = Theme.of(context).colorScheme.tertiary;
+      colorTile = Theme.of(context).colorScheme.primary;
     }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),

@@ -17,6 +17,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Center(
           child: Text(
             Const.DICTIONARY_APP_BAR_TITLE,

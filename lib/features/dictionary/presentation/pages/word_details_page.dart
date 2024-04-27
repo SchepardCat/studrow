@@ -83,6 +83,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       selectedTopicName = provider.topic[0].name;
       return Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           title: Text(_name.text),
           actions: [
             getIcon(),

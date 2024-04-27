@@ -4,21 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:studrow/features/dictionary/presentation/widgets/word_list/word_list.dart';
 import 'package:studrow/features/dictionary/presentation/widgets/search/dictionary_search.dart';
 
-
 @RoutePage()
 class WordsListPage extends StatelessWidget {
   const WordsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            WordSearch(),
-            Expanded(child: ListWords()),
-          ],
-        ),
+    return Container(
+      child: Column(
+        children: [
+          WordSearch(),
+          Expanded(child: ListWords()),
+        ],
       ),
     );
   }
