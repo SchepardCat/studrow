@@ -160,6 +160,9 @@ class MainRepository {
     await db.execute("INSERT INTO $_tableNameTopic(id_topic,name) VALUES (?, ?);", [null, "Family"]);
   }
 
+
+
+
   //Repeat
   static Future<int?> getCountRepetition(int isLearn, int isRepeatFirst,
       int isRepeatSecond, int isRepeatThird) async {
@@ -426,4 +429,5 @@ class MainRepository {
         Topic(id_topic: id_topic, name: name),
     ];
   }
+
 }

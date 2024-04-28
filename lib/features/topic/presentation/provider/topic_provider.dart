@@ -51,4 +51,5 @@ class TopicProvider with ChangeNotifier{
     isLoadingTopicInformation = false;
     notifyListeners();
   }
+
 }

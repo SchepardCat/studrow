@@ -83,9 +83,6 @@ class StudyProvider with ChangeNotifier{
     countSecondRepetition = await MainRepository.getCountRepetition(1,1,0,0);
     countThirdRepetition = await MainRepository.getCountRepetition(1,1,1,0);
     isLoadingRepetition = false;
-    print(countFirstRepetition);
-    print(countSecondRepetition);
-    print(countThirdRepetition);
     notifyListeners();
   }
 

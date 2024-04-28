@@ -46,7 +46,7 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<StudyProvider>(context);
+    final provider = Provider.of<TopicProvider>(context);
     if (!provider.isLoadingTopicPage && !isLoading)
     {
       return Scaffold(
@@ -157,6 +157,7 @@ class _StudyPageState extends State<StudyPage> {
                   value: isLearnByTopics,
                   onChanged: (bool? value) {
                     setState(() {
+                      Provider.of<StudyProvider>(context, listen: false).getTopics();
                       selectedTopic = null;
                       _topic.clear();
                       if (value! == isLearnRandom &&

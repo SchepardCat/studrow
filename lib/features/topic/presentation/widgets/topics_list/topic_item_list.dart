@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import '../../../../../router/router.dart';
 
 class TopicItemList extends StatefulWidget {
@@ -16,7 +18,7 @@ class TopicItemList extends StatefulWidget {
 class _TopicItemListState extends State<TopicItemList> {
   @override
   Widget build(BuildContext context) {
-    Color colorTile = Theme.of(context).colorScheme.primaryContainer;
+    Color colorTile = Theme.of(context).colorScheme.outline;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: Column(
@@ -36,4 +38,5 @@ class _TopicItemListState extends State<TopicItemList> {
       ),
     );
   }
+
 }
