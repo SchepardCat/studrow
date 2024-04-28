@@ -43,6 +43,8 @@ class StudyFrontCard extends StatelessWidget {
                     Text(
                       cardData.word,
                       maxLines: 3,
+                      textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 32,
                         color: Colors.black,
