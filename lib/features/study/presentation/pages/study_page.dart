@@ -76,7 +76,7 @@ class _StudyPageState extends State<StudyPage> {
                     ),
                   ),
                   SizedBox(
-                    width: 150,
+                    width: 200,
                     height: 60,
                     child: getButton(titleButton),
                   ),

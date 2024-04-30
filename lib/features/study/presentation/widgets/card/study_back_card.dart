@@ -41,6 +41,7 @@ class StudyBackCard extends StatelessWidget {
                   ),
                   Text(
                     cardData.translate,
+                    textAlign: TextAlign.center,
                     maxLines: 3,
                     style: const TextStyle(
                       fontSize: 32,
