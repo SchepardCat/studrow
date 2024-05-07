@@ -32,6 +32,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   String newTopicName = "";
   bool dontEdit = true;
   int? wordInTopicByTopic_Id;
+  Word? previusWord;
 
 
   @override
@@ -41,6 +42,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       _getDetailsTopic(widget.word.topic_id!);
     }
     if(widget.word != null){
+      previusWord = widget.word;
       _name.text = widget.word.name;
       _translate.text = widget.word.translate;
       _example.text = widget.word.example;
@@ -162,7 +164,6 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   _editWord(){
     setState(() {
       dontEdit = false;
-
     });
   }
 
@@ -185,10 +186,11 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
       Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
       Provider.of<WordProvider>(context, listen: false).getWords;
       FlashMessage(messageShort: Const.DICTIONARY_MESSAGE_SHORT_UPDATE ,messageLong:  Const.DICTIONARY_MESSAGE_LONG_ADD,colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+      previusWord = word;
     }else{
       setState(() {
-        dontEdit = false;
-        newTopicName = selectedTopic!.name;
+        dontEdit = true;
+        newTopicName = (previusWord!.topic_name)!;
       });
       FlashMessage(messageShort: Const.DICTIONARY_MESSAGE_SHORT_DONT_UPDATE ,messageLong:  Const.DICTIONARY_MESSAGE_LONG_DONT_UPDATE ,colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
     }
@@ -222,6 +224,7 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
             return provider.topics.isEmpty? const Center(child: Text("Empty")):
             DropdownMenu<Topic>(
               enabled: !dontEdit,
+              width: (MediaQuery.of(context).size.width/2 + 50),
               menuHeight: 200,
               controller: _topic,
               enableFilter: true,
