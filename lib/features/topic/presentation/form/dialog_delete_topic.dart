@@ -92,8 +92,8 @@ class _DialogDeleteTopicState extends State<DialogDeleteTopic> {
       Provider.of<TopicProvider>(context, listen: false).setDeleteTopicAndWords();
       Navigator.pop(context, true);
       FlashMessage(
-          messageShort: "Done!",
-          messageLong: "Topic " + widget.topic.name + " delete.",
+          messageShort: Const.TOPIC_MESSAGE_SHORT_DELETE,
+          messageLong: Const.TOPIC_MESSAGE_LONG_DELETE,
           colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     }

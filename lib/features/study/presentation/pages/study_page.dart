@@ -244,6 +244,7 @@ class _StudyPageState extends State<StudyPage> {
                             onSelected: (Topic? topic) {
                               setState(() {
                                 selectedTopic = topic;
+
                               });
                             },
                             dropdownMenuEntries:

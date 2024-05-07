@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
-
+import 'package:string_validator/string_validator.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../../domain/model/word.dart';
 import '../../../../router/router.dart';
@@ -167,44 +167,37 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
   }
 
   _updateWord() async {
-    if(selectedTopic == null){
-      selectedIdTopic = widget.word.topic_id;
-    } else {
-      selectedIdTopic = selectedTopic?.id_topic;
+    if(_checkValidationField()){
+      setState(() {
+        dontEdit = true;
+        newTopicName = selectedTopic!.name;
+      });
+      Word word = Word(
+          id_word: widget.word.id_word,
+          name: _name.text,
+          translate: _translate.text,
+          example: _example.text,
+          topic_id: selectedIdTopic,
+          isLearn: 0,
+          isRepeatFirst: 0,
+          isRepeatSecond: 0,
+          isRepeatThird: 0);
+      Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
+      Provider.of<WordProvider>(context, listen: false).getWords;
+      FlashMessage(messageShort: Const.DICTIONARY_MESSAGE_SHORT_UPDATE ,messageLong:  Const.DICTIONARY_MESSAGE_LONG_ADD,colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+    }else{
+      setState(() {
+        dontEdit = false;
+        newTopicName = selectedTopic!.name;
+      });
+      FlashMessage(messageShort: Const.DICTIONARY_MESSAGE_SHORT_DONT_UPDATE ,messageLong:  Const.DICTIONARY_MESSAGE_LONG_DONT_UPDATE ,colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
     }
-    setState(() {
-      dontEdit = true;
-      newTopicName = selectedTopic!.name;
-    });
-    final Word word = Word(
-        id_word: widget.word.id_word,
-        name: _name.text,
-        translate: _translate.text,
-        example: _example.text,
-        topic_id: selectedIdTopic,
-        isLearn: 0,
-        isRepeatFirst: 0,
-        isRepeatSecond: 0,
-        isRepeatThird: 0);
-    Provider.of<WordProvider>(context, listen: false).updateWord(word: word);
-
-    //Після оновлення через список слів в топіку, потрібно оновити сам ліст топіку також раніше створено зміна для оновлення топіку попереднього.
-    // wordInTopicByTopic_Id;
-    Provider.of<WordProvider>(context, listen: false).getWordsInTopic(topic_id: wordInTopicByTopic_Id!);
-    //Оновлення сиску слів в топіку завершено.
-    //logging transaction
-    //
-    //
-    FlashMessage(messageShort: "Done!",messageLong:  "Word " + word.name + " update.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 
   _deleteWord() async {
     Provider.of<WordProvider>(context, listen: false).deleteWord(id: widget.word.id_word!);
     Navigator.pop(context, true);
-    //logging transaction
-    //
-    //
-    FlashMessage(messageShort: "Done!",messageLong:  "Word " + widget.word.name + " delete.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+    FlashMessage(messageShort: Const.DICTIONARY_MESSAGE_SHORT_DELETE,messageLong:  Const.DICTIONARY_MESSAGE_LONG_DELETE,colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
   }
 
   Widget getDownMenu(String nameTopic){
@@ -276,5 +269,18 @@ class _WordDetailsPageState extends State<WordDetailsPage> {
 
   _getDetailsTopic(int id){
     Provider.of<TopicProvider>(context, listen: false).getTopic(id);
+  }
+
+  bool _checkValidationField(){
+    //Пробіли з обох боків
+    _name.text = trim(_name.text);
+    _translate.text = trim(_translate.text);
+    _example.text = trim(_example.text);
+    //Довжина + Не пусте
+    if(isLength(_name.text, 1, 40) && isLength(_translate.text, 1, 40) && isLength(_example.text, 1, 60) && selectedTopic != null){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

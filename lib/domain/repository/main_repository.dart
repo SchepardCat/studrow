@@ -36,11 +36,11 @@ class MainRepository {
         'isRepeatThird BOOLEAN,'
         'FOREIGN KEY(topic_id) REFERENCES $_tableNameTopic(id_topic))');
 
-    await insertTopics(db);
-    await insertTestWords(db);
+    await insertInitializationTopics(db);
+    await insertInitializationWords(db);
   }
 
-  static Future<void> insertTestWords(Database db) async {
+  static Future<void> insertInitializationWords(Database db) async {
     //Eating
     await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'cake (a)', 'торт', 'Do you want some cake?', 1, 0, 0, 0, 0]);
     await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'banana (a)', 'банан', 'I have three bananas', 1, 0, 0, 0, 0]);
@@ -152,7 +152,7 @@ class MainRepository {
     await db.execute("INSERT INTO $_tableNameWord(id_word,name, translate, example, topic_id, isLearn, isRepeatFirst, isRepeatSecond, isRepeatThird) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [null, 'wife (a)/wives', 'дружина/дружини', 'My wife listens to pop music', 5, 0, 0, 0, 0]);
   }
 
-  static Future<void> insertTopics(Database db) async {
+  static Future<void> insertInitializationTopics(Database db) async {
     await db.execute("INSERT INTO $_tableNameTopic(id_topic,name) VALUES (?, ?);", [null, "Eating"]);
     await db.execute("INSERT INTO $_tableNameTopic(id_topic,name) VALUES (?, ?);", [null, "Home"]);
     await db.execute("INSERT INTO $_tableNameTopic(id_topic,name) VALUES (?, ?);", [null, "Everyday Life"]);

@@ -7,7 +7,7 @@ import 'package:studrow/features/topic/presentation/form/dialog_delete_topic.dar
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:studrow/assets/constants.dart' as Const;
-
+import 'package:string_validator/string_validator.dart';
 import '../../../dictionary/presentation/provider/dictionary_provider.dart';
 import '../../../dictionary/presentation/widgets/word_list/word_item_list.dart';
 import '../../../study/presentation/widgets/snap_message/snap_message.dart';
@@ -25,12 +25,14 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   final TextEditingController _nameTopic = TextEditingController();
   bool edit = false;
   bool isLoading = true;
+  String previosName = "";
 
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
+        previosName = widget.topic.name;
       });
     });
     if (widget.topic.id_topic != null) {
@@ -120,20 +122,32 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   }
 
   _updateTopic() async {
-    setState(() {
-      edit = false;
-    });
-    final Topic topic =
-        Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
-    Provider.of<TopicProvider>(context, listen: false).update(topic: topic);
-    //logging transaction
-    //
-    //
-    FlashMessage(
-            messageShort: "Done!",
-            messageLong: "Topic " + topic.name + " update.",
-            colorMessage: Theme.of(context).colorScheme.primaryContainer)
-        .getScaffoldMessage(context);
+    if(_checkValidationField()){
+      setState(() {
+        edit = false;
+      });
+      final Topic topic =
+      Topic(id_topic: widget.topic.id_topic, name: _nameTopic.text);
+      Provider.of<TopicProvider>(context, listen: false).update(topic: topic);
+      //logging transaction
+      //
+      //
+      FlashMessage(
+          messageShort: Const.TOPIC_MESSAGE_SHORT_UPDATE,
+          messageLong: Const.TOPIC_MESSAGE_LONG_UPDATE,
+          colorMessage: Theme.of(context).colorScheme.primaryContainer)
+          .getScaffoldMessage(context);
+      previosName = _nameTopic.text;
+    }else{
+      setState(() {
+        edit = false;
+      });
+      _nameTopic.text = previosName;
+      FlashMessage(
+          messageShort: Const.TOPIC_MESSAGE_SHORT_DONT_UPDATE,
+          messageLong:  Const.TOPIC_MESSAGE_LONG_DONT_UPDATE,
+          colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
+    }
   }
 
   _deleteTopic() async {
@@ -147,8 +161,8 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
       //
       //
       FlashMessage(
-              messageShort: "Done!",
-              messageLong: "Topic " + widget.topic.name + " delete.",
+              messageShort: Const.TOPIC_MESSAGE_SHORT_DELETE,
+              messageLong: Const.TOPIC_MESSAGE_LONG_DELETE,
               colorMessage: Theme.of(context).colorScheme.primaryContainer)
           .getScaffoldMessage(context);
     } else {
@@ -195,5 +209,16 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   _getWordsInTopic(int id) {
     Provider.of<WordProvider>(context, listen: false)
         .getWordsInTopic(topic_id: id);
+  }
+
+  bool _checkValidationField(){
+    //Пробіли з обох боків
+    _nameTopic.text = trim(_nameTopic.text);
+    //Довжина + Не пусте
+    if(isLength(_nameTopic.text, 1, 40)){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

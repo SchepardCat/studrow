@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studrow/domain/model/topic.dart';
 import 'package:studrow/features/study/presentation/widgets/snap_message/snap_message.dart';
+import 'package:string_validator/string_validator.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/assets/constants.dart' as Const;
 
@@ -89,12 +90,32 @@ class _TopicFormAddState extends State<TopicFormAdd> {
   }
 
   _insertTopic() async {
-    final Topic topic = Topic(name: _nameTopic.text);
-    Provider.of<TopicProvider>(context, listen: false).insertTopic(topic: topic);
-    //logging transaction
-    //
-    //
-    FlashMessage(messageShort: "Done!",messageLong:  "Topic " + topic.name + " add.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+    if(_checkValidationField()) {
+      final Topic topic = Topic(name: _nameTopic.text);
+      Provider.of<TopicProvider>(context, listen: false).insertTopic(topic: topic);
+      FlashMessage(
+          messageShort: Const.TOPIC_MESSAGE_SHORT_ADD,
+          messageLong:  Const.TOPIC_MESSAGE_LONG_ADD,
+          colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+    }else{
+      FlashMessage(
+          messageShort: Const.TOPIC_MESSAGE_SHORT_DONT_ADD,
+          messageLong:  Const.TOPIC_MESSAGE_LONG_DONT_ADD,
+          colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
+    }
+
   }
+
+  bool _checkValidationField(){
+    //Пробіли з обох боків
+    _nameTopic.text = trim(_nameTopic.text);
+    //Довжина + Не пусте
+    if(isLength(_nameTopic.text, 1, 40)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
 }

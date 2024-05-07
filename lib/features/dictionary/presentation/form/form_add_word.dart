@@ -5,7 +5,7 @@ import 'package:studrow/domain/model/word.dart';
 import 'package:studrow/features/dictionary/presentation/form/form_list_topic.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/router/router.dart';
-
+import 'package:string_validator/string_validator.dart';
 import '../../../../domain/model/topic.dart';
 import '../../../study/presentation/widgets/snap_message/snap_message.dart';
 import '../../../topic/presentation/provider/topic_provider.dart';
@@ -40,7 +40,6 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
               iconSize: 32,
               icon: const Icon(Icons.done),
               onPressed: () {
-                Navigator.pop(context, true);
                 _insertTopic();
               },
             ),
@@ -61,6 +60,8 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
                       builder: (context, provider, child) {
                         return provider.topics.isEmpty? const Center(child: Text(Const.TOPICS_EMPTY)):
                         DropdownMenu<Topic>(
+                          width: (MediaQuery.of(context).size.width/2 + 50),
+                          menuHeight: 200,
                           controller: _topic,
                           enableFilter: true,
                           requestFocusOnTap: true,
@@ -81,7 +82,6 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
                               return DropdownMenuEntry<Topic>(
                                   value: topic,
                                   label: topic.name,
-                                  leadingIcon: Text(topic.id_topic.toString())
                               );
                             },
                           ).toList(),
@@ -142,9 +142,8 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
   }
 
   _insertTopic() async {
-    Word word;
-    if(selectedTopic == null){
-      word = Word(
+    if(_checkValidationField()){
+      Word word = Word(
           name: _name.text,
           translate: _translate.text,
           example: _example.text,
@@ -154,23 +153,31 @@ class _WordFormAddPageState extends State<WordFormAddPage> {
           isRepeatSecond: 0,
           isRepeatThird: 0
       );
+      Provider.of<WordProvider>(context, listen: false).insertWord(word: word);
+      FlashMessage(
+          messageShort: Const.DICTIONARY_MESSAGE_SHORT_ADD,
+          messageLong:  Const.DICTIONARY_MESSAGE_LONG_ADD,
+          colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+      Navigator.pop(context, true);
     } else {
-      word = Word(
-          name: _name.text,
-          translate: _translate.text,
-          example: _example.text,
-          topic_id: selectedTopic?.id_topic,
-          isLearn: 0,
-          isRepeatFirst: 0,
-          isRepeatSecond: 0,
-          isRepeatThird: 0
-      );
+      FlashMessage(
+          messageShort: Const.DICTIONARY_MESSAGE_SHORT_DONT_ADD,
+          messageLong:  Const.DICTIONARY_MESSAGE_LONG_DONT_ADD,
+          colorMessage: Theme.of(context).colorScheme.errorContainer).getScaffoldMessage(context);
     }
-    Provider.of<WordProvider>(context, listen: false).insertWord(word: word);
-    //logging transaction
-    //
-    //
-    FlashMessage(messageShort: "Done!",messageLong:  "Word " + word.name + " add.",colorMessage: Theme.of(context).colorScheme.primaryContainer).getScaffoldMessage(context);
+  }
+
+  bool _checkValidationField(){
+    //Пробіли з обох боків
+    _name.text = trim(_name.text);
+    _translate.text = trim(_translate.text);
+    _example.text = trim(_example.text);
+    //Довжина + Не пусте
+    if(isLength(_name.text, 1, 40) && isLength(_translate.text, 1, 40) && isLength(_example.text, 1, 60) && selectedTopic != null){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 

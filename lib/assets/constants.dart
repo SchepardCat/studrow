@@ -49,6 +49,20 @@ const String TOPIC_DELETE_DIALOG_TITLE = "Ви хочете видалити т�
 const String TOPIC_DELETE_DIALOG_SUBTITLE = "Виберіть що робити далі";
 const String TOPIC_DELETE_DIALOG_FIELD_CANCEL = "Відміна";
 const String TOPIC_DELETE_DIALOG_FIELD_DELETE = "Видалення всього";
+
+const String TOPIC_MESSAGE_SHORT_ADD = "Готово";
+const String TOPIC_MESSAGE_LONG_ADD = "Тему додано";
+const String TOPIC_MESSAGE_SHORT_DONT_ADD = "Помилка";
+const String TOPIC_MESSAGE_LONG_DONT_ADD = "Тему не додано";
+const String TOPIC_MESSAGE_SHORT_UPDATE = "Готово";
+const String TOPIC_MESSAGE_LONG_UPDATE = "Тему оновлено";
+const String TOPIC_MESSAGE_SHORT_DONT_UPDATE = "Помилка";
+const String TOPIC_MESSAGE_LONG_DONT_UPDATE = "Тему не оновлено";
+const String TOPIC_MESSAGE_SHORT_DELETE = "Готово";
+const String TOPIC_MESSAGE_LONG_DELETE = "Тему видалено";
+
+
+
 //dictionary_page
 const String DICTIONARY_APP_BAR_TITLE = "Словник";
 const String DICTIONARY_BOTTOM_BUTTON_TOOLTIP = "Форма додавання слів";
@@ -60,6 +74,16 @@ const String DICTIONARY_ADD_FORM_FIELD_TRANSLATE_HINT = "Переклад";
 const String DICTIONARY_ADD_FORM_FIELD_EXAMPLE_HINT = "Приклад";
 const String DICTIONARY_ADD_FORM_TITLE_CHOOSE_TOPIC_TITLE = "Тема";
 
+const String DICTIONARY_MESSAGE_SHORT_ADD = "Готово";
+const String DICTIONARY_MESSAGE_LONG_ADD = "Слово додано";
+const String DICTIONARY_MESSAGE_SHORT_DONT_ADD = "Помилка!";
+const String DICTIONARY_MESSAGE_LONG_DONT_ADD = "Слово не додано";
+const String DICTIONARY_MESSAGE_SHORT_UPDATE = "Готово";
+const String DICTIONARY_MESSAGE_LONG_UPDATE = "Слово оновлено";
+const String DICTIONARY_MESSAGE_SHORT_DONT_UPDATE = "Помилка!";
+const String DICTIONARY_MESSAGE_LONG_DONT_UPDATE = "Слово не оновлено";
+const String DICTIONARY_MESSAGE_SHORT_DELETE = "Готово";
+const String DICTIONARY_MESSAGE_LONG_DELETE = "Слово видалено";
 //SpinKit
 const String SPINKIT_LOADING = "Завантаження ... ";
 

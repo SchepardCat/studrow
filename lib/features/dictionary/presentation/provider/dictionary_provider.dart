@@ -50,6 +50,4 @@ class WordProvider with ChangeNotifier{
     isLoadingWordInTopicList = false;
     notifyListeners();
   }
-
-
 }
