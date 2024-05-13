@@ -25,6 +25,8 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = View.of(context).platformDispatcher.platformBrightness;
+    MaterialTheme theme = MaterialTheme(textTheme);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TopicProvider()),
@@ -33,7 +35,8 @@ class _MainAppState extends State<MainApp> {
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          theme: MaterialTheme(textTheme).light(),
+          theme: brightness == Brightness.light ? theme.light() : theme.dark(),
+          //theme: MaterialTheme(textTheme).light(),
           routerConfig: _router.config(),
       ),
     );

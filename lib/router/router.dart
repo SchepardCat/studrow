@@ -33,10 +33,6 @@ class AppRouter extends _$AppRouter {
           StudyRoutes.routes,
           TopicRoutes.routes,
           DictionaryRoutes.routes,
-          // AutoRoute(
-          //     page: SettingsRoute.page,
-          //     path: 'settings'
-          // ),
         ]),
 
   ];
