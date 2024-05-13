@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:studrow/domain/model/word.dart';
 import 'package:studrow/features/dictionary/presentation/provider/dictionary_provider.dart';
 import 'package:studrow/features/topic/presentation/provider/topic_provider.dart';
 import 'package:studrow/router/router.dart';
@@ -25,8 +24,6 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = View.of(context).platformDispatcher.platformBrightness;
-    MaterialTheme theme = MaterialTheme(textTheme);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TopicProvider()),
@@ -35,8 +32,8 @@ class _MainAppState extends State<MainApp> {
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          theme: brightness == Brightness.light ? theme.light() : theme.dark(),
-          //theme: MaterialTheme(textTheme).light(),
+          theme: MaterialTheme(textTheme).light(),
+          darkTheme: MaterialTheme(textTheme).dark(),
           routerConfig: _router.config(),
       ),
     );
