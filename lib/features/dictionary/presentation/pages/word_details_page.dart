@@ -20,7 +20,7 @@ class WordDetailsPage extends StatefulWidget {
   @override
   State<WordDetailsPage> createState() => _WordDetailsPageState();
 }
-
+// Потрібно змінити відображення деталей слова, та відображати як у вивченні слів у вигляді картки
 class _WordDetailsPageState extends State<WordDetailsPage> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _translate = TextEditingController();
