@@ -1,42 +1,42 @@
-name: android-apk-build
+name: Android-APK-Build
 
 on:
   workflow_dispatch:
 
 jobs:
   build-android:
+    name: 🤖 Android Build
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.27.3'
           channel: 'stable'
 
-      - name: Remove pub cache
+      - name: Clean pub cache
         run: rm -rf ~/.pub-cache
 
-      - name: Force downgrade win32 to 5.0.9
-        run: |
-          flutter pub cache repair
-          flutter pub add win32:5.0.9 --overwrite
-
-      - name: Clean project
+      - name: Flutter clean
         run: flutter clean
+
+      - name: Fix win32 version
+        run: |
+          echo "dependency_overrides:" >> pubspec.yaml
+          echo "  win32: 5.0.9" >> pubspec.yaml
+          cat pubspec.yaml
 
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build release APK
         run: flutter build apk --release
 
-      - name: Upload APK to GitHub Releases
-        uses: svenstaro/upload-release-action@v2
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/app/outputs/flutter-apk/app-release.apk
-          asset_name: app-release.apk
-          tag: v1.0
-          overwrite: true
-          body: "Android release build"
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
