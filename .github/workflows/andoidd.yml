@@ -17,6 +17,11 @@ jobs:
       - name: Remove pub cache
         run: rm -rf ~/.pub-cache
 
+      - name: Force downgrade win32 to 5.0.9
+        run: |
+          flutter pub cache repair
+          flutter pub add win32:5.0.9 --overwrite
+
       - name: Clean project
         run: flutter clean
 
