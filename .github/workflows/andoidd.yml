@@ -1,41 +1,31 @@
-name: Android-apk-build
+name: android-apk-build
 
 on:
-  workflow_dispatch:   # запуск вручну через GitHub → Actions → Run workflow
+  workflow_dispatch:
 
 jobs:
   build-android:
-    name: 🤖 Android Build
     runs-on: ubuntu-latest
-
     steps:
-      # 1️⃣ Клонування репозиторію
       - uses: actions/checkout@v4
 
-      # 2️⃣ Встановлення Flutter
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.27.3'
           channel: 'stable'
 
-      # 3️⃣ Встановлення залежностей
+      - name: Remove pub cache
+        run: rm -rf ~/.pub-cache
+
+      - name: Clean project
+        run: flutter clean
+
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Clean and get dependencies
-        run: |
-         flutter clean
-         flutter pub get
-
-      # 4️⃣ Збірка APK (debug або release)
       - name: Build APK
         run: flutter build apk --release
 
-      # 🧩 Якщо потрібно .aab для Play Store:
-      # - name: Build App Bundle
-      #   run: flutter build appbundle --release
-
-      # 5️⃣ Завантаження APK у релізи GitHub
       - name: Upload APK to GitHub Releases
         uses: svenstaro/upload-release-action@v2
         with:
