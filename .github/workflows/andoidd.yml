@@ -23,12 +23,6 @@ jobs:
       - name: Flutter clean
         run: flutter clean
 
-      - name: Fix win32 version
-        run: |
-          echo "dependency_overrides:" >> pubspec.yaml
-          echo "  win32: 5.0.9" >> pubspec.yaml
-          cat pubspec.yaml
-
       - name: Get dependencies
         run: flutter pub get
 
