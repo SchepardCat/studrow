@@ -22,6 +22,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Clean and get dependencies
+        run: |
+         flutter clean
+         flutter pub get
+
       # 4️⃣ Збірка APK (debug або release)
       - name: Build APK
         run: flutter build apk --release
